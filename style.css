@@ -1,1 +1,85 @@
-/* this will be boiler plate template for php pages */
+* {
+    margin: 0;
+    padding: 0;
+    color: 	#1B1212;
+    font-family:  sans-serif;
+
+}
+
+.page-container {
+    display: flex;
+    height: 100vh;
+    display: flex;
+
+
+}
+
+/* NAVBAR */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-container {
+    background-color: rgb(255, 255, 255);
+    width: 200px;
+    height: 100% vh;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+
+}
+
+.page-content-container {
+    background-color: rgb(227, 232, 232);
+    flex: 1;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    /* margin-top: 60px; */
+    width: 100%;
+}
+
+.nav-button {
+    /* background-color: beige; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    border-style: solid;
+}
+
+.nav-img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+   
+}
+
+.nav-link {
+    font-size: 13px;
+}
+.nav-bottom {
+    margin-top: 50px;
+}
+
+.active {
+    background-color: rgb(122, 122, 169);
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.logout {
+    margin-top: 20px;
+}
