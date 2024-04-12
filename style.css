@@ -1,3 +1,19 @@
+:root { 
+    --navbar-hover-color: rgba(233, 230, 230, 0.477);
+   --navbar-active-color: rgb(78, 78, 246); 
+   
+    --table-header-color: #edf0f341;
+   --table-hover-color: #acd0f4af;
+
+   --status-color-ordered: #d3d3d3; /* Light Grey */
+   --status-color-arrived: #808080; /* Dark Grey */
+   --status-color-assembled: #4169e1; /* Blue */
+   --status-color-ready-to-sell: #008000; /* Green */
+   --status-color-sold: #800080; /* Purple */
+   --status-color-other-special: #ffa500; /* Orange */
+
+   --field-label: #2f00ff; /* Orange */
+}
 * {
     margin: 0;
     padding: 0;
@@ -8,10 +24,8 @@
 
 .page-container {
     display: flex;
-    height: 100vh;
-    display: flex;
-
-
+    /* height: 100vh; */
+     
 }
 
 /* NAVBAR */
@@ -21,19 +35,22 @@ a {
 }
 
 .nav-container {
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     width: 200px;
     height: 100% vh;
     display: flex;
     flex-direction: column; 
     justify-content: center; 
     align-items: center;
+    position: fixed;
 
 }
 
 .page-content-container {
-    background-color: rgb(227, 232, 232);
-    flex: 1;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    margin-left: 200px;
+
 }
 
 .nav-buttons {
@@ -51,12 +68,18 @@ a {
     /* justify-content: center; */
     align-items: center;
     width: 100%;
-    height: 80px;
-    border-style: solid;
+    height: 40px;
+    /* border-style: solid; */
+}
+
+.nav-button:hover {
+    background-color:var(--navbar-hover-color);
+    
+   
 }
 
 .nav-img {
-    width: 30px;
+    width: 20px;
     height: auto;
     margin-right: 10px;
     margin-left: 10px;
@@ -66,12 +89,13 @@ a {
 .nav-link {
     font-size: 13px;
 }
+
 .nav-bottom {
     margin-top: 50px;
 }
 
 .active {
-    background-color: rgb(122, 122, 169);
+    background-color: var(--navbar-active-color);
 }
 
 .logo {
@@ -82,4 +106,153 @@ a {
 
 .logout {
     margin-top: 20px;
+}
+
+.temp {
+     border-style: solid ;
+     border-color: rgb(207, 78, 78);
+     /* background-color: rgba(255, 228, 196, 0.298); */
+}
+
+/* PAGE CONTENT */
+.page-content-container {
+    padding: 10px;
+    width: calc(100vw - 200px);
+    height: auto;
+}
+
+
+
+/* FULL WIDTH TABLE SECTION */
+.full-width-table {
+    width: 95%;
+    margin: 0 auto; 
+}
+
+.full-width-table thead {
+    height: 35px;
+    background-color: transparent;
+}
+
+.full-width-table tr {
+    height: 42px;
+}
+.full-width-table th {
+    text-align: left; 
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.full-width-table td,
+.full-width-table th {
+    vertical-align: middle;
+    padding-left: 10px;
+    color:rgb(60, 60, 60);
+}
+
+table tbody tr:nth-child(even) {
+    background-color:#ffffff;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.test {
+    background-color: blue;
+}
+
+.full-width-table tbody tr:hover {
+    background-color: var(--table-hover-color); /* Set the background color on hover */
+}
+
+/* TABLE ROWS COLOR STATUS */
+.ordered {
+    background-color: var(--status-color-ordered);
+}
+
+.arrived {
+    background-color: var(--status-color-arrived); 
+}
+
+.assembled {
+    background-color: var(--status-color-assembled); 
+}
+
+.ready-to-sell {
+    background-color: var(--status-color-ready-to-sell); 
+}
+
+.sold {
+    background-color: var(--status-color-sold); 
+}
+
+.other-special {
+    background-color: var(--status-color-other-special); 
+}
+
+
+/*  FIELDS SECTION */
+.fields {
+    width: 60%;
+    margin: 0 auto; 
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+}
+.fields h1 {
+    margin-bottom: 50px;
+}
+
+.field-wrap{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    align-items: flex-start;
+}
+
+
+.field-wrap input,
+.field-wrap textarea {
+    width: 40%;
+    
+}
+
+.field {
+    height: 26px;
+    padding: 2px;
+    width: 40%;
+}
+
+.fields label {
+    color: var(--field-label);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* FOUR CARD HIGHLIGHT SECTION */
+.highlights {
+    display: flex;
+    width: 95%;
+    margin: 0 auto; 
+    margin-bottom: 10px;
+    justify-content: space-evenly;
+    padding: 10px;
+   
+}
+
+.highlight-card {
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.highlight-number {
+    font-size: 70px;
 }
