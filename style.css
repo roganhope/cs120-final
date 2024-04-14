@@ -95,7 +95,7 @@ a {
 }
 
 .active {
-    background-color: var(--navbar-active-color);
+    background-color: var(--navbar-active-color) !important;
 }
 
 .logo {
