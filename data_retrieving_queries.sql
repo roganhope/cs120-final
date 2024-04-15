@@ -12,17 +12,10 @@ ORDER BY s.date_initiated;
 
 
 -- main dashboard page SELECT 
-    i.vin, 
-    i.make, 
-    i.model, 
-    i.year, 
-    i.color,
-    i.sell_price, 
-    sc.status_name
-FROM 
-    inventory i
-JOIN 
-    status_codes sc ON i.status_id = sc.status_id;
+SELECT i.vin, i.make, i.model, i.year, i.color, i.retail_price, sc.status_name, s.payment_status
+FROM inventory i
+LEFT JOIN sales s ON i.vin = s.invt_id
+LEFT JOIN status_codes sc ON i.status_id = sc.status_id;
 
 
 
@@ -39,7 +32,7 @@ WHERE s.client_id = 1 -- change this to the client id variable
 ORDER BY s.date_initiated;
 
 
--- grabbing all inventory based off a make and model 
+-- grabbing all inventory based off a make and model (for mechanic view page)
 SELECT *
 FROM inventory
 WHERE model = 'Maddog' -- change this
@@ -51,3 +44,7 @@ AND make = 'Icebear'; -- change this
 SELECT *
 FROM inventory
 WHERE order_id = <variable>;
+
+
+SELECT * FROM 
+shipments;
