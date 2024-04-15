@@ -1,6 +1,7 @@
 :root { 
     --navbar-hover-color: rgba(233, 230, 230, 0.477);
    --navbar-active-color: rgb(78, 78, 246); 
+   --page-title: #7c6cc2; /* Orange */
    
     --table-header-color: #edf0f341;
    --table-hover-color: #acd0f4af;
@@ -35,7 +36,7 @@ a {
 }
 
 .nav-container {
-    /* background-color: rgb(255, 255, 255); */
+    background-color: rgba(169, 213, 227, 0.752);
     width: 200px;
     height: 100% vh;
     display: flex;
@@ -121,6 +122,13 @@ a {
     height: auto;
 }
 
+
+/* PAGE TITLE  */
+.page-title h1 {
+    margin-left: 20px;
+    text-transform: uppercase;
+    color: var(--page-title);
+}
 
 
 /* FULL WIDTH TABLE SECTION */
