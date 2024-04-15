@@ -2,6 +2,9 @@
 -- client pages
 SELECT * FROM `clients`;
 
+-- specefic client / single view 
+$sql = "SELECT * FROM clients WHERE client_id = $client_id";
+
 
 -- sales page 
 SELECT s.*, i.vin, i.year, i.make, i.model, sc.status_name
@@ -48,3 +51,43 @@ WHERE order_id = <variable>;
 
 SELECT * FROM 
 shipments;
+
+--INSERTS 
+-- inserting shipments
+$sql = "INSERT INTO shipments (vendor, invoice_no, order_date, num_items, total, order_arrival_date) 
+        VALUES ('$vendor', '$invoice_no', '$order_date', '$num_items', '$total', '$order_arrival_date')"
+
+-- new client
+$sql = "INSERT INTO clients (first, last, email, phone_number, street, city, state, zipcode, date_created, notes) 
+        VALUES ('$first', '$last', '$email', '$phone_number', '$street', '$city', '$state', '$zipcode', '$date_created', '$notes')";
+
+
+-- updating scooter status 
+$sql = "UPDATE inventory SET status_id = :status WHERE inventory_id = :id";
+
+
+
+-- updating cleint
+$id = 123; 
+$first = "John";
+$last = "Doe";
+$email = "john@example.com";
+$phone_number = "123-456-7890";
+$street = "123 Main St";
+$city = "Anytown";
+$state = "CA";
+$zipcode = "12345";
+$date_created = date("Y-m-d");
+$notes = "Updated notes";
+
+// Construct the SQL query with variables
+$sql = "UPDATE clients 
+        SET first = ?, last = ?, email = ?, phone_number = ?, street = ?, 
+            city = ?, state = ?, zipcode = ?, date_created = ?, notes = ? 
+        WHERE client_id = ?";
+
+// Prepare the statement
+$stmt = $pdo->prepare($sql);
+
+// Bind parameters and execute the statement
+$stmt->execute([$first, $last, $email, $phone_number, $street, $city, $state, $zipcode, $date_created, $notes, $id]);
