@@ -16,6 +16,7 @@ ORDER BY s.date_initiated;
     i.make, 
     i.model, 
     i.year, 
+    i.color,
     i.sell_price, 
     sc.status_name
 FROM 
@@ -43,3 +44,10 @@ SELECT *
 FROM inventory
 WHERE model = 'Maddog' -- change this
 AND make = 'Icebear'; -- change this 
+
+
+
+-- get all the inventory from an order
+SELECT *
+FROM inventory
+WHERE order_id = <variable>;

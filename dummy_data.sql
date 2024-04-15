@@ -1,5 +1,4 @@
 -- clients 
-
 INSERT INTO clients (first, last, email, phone_number, street, city, state, zipcode, date_created, notes) VALUES
 ('John', 'Doe', 'john.doe@example.com', '555-1234', '123 Main St', 'Boston', 'MA', '02101', '2024-04-14', 'Client since 2020'),
 ('Jane', 'Smith', 'jane.smith@example.com', '555-5678', '456 Elm St', 'Worcester', 'MA', '01601', '2024-04-14', 'New client'),
@@ -13,83 +12,76 @@ INSERT INTO clients (first, last, email, phone_number, street, city, state, zipc
 ('Sophia', 'Sanchez', 'sophia.sanchez@example.com', '555-8901', '369 Spruce St', 'Woonsocket', 'RI', '02895', '2024-04-14', 'Frequent shopper');
 
 
-
-
 --  some mechanics 
 INSERT INTO mechanics (name) VALUES
 ('John'),
 ('Jefferey'),
 ('Sarah');
 
--- genuine shipment
-INSERT INTO orders (vendor, invoice_no, order_date, num_items, total, order_arrival_date) VALUES
-('Genuine', 'INV2024001', '2024-04-14', 10, 6400, '2024-04-21');
 
-INSERT INTO inventory (vin, make, model, year, order_id, buy_price, sell_price, status_id)
+
+-- create two shipments 
+INSERT INTO shipments (vendor, invoice_no, order_date, num_items, total, order_arrival_date) 
+VALUES ('icebear', 'ice2024001', '2024-03-04', 10, 5000.00, '2024-04-01');
+
+INSERT INTO shipments (vendor, invoice_no, order_date, num_items, total, order_arrival_date) 
+VALUES ('genuine', 'gen2024002', '2024-03-08', 10, 5000.00, '2024-04-10');
+
+-- inventory
+INSERT INTO inventory (vin, make, model, year, color, order_id, status_id, purchase_price, retail_price, last_update)
 VALUES
-('VIN001', 'Genuine', 'Buddy50', 2024, 1, 640, 1240, 1),
-('VIN002', 'Genuine', 'Buddy50', 2024, 1, 640, 1240, 1),
-('VIN003', 'Genuine', 'Buddy50', 2024, 1, 640, 1240, 1),
-('VIN004', 'Genuine', 'Buddy50', 2024, 1, 640, 1240, 1),
-('VIN005', 'Genuine', 'Buddy50', 2024, 1, 640, 1240, 1),
-('VIN006', 'Genuine', 'Buddy Kick', 2024, 1, 640, 1240, 1),
-('VIN007', 'Genuine', 'Buddy Kick', 2024, 1, 640, 1240, 1),
-('VIN008', 'Genuine', 'Hooligan', 2024, 1, 640, 1240, 1),
-('VIN009', 'Genuine', 'Hooligan', 2024, 1, 640, 1240, 1),
-('VIN010', 'Genuine', 'Hooligan', 2024, 1, 640, 1240, 1);
--- this will automatically populate in the models column because of the trigger
+-- Icebear Maddog50
+('VIN001', 'Icebear', 'Maddog50', 2024, 'Red', 1, 1, 500.00, 1500.00, NOW()),
+('VIN002', 'Icebear', 'Maddog50', 2024, 'Blue', 1, 1, 500.00, 1500.00, NOW()),
+('VIN003', 'Icebear', 'Maddog50', 2024, 'Yellow', 1, 1, 500.00, 1500.00, NOW()),
+('VIN004', 'Icebear', 'Maddog50', 2024, 'Green', 1, 1, 500.00, 1500.00, NOW()),
+('VIN005', 'Icebear', 'Maddog50', 2024, 'Black', 1, 1, 500.00, 1500.00, NOW()),
+-- Icebear Rocket
+('VIN006', 'Icebear', 'Rocket', 2024, 'Red', 1, 1, 500.00, 1500.00, NOW()),
+('VIN007', 'Icebear', 'Rocket', 2024, 'Blue', 1, 1, 500.00, 1500.00, NOW()),
+('VIN008', 'Icebear', 'Rocket', 2024, 'Yellow', 1, 1, 500.00, 1500.00, NOW()),
+('VIN009', 'Icebear', 'Rocket', 2024, 'Green', 1, 1, 500.00, 1500.00, NOW()),
+('VIN010', 'Icebear', 'Rocket', 2024, 'Black', 1, 1, 500.00, 1500.00, NOW()),
+-- Genuine Buddy50
+('VIN011', 'Genuine', 'Buddy50', 2024, 'Red', 1, 1, 500.00, 1500.00, NOW()),
+('VIN012', 'Genuine', 'Buddy50', 2024, 'Blue', 1, 1, 500.00, 1500.00, NOW()),
+('VIN013', 'Genuine', 'Buddy50', 2024, 'Yellow', 1, 1, 500.00, 1500.00, NOW()),
+('VIN014', 'Genuine', 'Buddy50', 2024, 'Green', 1, 1, 500.00, 1500.00, NOW()),
+('VIN015', 'Genuine', 'Buddy50', 2024, 'Black', 1, 1, 500.00, 1500.00, NOW()),
+-- Genuine Grand Prix
+('VIN016', 'Genuine', 'Grand Prix', 2024, 'Red', 1, 1, 500.00, 1500.00, NOW()),
+('VIN017', 'Genuine', 'Grand Prix', 2024, 'Blue', 1, 1, 500.00, 1500.00, NOW()),
+('VIN018', 'Genuine', 'Grand Prix', 2024, 'Yellow', 1, 1, 500.00, 1500.00, NOW()),
+('VIN019', 'Genuine', 'Grand Prix', 2024, 'Green', 1, 1, 500.00, 1500.00, NOW()),
+('VIN020', 'Genuine', 'Grand Prix', 2024, 'Black', 1, 1, 500.00, 1500.00, NOW());
 
 
+UPDATE inventory
+SET status_id = 2
+WHERE make = 'Icebear';
 
--- Icebear shipment
-INSERT INTO orders (vendor, invoice_no, order_date, num_items, total, order_arrival_date) VALUES
-('Icebear', 'INV2023001', '2023-03-12', 16, 9600, '2023-04-01');
 
--- Scooters from Icebear shipment
-INSERT INTO inventory (vin, make, model, year, order_id, buy_price, sell_price, status_id)
+-- Update 4 random Icebear scooters to status 3
+UPDATE inventory
+SET status_id = 3
+WHERE make = 'Icebear'
+ORDER BY RAND()
+LIMIT 4;
+
+-- Update another 4 random Icebear scooters to status 4
+UPDATE inventory
+SET status_id = 4
+WHERE make = 'Icebear'
+ORDER BY RAND()
+LIMIT 4;
+
+
+-- Create a sale for client ID 1 with inventory ID 2 and payment status ID 3
+INSERT INTO sales (client_id, invt_id, sale_price, payment_status, down_payment_amount, date_initiated)
 VALUES
-('VIN011', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN012', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN013', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN014', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN015', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN016', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN017', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN018', 'Icebear', 'Maddog', 2023, 2, 600, 1400, 1),
-('VIN019', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN020', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN021', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN022', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN023', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN024', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN025', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1),
-('VIN026', 'Icebear', 'Mini Max', 2023, 2, 600, 1400, 1);
+(1, 'VIN002', 0.00, 3, 0.00, CURRENT_DATE());
 
--- Update status for random scooters
-UPDATE inventory SET status_id = 2 WHERE vin IN ('VIN011', 'VIN012', 'VIN013', 'VIN014');
-UPDATE inventory SET status_id = 3 WHERE vin IN ('VIN015', 'VIN016', 'VIN017', 'VIN018');
-
-
--- create some sales 
-INSERT INTO sales (client_id, invt_id, sale_price, payment_status, down_payment_amount, date_completed)
+-- Create a sale for client ID 2 with inventory ID 4 and payment status ID 3
+INSERT INTO sales (client_id, invt_id, sale_price, payment_status, down_payment_amount, date_initiated)
 VALUES
-(1, 'VIN015', 1400.00, 'down payment', 200.00, '2024-04-14'),
-(2, 'VIN016', 1400.00, 'down payment', 200.00, '2024-04-14'),
-(3, 'VIN017', 1400.00, 'sold', NULL, '2024-04-14'),
-(4, 'VIN018', 1400.00, 'down payment', 200.00, '2024-04-14');
-
--- Update inventory status for the provided scooters
-UPDATE inventory SET status_id = 4 WHERE vin IN ('VIN015', 'VIN016');
-UPDATE inventory SET status_id = 5 WHERE vin = 'VIN017';
-
--- realized i should add a date initiated column
--- Update date_initiated for each sale with a random date within the past week
-UPDATE sales 
-SET date_initiated = DATE_SUB(CURDATE(), INTERVAL FLOOR(RAND() * 7) DAY) 
-WHERE invt_id IN ('VIN015', 'VIN016', 'VIN017', 'VIN018');
-
-
-
--- added last edited for queries 
-UPDATE inventory 
-SET last_update = DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 7) DAY);
+(2, 'VIN004', 0.00, 3, 0.00, CURRENT_DATE());
