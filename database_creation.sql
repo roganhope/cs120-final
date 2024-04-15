@@ -39,10 +39,17 @@ INSERT INTO payment_status_codes (status_name) VALUES
 ('full payment collected');
 
 
-CREATE TABLE mechanics (
+-- CREATE TABLE mechanics (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     email VARCHAR(100),
+--     mechanic_name VARCHAR(100)
+-- );
+
+CREATE TABLE staff (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100),
-    mechanic_name VARCHAR(100)
+    staff_name VARCHAR(100),
+    staff_role VARCHAR(100)
 );
 
 CREATE TABLE models (
