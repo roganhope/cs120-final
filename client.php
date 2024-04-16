@@ -59,10 +59,10 @@
         <div class="page-content-container temp">
 
         <div class="page-title">
-                <h1>new client</h1>
+                <h1>view client</h1>
         </div>
         
-        <div class="temp fields">
+       
     <h1>Fields Title</h1>
     <form id="newClientForm">
         <div class="field-wrap">
@@ -110,55 +110,7 @@
         
         </div>
     </div>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("submitButton").addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // get data
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
-            var email = document.getElementById("email").value;
-            var phoneNumber = document.getElementById("phoneNumber").value;
-            var street = document.getElementById("street").value;
-            var city = document.getElementById("city").value;
-            var state = document.getElementById("state").value;
-            var zipcode = document.getElementById("zipcode").value;
-            var notes = document.getElementById("notes").value;
-
-            // Prepare form data
-            var formData = new FormData();
-            formData.append("firstName", firstName);
-            formData.append("lastName", lastName);
-            formData.append("email", email);
-            formData.append("phoneNumber", phoneNumber);
-            formData.append("street", street);
-            formData.append("city", city);
-            formData.append("state", state);
-            formData.append("zipcode", zipcode);
-            formData.append("notes", notes);
-
-            // Send data to new_client_script.php using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "new_client_script.php", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Request was successful
-                        console.log(xhr.responseText);
-                        window.location.href = 'client.php';
-                    } else {
-                        // Error occurred
-                        console.error("Error:", xhr.status);
-                    }
-                }
-            };
-            xhr.send(formData);
-        });
-    });
-</script>
+   
 
 
 </body>
-
-</html>
