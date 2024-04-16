@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="page-container">
-        <div class="nav-container">
+           <div class="nav-container">
             <div>
                 <a  href="dashboard.php"><img class="logo" src="images/temp-logo.png" alt=""></a>
             </div>
