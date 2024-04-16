@@ -1,8 +1,8 @@
 <?php
 
-$clientID = '232301126322-5db2irp4hgmjov1cg251ep06gpchj2vt.apps.googleusercontent.com';
-$clientSecret = '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';
-$redirectUri = 'http://HaventdDoneYet';
+$clientID = '';
+$clientSecret = '';
+$redirectUri = '';
 
 
 $authUrl = "https://accounts.google.com/o/oauth2/v2/auth";
