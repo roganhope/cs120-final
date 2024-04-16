@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Main Page</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 
 </head>
 <body>
@@ -63,11 +63,11 @@
         </div>
         
         <div class="temp fields">
-    <h1>Fields Title</h1>
+    <h1>Create Client</h1>
     <form id="newClientForm">
         <div class="field-wrap">
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" class="editable-field field" placeholder="First Name">
+            <input type="text" id="firstName" name="firstName" class="editable-field field" placeholder="First Name" >
         </div>
         <div class="field-wrap">
             <label for="lastName">Last Name:</label>
@@ -75,7 +75,7 @@
         </div>
         <div class="field-wrap">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="editable-field field" placeholder="Email">
+            <input type="email" id="email" name="email" class="editable-field field" placeholder="Email" >
         </div>
         <div class="field-wrap">
             <label for="phoneNumber">Phone Number:</label>
