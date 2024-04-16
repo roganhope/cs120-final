@@ -63,64 +63,48 @@
             </div>
             
             <!--  SECTION: FULL WIDTH TABLE  -->
-            <table class="full-width-table temp">
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>123-456-7890</td>
-                        <td>john.doe@example.com</td>
-                        <td class="ordered">Ordered</td>
-                    </tr>
-                    <tr>
-                        <td>Jane</td>
-                        <td>Smith</td>
-                        <td>987-654-3210</td>
-                        <td>jane.smith@example.com</td>
-                        <td class="arrived">Arrived</td>
-                    </tr>
-                    <tr>
-                        <td>Michael</td>
-                        <td>Jackson</td>
-                        <td>555-123-4567</td>
-                        <td>michael.jackson@example.com</td>
-                        <td class="assembled">Assembled</td>
-                    </tr>
-                    <tr>
-                        <td>Emily</td>
-                        <td>Thompson</td>
-                        <td>789-456-1230</td>
-                        <td>emily.thompson@example.com</td>
-                        <td class="ready-to-sell">Ready to Sell</td>
-                    </tr>
-                    <tr>
-                        <td>David</td>
-                        <td>Bowie</td>
-                        <td>222-333-4444</td>
-                        <td>david.bowie@example.com</td>
-                        <td class="sold">Sold</td>
-                    </tr>
-                    <tr>
-                        <td>Amy</td>
-                        <td>Lee</td>
-                        <td>111-222-3333</td>
-                        <td>amy.lee@example.com</td>
-                        <td class="other-special">Other/Special</td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php
 
+                require_once("database-credentials.php");
+                $conn = new mysqli($server, $userid, $pw, $db);
 
-            
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $sql = "select first, last, email, phone_number, city from clients order by date_created desc";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    echo '<table class="full-width-table temp">';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>First Name</th>';
+                    echo '<th>Last Name</th>';
+                    echo '<th>Email</th>';
+                    echo '<th>Phone Number</th>';
+                    echo '<th>City</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row["first"] . '</td>';
+                        echo '<td>' . $row["last"] . '</td>';
+                        echo '<td>' . $row["email"] . '</td>';
+                        echo '<td>' . $row["phone_number"] . '</td>';
+                        echo '<td>' . $row["city"] . '</td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                }
+                else {
+                    echo "No clients in database or error occured.";
+                }
+              
+            ?>
+
+        
         
         </div>
     </div>
