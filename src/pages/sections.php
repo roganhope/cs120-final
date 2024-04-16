@@ -7,7 +7,7 @@
     <title>dashboard</title>
     <link rel="stylesheet" href="../../style.css">
     <link rel="icon" href="../../public/images/favicon.ico" type="image/x-icon">
-    <script src="/src/scripts/login.js"></script>
+    <script src="/src/api/login.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
