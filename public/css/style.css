@@ -4,6 +4,7 @@
    --navbar-background-color: #2f3943;
    --page-title: #7c6cc2; /* Orange */
    --font1: #212a32;
+   --font2: #2065a2;
    
    /* tables */
     --table-header-color: #748d92;
@@ -12,8 +13,8 @@
 
    --status-color-ordered: #d3d3d3; /* Light Grey */
    --status-color-arrived: #808080; /* Dark Grey */
-   --status-color-assembled: #4169e1; /* Blue */
-   --status-color-ready-to-sell: #008000; /* Green */
+   --status-color-assembled: #a3b8f8; /* Blue */
+   --status-color-ready-to-sell: #16a316; /* Green */
    --status-color-sold: #800080; /* Purple */
    --status-color-other-special: #ffa500; /* Orange */
 
@@ -29,7 +30,7 @@
 
 .page-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #d3d9d5;
      
 }
@@ -196,10 +197,12 @@ table tbody tr:nth-child(odd) {
 /* TABLE ROWS COLOR STATUS */
 .ordered {
     background-color: var(--status-color-ordered);
+    
 }
 
 .arrived {
     background-color: var(--status-color-arrived); 
+
 }
 
 .assembled {
@@ -264,61 +267,65 @@ table tbody tr:nth-child(odd) {
 .highlights-and-buttons {
     width: 95%;
     display: flex; 
-    /* align-items: center;  */
+    align-items: center; 
+    height: 270px;
     margin: 0 auto;
     display: flex; 
 
 }
 
+.button-holder {
+    height: 95%;
+    width: 200px;
+    padding-top: 20px;
+}
+
 
 .highlights {
     display: flex;
-    width: 95%;
-    margin: 0 auto; 
-    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
     justify-content: space-evenly;
-    padding: 10px;
-   
+    align-items: center;
+
+ 
 }
-
-.highlights-3 {
-    /* width: calc(75% - 160px); */
-    
-
-}
-
 
 .highlight-card {
-    width: 200px;
+    padding: 5px;
+    width: 260px;
     height: 200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border-radius: 10px; 
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     background-color: white;
     color: var(--font1);
+    /* text-align: center; */
 }
 
 .card-title {
-    font-size: 30px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .card-value {
     font-size: 50px;
+    color: var(--font2);  
 }
 
 .highlight-number {
     font-size: 70px;
-    color: var(--font1);
+    color: var(--font1) !important;
 }
 
 
 button {
     background-color: #124e66;
     color: white;
-    height: 30px;
+    height: 40px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     padding: 3px;
