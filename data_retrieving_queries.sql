@@ -1,3 +1,51 @@
+-- DASHBOARD
+
+
+-- INVENTORY PAGE 
+        -- card 1: # invenotry in trasnit 
+        SELECT COUNT(*) AS count FROM `inventory` WHERE status_id = 1;
+        -- card 2: days until next arrival 
+        SELECT MIN(order_arrival_date) AS soonest_arrival_date, DATEDIFF(MIN(order_arrival_date), CURDATE()) AS days_until_arrival FROM shipments;
+        -- this could be negative, need to deal with that (ie no shipments)
+
+        -- card 2: number on site
+        SELECT COUNT(*) AS count_inventory FROM inventory WHERE status_id IN (2, 3);
+        -- remaining int: just subtract the above query value 
+
+        -- card 3:
+        -- total scooters available to be sold today/right now
+        SELECT COUNT(*) AS inventory_status_2_3_4_not_in_sales_count
+        FROM inventory i
+        LEFT JOIN sales s ON i.sale_id = s.sale_id
+        WHERE i.status_id IN (2, 3, 4) AND s.sale_id IS NULL;
+
+        -- ready to go instantly 
+        SELECT COUNT(*) AS inventory_status_4_not_in_sales_count
+        FROM inventory i
+        LEFT JOIN sales s ON i.sale_id = s.sale_id
+        WHERE i.status_id = 4 AND s.sale_id IS NULL;
+
+        -- main table 
+        SELECT 
+        inv.vin,
+        inv.color,
+        inv.year,
+        inv.make,
+        inv.model,
+        CONCAT(cl.first, ' ', cl.last) AS full_name, -- Concatenate first and last name if client exists
+        sc.status_name AS status
+        FROM 
+        inventory inv
+        LEFT JOIN 
+        sales s ON inv.sale_id = s.sale_id
+        LEFT JOIN 
+        clients cl ON s.client_id = cl.client_id
+        LEFT JOIN 
+        status_codes sc ON inv.status_id = sc.status_id;
+                
+
+
+
 
 -- client pages
 SELECT * FROM `clients`;
