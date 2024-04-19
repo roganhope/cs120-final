@@ -15,19 +15,40 @@
     <div class="page-container">
         <?php include '../components/navbar.php'; ?> <!-- Include the navbar -->
         <div class="page-content-container temp">
+            <div class="highlights-and-buttons temp">
+                <div class="highlights highlights-3 temp">
+                    <div class="highlight-card">
+                        <div class="card-title">Title</div>
+                        <div class="card-value">20</div>
+                        <div class="card-subtitle">here is my subtitles</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="card-title">Title</div>
+                        <div class="card-value">20</div>
+                        <div class="card-subtitle">here is my subtitles</div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="card-title">Title</div>
+                        <div class="card-value">20</div>
+                        <div class="card-subtitle">here is my subtitles</div>
+                    </div>
+                </div>
+                <div class="button-holder temp">
+                <button>Upload Inventory</button>
+                </div>
 
-            <div class="3-cards">
-
+               
             </div>
+
             <div class="full-width-table">
                 <table>
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                    </tr>
-</thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
                     <tr>
                         <td>John Doe</td>
                         <td>(555) 123-4567</td>

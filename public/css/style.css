@@ -3,8 +3,11 @@
    --navbar-active-color: #124e66;; 
    --navbar-background-color: #2f3943;
    --page-title: #7c6cc2; /* Orange */
+   --font1: #212a32;
    
-    --table-header-color: #edf0f341;
+   /* tables */
+    --table-header-color: #748d92;
+    --table-row: #d3d9d5;
    --table-hover-color: #acd0f4af;
 
    --status-color-ordered: #d3d3d3; /* Light Grey */
@@ -174,10 +177,12 @@ a {
 
 table tbody tr:nth-child(even) {
     background-color:#d3d9d5;
+    
 }
 
 table tbody tr:nth-child(odd) {
     background-color: #ffffff;
+    
 }
 
 .test {
@@ -253,7 +258,19 @@ table tbody tr:nth-child(odd) {
     margin-bottom: 5px;
 }
 
-/* FOUR CARD HIGHLIGHT SECTION */
+/* HIGHLIGHT card  SECTION */
+
+
+.highlights-and-buttons {
+    width: 95%;
+    display: flex; 
+    /* align-items: center;  */
+    margin: 0 auto;
+    display: flex; 
+
+}
+
+
 .highlights {
     display: flex;
     width: 95%;
@@ -264,6 +281,13 @@ table tbody tr:nth-child(odd) {
    
 }
 
+.highlights-3 {
+    /* width: calc(75% - 160px); */
+    
+
+}
+
+
 .highlight-card {
     width: 200px;
     height: 200px;
@@ -273,8 +297,30 @@ table tbody tr:nth-child(odd) {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-color: white;
+    color: var(--font1);
+}
+
+.card-title {
+    font-size: 30px;
+}
+
+.card-value {
+    font-size: 50px;
 }
 
 .highlight-number {
     font-size: 70px;
+    color: var(--font1);
+}
+
+
+button {
+    background-color: #124e66;
+    color: white;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 3px;
+    width: 160px;
 }
