@@ -1,0 +1,16 @@
+{
+  "name": "cs120-final",
+  "version": "1.0.0",
+  "description": "Final project for Tufts CS120 Web Programming and Engineering Course.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
+}
