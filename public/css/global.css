@@ -1,0 +1,244 @@
+:root {
+    --page-title: #7c6cc2; /* Orange */
+    --font1: #212a32;
+    --font2: #2065a2;
+
+    /* tables */
+    --table-header-color: #748d92;
+    --table-row: #d3d9d5;
+    --table-hover-color: #acd0f4af;
+
+    --status-color-ordered: #d3d3d3; /* Light Grey */
+    --status-color-arrived: #808080; /* Dark Grey */
+    --status-color-assembled: #a3b8f8; /* Blue */
+    --status-color-ready-to-sell: #16a316; /* Green */
+    --status-color-sold: #800080; /* Purple */
+    --status-color-other-special: #ffa500; /* Orange */
+
+    --field-label: #2f00ff; /* Orange */
+}
+* {
+    margin: 0;
+    padding: 0;
+    color: 	#1B1212;
+    font-family:  sans-serif;
+
+}
+
+.page-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #d3d9d5;
+
+}
+
+/* PAGE CONTENT */
+.page-content-container {
+    padding: 10px;
+    width: calc(100vw - 200px);
+    height: auto;
+}
+
+
+/* PAGE TITLE  */
+.page-title h1 {
+    margin-left: 20px;
+    text-transform: uppercase;
+    color: var(--page-title);
+    margin-bottom: 20px;
+}
+
+
+/* FULL WIDTH TABLE SECTION */
+.full-width-table {
+    width: 95%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.full-width-table table {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.full-width-table thead {
+    height: 35px;
+    background-color: #748d92;
+
+}
+
+.full-width-table tr {
+    height: 42px;
+}
+.full-width-table th {
+    text-align: left;
+    font-weight: normal;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+.full-width-table td,
+.full-width-table th {
+    vertical-align: middle;
+    padding-left: 10px;
+    /* color:rgb(60, 60, 60); */
+}
+
+table tbody tr:nth-child(even) {
+    background-color:#d3d9d5;
+
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+
+}
+
+.test {
+    background-color: blue;
+}
+
+.full-width-table tbody tr:hover {
+    background-color: var(--table-hover-color); /* Set the background color on hover */
+}
+
+/* TABLE ROWS COLOR STATUS */
+.ordered {
+    background-color: var(--status-color-ordered);
+
+}
+
+.arrived {
+    background-color: var(--status-color-arrived);
+
+}
+
+.assembled {
+    background-color: var(--status-color-assembled);
+}
+
+.ready-to-sell {
+    background-color: var(--status-color-ready-to-sell);
+}
+
+.sold {
+    background-color: var(--status-color-sold);
+}
+
+.other-special {
+    background-color: var(--status-color-other-special);
+}
+
+
+/*  FIELDS SECTION */
+.fields {
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+}
+.fields h1 {
+    margin-bottom: 50px;
+}
+
+.field-wrap{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    align-items: flex-start;
+}
+
+
+.field-wrap input,
+.field-wrap textarea {
+    width: 40%;
+
+}
+
+.field {
+    height: 26px;
+    padding: 2px;
+    width: 40%;
+}
+
+.fields label {
+    color: var(--field-label);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* HIGHLIGHT card  SECTION */
+
+
+.highlights-and-buttons {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    height: 270px;
+    margin: 0 auto;
+    display: flex;
+
+}
+
+.button-holder {
+    height: 95%;
+    width: 200px;
+    padding-top: 20px;
+}
+
+
+.highlights {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+
+
+}
+
+.highlight-card {
+    padding: 5px;
+    width: 260px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: white;
+    color: var(--font1);
+    /* text-align: center; */
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-value {
+    font-size: 50px;
+    color: var(--font2);
+}
+
+.highlight-number {
+    font-size: 70px;
+    color: var(--font1) !important;
+}
+
+
+button {
+    background-color: #124e66;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 3px;
+    width: 160px;
+}
