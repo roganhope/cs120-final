@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="<%- customCSS %>"> <!-- changeable CSS -->
+    <title><%- pageTitle %></title>
+    <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="page-container">
+    <div class="nav-container">
+        <div>
+            <a href="/dashboard"><img class="logo" src="/images/temp-logo.png" alt=""></a>
+        </div>
+        <div class="nav-buttons">
+            <div class="nav-button active"><a class="nav-link" href="/dashboard">Dashboard</a></div>
+            <div class="nav-button"><a class="nav-link" href="/inventory">Inventory</a></div>
+            <div class="nav-button"><a class="nav-link" href="/shipments">Shipments</a></div>
+            <div class="nav-button"><a class="nav-link" href="/mechanic_hub">Mechanic Hub</a></div>
+            <div class="nav-button"><a class="nav-link" href="/clients">Clients</a></div>
+            <div class="nav-button"><a class="nav-link" href="/sales">Sales</a></div>
+            <div class="nav-button"><a class="nav-link" href="#">Account</a></div>
+            <div class="nav-button"><a class="nav-link" href="#">Log Out</a></div>
+        </div>
+    </div>
+    <div class="page-content-container temp">
+        <%- include(content) %>
+    </div>
+</div>
+</body>
+</html>
