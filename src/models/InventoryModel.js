@@ -1,3 +1,6 @@
+const fs = require('fs');
+const csv = require('csv-parser');
+
 const { MongoClient } = require('mongodb');
 
 class InventoryModel {
@@ -16,10 +19,26 @@ class InventoryModel {
         await this.client.close();
     }
 
-    async Inventory(inventoryData){
-        // createa a new shipment
+    async uploadBulkInventory(inventoryData){
+        console.log("uploading inventory atempt")
+        await this.connect()
+        try {
+            
+                await this.inventory.insertMany(inventoryData);
+            
+            console.log('All inventory data uploaded successfully');        } 
+            catch (error) {
+            console.error('Error uploading inventory data:', error);
+            throw error;
+        }
 
+        await this.client.close()
     }
+
+
+
+    
+
 
  
 }

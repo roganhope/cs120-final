@@ -1,7 +1,7 @@
 <h1>upload</h1>
 <br>
-<form action="/shipment/new" method="post" >
-    <input type="file" name="invFile" id="invFile">
+<form action="/shipment/new" method="post"  enctype="multipart/form-data" >
+    <input type="file" name="file" id="file">
     <div>
         <label for="shipmentVendor">Shipment Vendor:</label>
         <input type="text" name="shipmentVendor" id="shipmentVendor">

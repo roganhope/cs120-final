@@ -19,8 +19,10 @@ class ShipmentModel {
     async createShipment(shipmentData) {
         await this.connect();
         const result = await this.shipments.insertOne(shipmentData);
-        console.log('Sale created with ID:', result.insertedId);
+        const shipID = result.insertedId
+        console.log('SHIPMENT MODEL LOG: shipment created with ID:', shipID);
         await this.client.close();
+        return(result)
     }
 
 }

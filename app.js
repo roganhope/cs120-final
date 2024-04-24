@@ -17,33 +17,56 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/inventory', (req, res) => {
-    res.render('inventory/allInventory');
-});
+// app.get('/inventory', (req, res) => {
+//     res.render('inventory/allInventory');
+// });
 
-app.get('/uploadinventory', (req, res) => {
-    res.render('inventory/uploadInventory');
-});
-
-
-const { getSale, newSale, uploadSale} = require('./src/controllers/SalesController');
+// app.get('/uploadinventory', (req, res) => {
+//     res.render('inventory/uploadInventory');
+// });
 
 
+const { getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const {uploadShipment, newShipment} = require('./src/controllers/ShipmentController');
+const { uploadShipment, newShipment } = require('./src/controllers/ShipmentController');
+const { uploadInventory } = require('./src/controllers/InventoryController');
 app.get('/shipment', newShipment);
-app.post('/shipment/new', uploadShipment);
 
+const upload = require('./src/controllers/MulterFileController');
+app.post('/shipment/new',upload.single('file'), async (req, res) => {
+    try {
+        const fileData = req.file;
+        console.log('File data:', fileData);
+    
+        console.log("REQ POST DATA : " + JSON.stringify(req.body));
+   
+        // make a shipment first so you have ship id for the inventory 
+        const shipmentResult = await uploadShipment(req);
+        if (shipmentResult && shipmentResult.acknowledged === true) {
+            shipmentResult.filePath = fileData.path;
+            console.log("RETURNED SHIP BODY " + JSON.stringify(shipmentResult))
+            console.log("ready to upload inventory")
+            const inventoryResult = await uploadInventory(shipmentResult);
+        }
 
+        
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    } catch (error) {
+        console.error('Error processing shipment:', error);
+        res.status(500).send('Error processing shipment');
+    }
 });
-// const PORT = process.env.PORT || 8080;
+
+
+
+// const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
 //     console.log(`Server running on port ${PORT}`);
 // });
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

@@ -1,6 +1,8 @@
 const ShipmentModel = require('../models/ShipmentModel');
 const themodel = new ShipmentModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
 
+
+
 async function newShipment(req, res) {
     res.render('inventory/uploadInventory', {
         pageTitle: 'uploadInventory',
@@ -9,8 +11,9 @@ async function newShipment(req, res) {
 }
 
 async function uploadShipment(req, res) {
-    const { shipmentVendor, orderDate, expectedDate, total } = req.body;
-    console.log(req.body);
+    const { shipmentVendor, orderDate, expectedDate, total, invFile } = req.body;
+    console.log("REQ POST DATA ibsude ship controller : " + JSON.stringify(req.body));
+    // console.log(JSON.parse(req.body));
     const shipmentData = {
         shipmentVendor,
         orderDate,
@@ -18,11 +21,24 @@ async function uploadShipment(req, res) {
         total
     };
 
-    console.log(shipmentData);
+    console.log("creating shipment in controller with " + shipmentData);
 
     try {
-        await themodel.createShipment(shipmentData);
-        // res.redirect('/shipments');
+        const shipmentResult = await themodel.createShipment(shipmentData);
+
+        // create new json object with the original req
+        if (shipmentResult.acknowledged === true) {
+            shipmentID = shipmentResult.insertedId;
+            acknowledged = shipmentResult.acknowledged;
+            const returnData = {
+                shipmentID,
+                invFile,
+                acknowledged
+            }
+            return (returnData)
+        }
+        
+        return(shipmentResult);
 
     } catch (error) {
         console.error("Error creating new shipment:", error);
