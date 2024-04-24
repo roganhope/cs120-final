@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/style.css">
     <title>Main Page</title>
-    <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/images/scooter_icon.png" type="image/x-icon">
 
 </head>
+
 <body>
     <div class="page-container">
         <?php include '../components/navbar.php'; ?> <!-- Include the navbar -->
@@ -32,7 +34,7 @@
                     <p class="highlight-number">10</p>
                     <p>TO BE ASSEMBLED</p>
                 </div>
-               
+
             </div>
 
             <!-- SECTION: FILLABLE FIELDS -->
@@ -41,11 +43,13 @@
                 <form id="profileForm">
                     <div class="field-wrap">
                         <label for="firstName">LABEL</label>
-                        <input type="text" id="firstName" name="firstName" class="editable-field field" placeholder="First Name">
+                        <input type="text" id="firstName" name="firstName" class="editable-field field"
+                            placeholder="First Name">
                     </div>
                     <div class="field-wrap">
                         <label for="lastName">LABEL</label>
-                        <input type="text" id="lastName" name="lastName" class="editable-field field" placeholder="Last Name">
+                        <input type="text" id="lastName" name="lastName" class="editable-field field"
+                            placeholder="Last Name">
                     </div>
                     <div class="field-wrap">
                         <label for="email">LABEL</label>
@@ -53,7 +57,8 @@
                     </div>
                     <div class="field-wrap">
                         <label for="phoneNumber">LABEL</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" class="editable-field field" placeholder="Phone Number">
+                        <input type="tel" id="phoneNumber" name="phoneNumber" class="editable-field field"
+                            placeholder="Phone Number">
                     </div>
                     <div class="field-wrap">
                         <label for="street">Street:</label>
@@ -69,7 +74,8 @@
                     </div>
                     <div class="field-wrap">
                         <label for="zipcode">Zipcode:</label>
-                        <input type="text" id="zipcode" name="zipcode" class="editable-field field" placeholder="Zipcode">
+                        <input type="text" id="zipcode" name="zipcode" class="editable-field field"
+                            placeholder="Zipcode">
                     </div>
                     <div class="field-wrap">
                         <label for="notes">Notes:</label>
@@ -79,7 +85,7 @@
                     <button type="submit" id="saveButton" style="display: none;">Save</button>
                 </form>
             </div>
-            
+
             <!--  SECTION: FULL WIDTH TABLE  -->
             <table class="full-width-table temp">
                 <thead>
@@ -139,11 +145,11 @@
 
             <!-- SECTION: UPLOAD CSV  -->
 
-            
-        
+
+
         </div>
     </div>
-    
+
 </body>
 
 </html>

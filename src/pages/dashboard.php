@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard</title>
     <link rel="stylesheet" href="../../style.css">
-    <link rel="icon" href="../../public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../../public/images/scooter_icon.png" type="image/x-icon">
     <script src="/src/api/login.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
