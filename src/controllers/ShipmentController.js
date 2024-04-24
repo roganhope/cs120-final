@@ -1,6 +1,12 @@
 const ShipmentModel = require('../models/ShipmentModel');
 const themodel = new ShipmentModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
 
+async function newShipment(req, res) {
+    res.render('inventory/uploadInventory', {
+        pageTitle: 'uploadInventory',
+        customCSS: '/css/inventory.css',
+    });
+}
 
 async function uploadShipment(req, res) {
     const { shipmentVendor, orderDate, expectedDate, total } = req.body;
@@ -24,4 +30,4 @@ async function uploadShipment(req, res) {
     }
 }
 
-module.exports = { uploadShipment};
+module.exports = { uploadShipment, newShipment};

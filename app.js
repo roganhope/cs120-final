@@ -33,16 +33,17 @@ app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const {uploadShipment } = require('./src/controllers/ShipmentController');
+const {uploadShipment, newShipment} = require('./src/controllers/ShipmentController');
+app.get('/shipment', newShipment);
 app.post('/shipment/new', uploadShipment);
 
 
 
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-// });
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
