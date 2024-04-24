@@ -17,13 +17,32 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+app.get('/inventory', (req, res) => {
+    res.render('inventory/allInventory');
+});
+
+app.get('/uploadinventory', (req, res) => {
+    res.render('inventory/uploadInventory');
+});
+
+
 const { getSale, newSale, uploadSale} = require('./src/controllers/SalesController');
+
 
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const PORT = process.env.PORT || 3000;
+const {uploadShipment } = require('./src/controllers/ShipmentController');
+app.post('/shipment/new', uploadShipment);
+
+
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

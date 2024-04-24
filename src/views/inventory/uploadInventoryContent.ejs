@@ -1,0 +1,23 @@
+<h1>upload</h1>
+<br>
+<form action="/shipment/new" method="post" >
+    <input type="file" name="invFile" id="invFile">
+    <div>
+        <label for="shipmentVendor">Shipment Vendor:</label>
+        <input type="text" name="shipmentVendor" id="shipmentVendor">
+    </div>
+   
+    <div>
+        <label for="orderDate">Order Date:</label>
+        <input type="date" name="orderDate" id="orderDate">
+    </div>
+    <div>
+        <label for="expectedDate">Expected Date:</label>
+        <input type="date" name="expectedDate" id="expectedDate">
+    </div>
+    <div>
+        <label for="total">Total:</label>
+        <input type="number" name="total" id="total">
+    </div>
+    <input type="submit" value="Submit">
+</form>
