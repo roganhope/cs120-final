@@ -2,11 +2,20 @@ const ShipmentModel = require('../models/ShipmentModel');
 const themodel = new ShipmentModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
 
 
-async function getAllShipmentInfo(req, res, shipID){
-    console.log('using get shipment!')
+async function getShipment(req, res, shipID, inventoryData){
+    console.log("getting shipment")
     console.log(shipID)
-    const shipmentData = await themodel.getShipment(shipID)
-    console.log(JSON.stringify(shipmentData));
+    const data = await themodel.getShipment(shipID);
+    res.render('shipments/singleShipment', {
+        pageTitle: 'View Shipment',
+        customCSS: '/css/shipments.css',
+        shipID: data.shipID,
+        vendor: data.vendor,
+        orderDate: data.orderDate,
+        expectedDate: data.expectedDate,
+        total: data.total,
+        inventory: inventoryData
+    });
 }
 
 async function newShipment(req, res) {
@@ -52,4 +61,4 @@ async function uploadShipment(req, res) {
     }
 }
 
-module.exports = { uploadShipment, newShipment, getAllShipmentInfo};
+module.exports = { uploadShipment, newShipment, getShipment};

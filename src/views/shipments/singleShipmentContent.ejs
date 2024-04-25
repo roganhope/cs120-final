@@ -1,1 +1,37 @@
-<h1>single shipment</h1>
+<h1>(single) Shipment Details</h1>
+
+    <div>
+        <!-- Render shipment details -->
+        <strong>Shipment ID:</strong> <%= shipID %><br>
+        <strong>Vendor:</strong> <%= vendor %><br>
+        <strong>Order Date:</strong> <%= orderDate %><br>
+        <strong>Expected Date:</strong> <%= expectedDate %><br>
+        <strong>Total:</strong> <%= total %><br>
+    </div>
+
+    
+    <h2>Inventory</h2>
+    <div class="full-width-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>VIN</th>
+                    <th>Scooter</th>
+                    <th>Client</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% inventory.forEach(item => { %>
+                    <tr>
+                        <td><%= item.vin %></td>
+                        <td><%= `${item.color} ${item.make} ${item.model}` %></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+  

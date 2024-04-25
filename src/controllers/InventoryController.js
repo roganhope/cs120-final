@@ -29,19 +29,28 @@ async function uploadInventory(req, res) {
     const shipmentID = req.shipmentID;
     try {
         const jsonArray = await processInventoryFile(req.filePath);
-        
-        // Now you can use jsonArray or process it further as needed
         const jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
         console.log('JSON data received:', jsonArrayWithShipmentID);
         await themodel.uploadBulkInventory(jsonArrayWithShipmentID)
         // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL
-        // res.redirect(`/shipment/${shipmentID.toString()}`);
     } catch (error) {
         console.error('Error uploading inventory:', error);
-        
     }
 
 }
 
+async function getInventoryFromShipment(req, res, shipmentID){
+    console.log("shipment id in inventory controller is " + shipmentID)
+    try {
+        const inventory = await themodel.getInventoryFromShipment(shipmentID);
+        // console.log("Inventory returned from controller:", inventory);
+        
+        return inventory
+    }
+    catch (error){
+        console.error("Error locating inventory for shipment", error);
+    }
+}
 
-module.exports = { uploadInventory};
+
+module.exports = { uploadInventory, getInventoryFromShipment};

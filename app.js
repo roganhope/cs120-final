@@ -31,14 +31,20 @@ app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const { uploadShipment, newShipment } = require('./src/controllers/ShipmentController');
-const { uploadInventory } = require('./src/controllers/InventoryController');
+const { uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
+const { uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
 app.get('/shipment', newShipment);
 
-app.get('/shipment/:shipmentID', (req, res) => {
-    // const shipmentID = req.params.shipmentID;
+app.get('/shipment/:shipmentID', async (req, res) => {
     console.log("woohoo")
-    // Your logic to handle the GET request for a specific shipmentID
+    const shipmentID = req.params.shipmentID;
+    console.log("shipment id here " + shipmentID.toString())
+    const inventoryData = await getInventoryFromShipment(res, req, shipmentID)
+    console.log("Type of inventory:", typeof inventoryData);
+   
+    console.log(JSON.stringify(inventoryData));
+    const shipmentData = await getShipment(req, res, shipmentID, inventoryData);
+
 });
 
 const upload = require('./src/controllers/MulterFileController');
