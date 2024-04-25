@@ -1,25 +1,28 @@
-const ClientsModel = require('../models/ClientModel');
+const ClientsModel = require("../models/ClientModel");
 
-const clientsModel = new ClientsModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
+const clientsModel = new ClientsModel(
+  "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+);
 
-async function getClients(req,res){
-    try{
-        const clientsData = await clientsModel.getAllClients();
-        
-        res.render('clients/clients',{
-            pageTitle: 'Client Data',
-            customCSS: '/css/clients.css',
-            clients: clientsData
-        });
-    }catch(error){
-        console.error("Error accessing client data:", error);
-        res.status(500).send("Unable to retrieve sales data.");
-    }
+async function getClients(req, res) {
+  try {
+    const clientsData = await clientsModel.getAllClients();
+
+    const totalClients = await clientsModel.getTotalNumberOfClients();
+
+    res.render("clients/clients", {
+      pageTitle: "Client Data",
+      customCSS: "/css/clients.css",
+      totalClients: totalClients,
+      clients: clientsData,
+    });
+  } catch (error) {
+    console.error("Error accessing client data:", error);
+    res.status(500).send("Unable to retrieve client data.");
+  }
 }
 
-
-
-
+module.exports = { getClients };
 // async function getSale(req, res) {
 //     try {
 //         const total = await salesModel.getTotalSales();
@@ -64,4 +67,4 @@ async function getClients(req,res){
 //     }
 // }
 
-// module.exports = { getSale, newSale, uploadSale};
+// module.exports = { getSale, newSale, uploadSale };
