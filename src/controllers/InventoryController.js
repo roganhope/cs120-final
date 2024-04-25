@@ -33,8 +33,7 @@ async function uploadInventory(req, res) {
         jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
         const status_id = 1;
         const jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
-        
-        
+   
         console.log('JSON data received:', jsonArrayWithStatus);
         await themodel.uploadBulkInventory(jsonArrayWithStatus)
         // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL

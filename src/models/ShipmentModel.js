@@ -45,6 +45,28 @@ class ShipmentModel {
         }
     }
 
+
+    // gets all shipments
+    async getShipments(){
+        console.log("shipment model is retrieving shipments")
+        await this.connect();
+        try {
+            const cursor =  this.shipments.find();
+            const data = await cursor.toArray();        
+            if (data.length === 0) {
+                console.log('No records found for shipments');
+                return null;
+            }
+            console.log('Found shipments');
+            return data;
+        } catch (error) {
+            console.error('Error retrieving shipments data :', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
+
 }
 
 module.exports = ShipmentModel;

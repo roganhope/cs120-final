@@ -61,4 +61,13 @@ async function uploadShipment(req, res) {
     }
 }
 
-module.exports = { uploadShipment, newShipment, getShipment};
+async function getShipments(req, res) {
+    const shipments = await themodel.getShipments();
+    res.render('shipments/allShipments', {
+        pageTitle: 'View Shipments',
+        customCSS: '/css/shipments.css',
+        shipmentData: shipments
+    });
+}
+
+module.exports = { uploadShipment, newShipment, getShipment, getShipments};

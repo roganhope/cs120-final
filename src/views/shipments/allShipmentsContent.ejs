@@ -1,2 +1,27 @@
 <h1>ALL SHIPMENTS</h1>
 
+<table class="full-width-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vendor</th>
+            <th>Order Date</th>
+            <th>Expected Date</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% shipmentData.forEach(shipment => { %>
+            <tr>
+                <!-- // to do wrap link -->
+                <a href="/shipment/<%= shipment._id %>">
+                    <td><%= shipment._id %></td>
+                    <td><%= shipment.shipmentVendor %></td>
+                    <td><%= shipment.orderDate %></td>
+                    <td><%= shipment.expectedDate %></td>
+                    <td><%= shipment.total %></td>
+                </a>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

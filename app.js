@@ -5,6 +5,18 @@ const app = express();
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
+// model trigger 
+const ModelModel = require('./src/models/ModelModel.js');
+const modelTrigger = new ModelModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
+modelTrigger.watchInventoryChanges()
+    .then(() => {
+        console.log('Watching for inventory changes...');
+    })
+    .catch((error) => {
+        console.error('Error setting up inventory change watcher:', error);
+    });
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
@@ -19,18 +31,17 @@ app.get('/login', (req, res) => {
 
 
 
-
-
 const { getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const { uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
+const {getShipments, uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
 const {  getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
 
 app.get('/inventory', getInventory);
-app.get('/shipment', newShipment);
+app.get('/newshipment', newShipment);
+app.get('/shipments', getShipments);
 
 app.get('/shipment/:shipmentID', async (req, res) => {
     console.log("woohoo")
