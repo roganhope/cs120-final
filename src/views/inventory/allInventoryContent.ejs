@@ -1,1 +1,22 @@
-<h1>TEST</h1>
+<h1>all inventroy</h1>
+
+<table class="full-width-table">
+    <thead>
+        <tr>
+            <th>VIN</th>
+            <th>Scooter</th>
+            <th>Client</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% inventory.forEach(item => { %>
+            <tr>
+                <td><%= item.vin %></td>
+                <td><%= item.color %> <%= item.make %> <%= item.model %></td>
+                <td></td> <!-- Placeholder for client -->
+                <td></td> <!-- Placeholder for status -->
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

@@ -17,13 +17,8 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-// app.get('/inventory', (req, res) => {
-//     res.render('inventory/allInventory');
-// });
 
-// app.get('/uploadinventory', (req, res) => {
-//     res.render('inventory/uploadInventory');
-// });
+
 
 
 const { getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
@@ -32,7 +27,9 @@ app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
 const { uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
-const { uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
+const {  getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
+
+app.get('/inventory', getInventory);
 app.get('/shipment', newShipment);
 
 app.get('/shipment/:shipmentID', async (req, res) => {
@@ -44,7 +41,6 @@ app.get('/shipment/:shipmentID', async (req, res) => {
    
     console.log(JSON.stringify(inventoryData));
     const shipmentData = await getShipment(req, res, shipmentID, inventoryData);
-
 });
 
 const upload = require('./src/controllers/MulterFileController');
@@ -66,9 +62,6 @@ app.post('/shipment/new',upload.single('file'), async (req, res) => {
             res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
             return; 
         }
-
-        
-
     } catch (error) {
         console.error('Error processing shipment:', error);
         res.status(500).send('Error processing shipment');

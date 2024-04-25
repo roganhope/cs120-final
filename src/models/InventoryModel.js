@@ -56,6 +56,29 @@ class InventoryModel {
 
     }
 
+    async getInventory() {
+        console.log("inventory model is retrieving inventory")
+        await this.connect();
+        try {
+            
+            const cursor =  this.inventory.find();
+            const data = await cursor.toArray();        
+
+            if (data.length === 0) {
+                console.log('No inventory found for shipment');
+                return null;
+            }
+            console.log('Found inventory');
+            return data;
+        } catch (error) {
+            console.error('Error retrieving inventory :', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+
+    }
+
 
 
 

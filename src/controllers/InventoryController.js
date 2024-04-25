@@ -29,9 +29,14 @@ async function uploadInventory(req, res) {
     const shipmentID = req.shipmentID;
     try {
         const jsonArray = await processInventoryFile(req.filePath);
-        const jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
-        console.log('JSON data received:', jsonArrayWithShipmentID);
-        await themodel.uploadBulkInventory(jsonArrayWithShipmentID)
+        let jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID })); 
+        jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
+        const status_id = 1;
+        const jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
+        
+        
+        console.log('JSON data received:', jsonArrayWithStatus);
+        await themodel.uploadBulkInventory(jsonArrayWithStatus)
         // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL
     } catch (error) {
         console.error('Error uploading inventory:', error);
@@ -52,5 +57,24 @@ async function getInventoryFromShipment(req, res, shipmentID){
     }
 }
 
+async function getInventory(req, res){
+    console.log("controller is sending request to get inventory to mdoel")
+    
+    try {
+        const data = await themodel.getInventory();
+        res.render('inventory/allInventory', {
+            pageTitle: 'View Inventory',
+            customCSS: '/css/inventory.css',
+            inventory: data
+        });
+        
+    }
+    catch (error){
+        console.error("Error locating inventory", error);
+    }
+   
+        
+}
 
-module.exports = { uploadInventory, getInventoryFromShipment};
+
+module.exports = { getInventory, uploadInventory, getInventoryFromShipment};
