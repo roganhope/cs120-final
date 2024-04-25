@@ -2,6 +2,12 @@ const ShipmentModel = require('../models/ShipmentModel');
 const themodel = new ShipmentModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
 
 
+async function getAllShipmentInfo(req, res, shipID){
+    console.log('using get shipment!')
+    console.log(shipID)
+    const shipmentData = await themodel.getShipment(shipID)
+    console.log(JSON.stringify(shipmentData));
+}
 
 async function newShipment(req, res) {
     res.render('inventory/uploadInventory', {
@@ -45,5 +51,5 @@ async function uploadShipment(req, res) {
         res.status(500).send("Failed to create new shipment.");
     }
 }
-
-module.exports = { uploadShipment, newShipment};
+--
+module.exports = { uploadShipment, newShipment, getAllShipmentInfo};
