@@ -51,5 +51,5 @@ async function uploadShipment(req, res) {
         res.status(500).send("Failed to create new shipment.");
     }
 }
---
+
 module.exports = { uploadShipment, newShipment, getAllShipmentInfo};

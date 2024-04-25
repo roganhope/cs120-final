@@ -35,6 +35,12 @@ const { uploadShipment, newShipment } = require('./src/controllers/ShipmentContr
 const { uploadInventory } = require('./src/controllers/InventoryController');
 app.get('/shipment', newShipment);
 
+app.get('/shipment/:shipmentID', (req, res) => {
+    // const shipmentID = req.params.shipmentID;
+    console.log("woohoo")
+    // Your logic to handle the GET request for a specific shipmentID
+});
+
 const upload = require('./src/controllers/MulterFileController');
 app.post('/shipment/new',upload.single('file'), async (req, res) => {
     try {
@@ -50,6 +56,9 @@ app.post('/shipment/new',upload.single('file'), async (req, res) => {
             console.log("RETURNED SHIP BODY " + JSON.stringify(shipmentResult))
             console.log("ready to upload inventory")
             const inventoryResult = await uploadInventory(shipmentResult);
+            console.log(shipmentResult.shipmentID)
+            res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
+            return; 
         }
 
         

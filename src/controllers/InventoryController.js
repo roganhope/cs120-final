@@ -34,6 +34,8 @@ async function uploadInventory(req, res) {
         const jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
         console.log('JSON data received:', jsonArrayWithShipmentID);
         await themodel.uploadBulkInventory(jsonArrayWithShipmentID)
+        // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL
+        // res.redirect(`/shipment/${shipmentID.toString()}`);
     } catch (error) {
         console.error('Error uploading inventory:', error);
         
