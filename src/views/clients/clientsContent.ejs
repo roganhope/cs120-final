@@ -1,0 +1,35 @@
+<div class="total-box">
+    <div>Total Clients: $<%= totalClients %></div>
+    <div>Total Active Clients: $<%= totalActiveClients %></div>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Client</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Scooter</th>
+        <th>Order Status</th>
+        <th>Client Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% clients.forEach(function(client) { %>
+        <tr>
+            <!-- <td><%= client.client_id %></td>
+            <td>$<%= s.sale_price %></td>
+            <td>$<%= sale.down_payment_amount %></td>
+            <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
+            <td><%= sale.date_completed.toISOString().substring(0, 10) %></td> -->
+        </tr>
+    <% }); %>
+    </tbody>
+</table>
+
+
+
+
+
+
+

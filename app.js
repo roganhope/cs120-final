@@ -25,8 +25,14 @@ app.get('/uploadinventory', (req, res) => {
     res.render('inventory/uploadInventory');
 });
 
+const { getClients, newClient, uploadClient} = require('./src/controllers/ClientsController');
+
+// app.get('/clents', getClients);
+// app.get('/newClients', newClient);
+// app.post('clients/new', uploadClient);
 
 const { getSale, newSale, uploadSale} = require('./src/controllers/SalesController');
+
 
 
 app.get('/sales', getSale);
