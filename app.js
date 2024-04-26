@@ -28,54 +28,41 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-app.get("/inventory", (req, res) => {
-  res.render("inventory/allInventory");
-});
+// app.get("/inventory", (req, res) => {
+//   res.render("inventory/allInventory");
+// });
 // all imports
 const {getShipments, uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
 const {getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
 const {getModel, getHub} = require('./src/controllers/MechanicController');
 const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 const upload = require('./src/controllers/MulterFileController');
+const {
+    getClients,
+    //   newClient,
+    //   uploadClient,
+  } = require("./src/controllers/ClientsController");
+
 
 app.get("/uploadinventory", (req, res) => {
   res.render("inventory/uploadInventory");
 });
 
-const {
-  getClients,
-  //   newClient,
-  //   uploadClient,
-} = require("./src/controllers/ClientsController");
-
 app.get("/clients", getClients);
 // app.get('/newClients', newClient);
 // app.post('clients/new', uploadClient);
 
-const {
-  getSale,
-  newSale,
-  uploadSale,
-} = require("./src/controllers/SalesController");
-
-app.get("/sales", getSale);
-app.get("/newSales", newSale);
-app.post("/sales/new", uploadSale);
 // sales
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const {
-  uploadShipment,
-  newShipment,
-} = require("./src/controllers/ShipmentController");
+
+
 app.get("/shipment", newShipment);
 app.post("/shipment/new", uploadShipment);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+
 // inventory + shipments (related)
 app.get('/inventory', getInventory);
 app.get('/newshipment', newShipment);
@@ -87,7 +74,6 @@ app.get('/shipment/:shipmentID', async (req, res) => {
     // console.log("shipment id here " + shipmentID.toString())
     const inventoryData = await getInventoryFromShipment(res, req, shipmentID)
     // console.log("Type of inventory:", typeof inventoryData);
-   
     console.log(JSON.stringify(inventoryData));
     await getShipment(req, res, shipmentID, inventoryData);
 });
@@ -96,9 +82,7 @@ app.post('/shipment/new',upload.single('file'), async (req, res) => {
     try {
         const fileData = req.file;
         // console.log('File data:', fileData);
-    
         // console.log("REQ POST DATA : " + JSON.stringify(req.body));
-   
         // make a shipment first so you have ship id for the inventory 
         const shipmentResult = await uploadShipment(req);
         if (shipmentResult && shipmentResult.acknowledged === true) {
@@ -142,4 +126,4 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-})
+
