@@ -1,11 +1,5 @@
 
-<!-- <h1><%= pageTitle %></h1> -->
 <h1><%= data.make %>  <%= data.model %> </h1>
-
-
-
-
- 
 
     <% if (data.image) { %>
         <img id="makemodelimg" src="<%= data.image %>" alt="">
@@ -35,13 +29,14 @@
             <thead>
                 <tr>
                     <th>Vin</th>
+                    <th>Color</th>
                 </tr>
             </thead>
            
             <% inventory.forEach(item => { %>
                 <tr>
                     <td> <a href="/inventory/<%= item._id %>"><%= item.vin %> </a> </td>
-                   
+                    <td> <a href="/inventory/<%= item._id %>"><%= item.color %> </a> </td>
                 </tr>
             
             <% }); %>
