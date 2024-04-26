@@ -1,28 +1,32 @@
-<h1>Create Shipment and Upload Inventory</h1>
-<br>
+
+    <h1 class="page-title">Create Shipment and Upload Inventory</h1>
 
 
-<form action="/shipment/new" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" id="file" required>
-    <div>
-        <label for="shipmentVendor"> Vendor:</label>
-        <input type="text" name="shipmentVendor" id="shipmentVendor" required>
-    </div>
-    <div>
-        <label for="invoiceno">Invoice Number:</label>
-        <input type="text" name="invoiceno" id="invoiceno" required>
-    </div>
-    <div>
-        <label for="orderDate">Order Date:</label>
-        <input type="date" name="orderDate" id="orderDate" required>
-    </div>
-    <div>
-        <label for="expectedDate">Expected Date:</label>
-        <input type="date" name="expectedDate" id="expectedDate" required>
-    </div>
-    <div>
-        <label for="total">Total:</label>
-        <input type="number" name="total" id="total" required>
-    </div>
-    <input type="submit" value="Submit">
-</form>
+<div class="section-container">
+    <form action="/shipment/new" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" required>
+        <div>
+            <label for="shipmentVendor"> Vendor:</label>
+            <input type="text" name="shipmentVendor" id="shipmentVendor" required>
+        </div>
+        <div>
+            <label for="invoiceno">Invoice Number:</label>
+            <input type="text" name="invoiceno" id="invoiceno" required>
+        </div>
+        <div>
+            <label for="orderDate">Order Date:</label>
+            <input type="date" name="orderDate" id="orderDate" required>
+        </div>
+        <div>
+            <label for="expectedDate">Expected Date:</label>
+            <input type="date" name="expectedDate" id="expectedDate" required>
+        </div>
+        <div>
+            <label for="total">Total:</label>
+            <input type="number" name="total" id="total" required>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    
+</div>
+

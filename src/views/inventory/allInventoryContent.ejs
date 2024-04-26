@@ -1,5 +1,5 @@
-<h1>all inventroy</h1>
 
+<h1 class="page-title">View Inventory</h1>
 <table class="full-width-table">
     <thead>
         <tr>
@@ -12,10 +12,10 @@
     <tbody>
         <% inventory.forEach(item => { %>
             <tr>
-                <td><%= item.vin %></td>
+                <td><a href="/inventory/<%= item._id %>"> <%= item.vin %></a></td>
                 <td><%= item.color %> <%= item.make %> <%= item.model %></td>
                 <td></td> <!-- Placeholder for client -->
-                <td></td> <!-- Placeholder for status -->
+                <td><%= item.status_id %> </td> 
             </tr>
         <% }); %>
     </tbody>

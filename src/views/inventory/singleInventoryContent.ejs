@@ -1,12 +1,25 @@
-<h1><%= pageTitle %></h1>
+<h1 class="page-title">
+    <%= inventory.year %>
+        <%= inventory.color %>
+            <%= inventory.make %>
+                <%= inventory.model %>
+</h1>
+
 
 <link rel="stylesheet" href="<%= customCSS %>">
 
-<div class="inventory-details">
-    <h2>Inventory Details</h2>
-    <ul>
-        <% Object.keys(inventory).forEach(key => { %>
-            <li><strong><%= key %>:</strong> <%= inventory[key] %></li>
-        <% }); %>
-    </ul>
+<div class="section-container inventory-details">
+
+    <h2 class="section-title">Inventory Details</h2>
+    <%= inventory.status_id %>
+        <%= inventory.ccs %>
+            <%= inventory.purchase_price %>
+
+
+</div>
+<button><a href="/shipment/<%= inventory.shipmentID %>">
+        View Shipment Details</a></button>
+
+<div class="section-container client-section">
+    <p>client info here</p>
 </div>
