@@ -1,0 +1,28 @@
+.mechanic_notes_container {
+    background-color: rgb(170, 170, 202);
+
+}
+
+.mechanic_notes_container form {
+    color: red;
+}
+
+#mechanic_notes {
+    width: 100%; 
+    min-height: 100px; 
+    box-sizing: border-box;
+    border-style: solid;
+}
+
+textarea#mechanic_notes {
+    width: 100%; /* Set the width to fill its container */
+    height: 150px; /* Set the initial height */
+    resize: vertical; /* Allow vertical resizing */
+    overflow-y: auto; /* Add vertical scrollbar if needed */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    /* Add any other styling you want */
+}
+
+#makemodelimg {
+    width: 100px;
+}

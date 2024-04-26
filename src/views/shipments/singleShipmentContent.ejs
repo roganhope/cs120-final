@@ -25,7 +25,7 @@
             <tbody>
                 <% inventory.forEach(item => { %>
                     <tr>
-                        <td><%= item.vin %></td>
+                        <td><a href="/inventory/<%= item._id %>"><%= item.vin %></a></td>
                         <td><%= `${item.color} ${item.make} ${item.model}` %></td>
                         <td></td>
                         <td></td>

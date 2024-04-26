@@ -36,7 +36,7 @@ class ModelModel {
                     if (!processedModels.has(`${make}-${model}`)) {
                         // Add the combination to the set of processed models
                         processedModels.add(`${make}-${model}`);
-                        const image = './src/public/images/scooter_icon.png'
+                        const image = '/images/unknown-scooter.png'
     
                         // Check if the model already exists in the database
                         const existingModel = await this.models.findOne({ make, model });

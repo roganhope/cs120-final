@@ -1,4 +1,4 @@
-<h1>ALL SHIPMENTS</h1>
+<h1><%= pageTitle %></h1>
 
 <table class="full-width-table">
     <thead>
@@ -8,25 +8,19 @@
             <th>Order Date</th>
             <th>Expected Date</th>
             <th>Total</th>
-            <h1>rtadsfadsfs</h1>
-      
         </tr>
     </thead>
     <tbody>
         <% shipmentData.forEach(shipment => { %>
             <a href="/shipment/<%= shipment._id %>">
-            <tr>
-                <!-- // to do wrap link across entire row  -->
-               
+                <tr>
                     <td><a href="/shipment/<%= shipment._id %>"><%= shipment.invoiceno %></a></td>
                     <td><%= shipment.shipmentVendor %></td>
                     <td><%= shipment.orderDate %></td>
                     <td><%= shipment.expectedDate %></td>
                     <td><%= shipment.total %></td>
-             
-            </tr>
-        </a>
+                </tr>
+            </a>
         <% }); %>
     </tbody>
-   
 </table>
