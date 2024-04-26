@@ -1,0 +1,16 @@
+<h1><%= pageTitle %></h1>
+
+
+
+<div class="mechanic-hub">
+    <% if (models.length > 0) { %>
+        <h2>Models</h2>
+        <ul>
+            <% models.forEach(model => { %>
+                <li><strong>Make:</strong> <%= model.make %>, <strong>Model:</strong> <%= model.model %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>No models found.</p>
+    <% } %>
+</div>

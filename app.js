@@ -29,16 +29,19 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-
-
+// all imports
+const {getShipments, uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
+const {getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
+const {getModel, getHub} = require('./src/controllers/MechanicController');
 const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
+const upload = require('./src/controllers/MulterFileController');
+
+// sales
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
-const {getShipments, uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
-const {getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
-
+// inventory + shipments (related)
 app.get('/inventory', getInventory);
 app.get('/newshipment', newShipment);
 app.get('/shipments', getShipments);
@@ -54,7 +57,6 @@ app.get('/shipment/:shipmentID', async (req, res) => {
     await getShipment(req, res, shipmentID, inventoryData);
 });
 
-const upload = require('./src/controllers/MulterFileController');
 app.post('/shipment/new',upload.single('file'), async (req, res) => {
     try {
         const fileData = req.file;
@@ -91,6 +93,8 @@ app.post('/shipment/arrived/:shipID', async (req, res) => {
 });
 
 app.get('/inventory/:inventoryID', getSingleInventory)
+app.get('/mechanichub', getHub)
+app.get('/mechanichub/:make/:model', getModel);
 
 
 

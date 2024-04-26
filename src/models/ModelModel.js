@@ -52,8 +52,45 @@ class ModelModel {
             console.error('Error setting up change stream:', error);
         }
     }
+
+
+    async getAllModels() {
+        console.log("retrieving model list");
+        await this.connect();
+        try {
+            const cursor = await this.models.find();
+            const data = await cursor.toArray();
+            if (data.length === 0) {
+                console.log("No models found");
+                return data; 
+            }
+            return data;
+        } catch (error) {
+            console.error('error retrieving models ', error);
+            throw error; 
+        } finally {
+            await this.client.close();
+        }
+    }
+
+    async getSpeceficModel(make, model) {
+        console.log("retrieving model ");
+        await this.connect();
+        try {
+            
+            const specificModel = await this.models.findOne({ make: make, model: model });
+
+            return specificModel;
+        } catch (error) {
+            console.error('error retrieving model ', error);
+            throw error; 
+        } finally {
+            await this.client.close();
+        }
+    }
     
 }
+
 
 
 

@@ -1,0 +1,19 @@
+
+<h1><%= pageTitle %></h1>
+
+<ul>
+    
+        <li><strong>Make:</strong> <%= data.make %></li>
+   
+   
+        <li><strong>Model:</strong> <%= data.model %></li>
+  
+    <% if (data.mechanic_notes) { %>
+        <li><strong>Mechanic Notes:</strong> <%= data.mechanic_notes %></li>
+    <% } %>
+
+    <% if (data.image) { %>
+        <img src="<%= data.image %>" alt="">
+    <% } %>
+    <img src="./src/public/images/scooter_icon.png" alt="">
+</ul>
