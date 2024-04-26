@@ -58,7 +58,7 @@ const upload = require("./src/controllers/MulterFileController");
 const {
   getClients,
   newClient,
-  //   uploadClient,
+  uploadClient,
 } = require("./src/controllers/ClientsController");
 
 app.get("/uploadinventory", (req, res) => {
@@ -67,7 +67,7 @@ app.get("/uploadinventory", (req, res) => {
 
 app.get("/clients", getClients);
 app.get("/newClient", newClient);
-// app.post('clients/new', uploadClient);
+app.post("/clients/new", uploadClient);
 
 // sales
 app.get("/sales", getSale);

@@ -29,7 +29,32 @@ async function newClient(req, res) {
   });
 }
 
-module.exports = { getClients, newClient };
+async function uploadClient(req, res) {
+  const clientData = {
+    first: req.body.client_fname,
+    last: req.body.client_lname,
+    email: req.body.client_email,
+    phone_number: req.body.client_phone,
+    address: {
+      street: req.body.client_street,
+      city: req.body.client_city,
+      state: req.body.client_state,
+      zipcode: req.body.client_zipcode,
+    },
+    date_created: new Date(),
+    notes: req.body.notes,
+  };
+
+  try {
+    await clientsModel.createClient(clientData);
+    res.redirect("/clients");
+  } catch (error) {
+    console.error("Error creating new client:", error);
+    res.status(500).send("Failed to create new client.");
+  }
+}
+
+module.exports = { getClients, newClient, uploadClient };
 // async function getSale(req, res) {
 //     try {
 //         const total = await salesModel.getTotalSales();
