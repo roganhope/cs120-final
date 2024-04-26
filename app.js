@@ -74,13 +74,12 @@ app.get("/sales", getSale);
 app.get("/newSales", newSale);
 app.post("/sales/new", uploadSale);
 
-app.get("/shipment", newShipment);
-app.post("/shipment/new", uploadShipment);
+
 
 // inventory + shipments (related)
 app.get("/inventory", getInventory);
-app.get("/newshipment", newShipment);
 app.get("/shipments", getShipments);
+app.get("/shipment/new", newShipment);
 
 app.get("/shipment/:shipmentID", async (req, res) => {
   // console.log("woohoo")
@@ -93,21 +92,23 @@ app.get("/shipment/:shipmentID", async (req, res) => {
 });
 
 app.post("/shipment/new", upload.single("file"), async (req, res) => {
+  console.log("Creating new shipment")
   try {
     const fileData = req.file;
     // console.log('File data:', fileData);
-    // console.log("REQ POST DATA : " + JSON.stringify(req.body));
+    console.log("REQ POST DATA : " + JSON.stringify(req.body));
     // make a shipment first so you have ship id for the inventory
     const shipmentResult = await uploadShipment(req);
     if (shipmentResult && shipmentResult.acknowledged === true) {
       shipmentResult.filePath = fileData.path;
-      // console.log("RETURNED SHIP BODY " + JSON.stringify(shipmentResult))
+      console.log("RETURNED SHIP BODY " + JSON.stringify(shipmentResult))
       // console.log("ready to upload inventory")
       const inventoryResult = await uploadInventory(shipmentResult);
       // console.log(shipmentResult.shipmentID)
       res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
       return;
     }
+    console.log("reaching here")
   } catch (error) {
     console.error("Error processing shipment:", error);
     res.status(500).send("Error processing shipment");

@@ -1,5 +1,5 @@
 :root {
-  --page-title: #7c6cc2; /* Orange */
+  --page-title: #474b54; /* Orange */
   --font1: #212a32;
   --font2: #2065a2;
 
@@ -38,12 +38,14 @@
 }
 
 /* PAGE TITLE  */
-.page-title h1 {
+.page-title {
   margin-left: 20px;
   text-transform: uppercase;
   color: var(--page-title);
   margin-bottom: 20px;
 }
+
+
 
 /* FULL WIDTH TABLE SECTION */
 .full-width-table {
@@ -234,3 +236,27 @@ button {
   padding: 3px;
   width: 160px;
 }
+
+button a {
+  display: block;
+}
+
+/* GENERAL CONTAINER */
+
+/* use h2 */
+.section-title {
+  /* font-size: 15px; */
+  margin-left: 13px;
+  text-transform: uppercase;
+  color: var(--page-title);
+  margin-bottom: 10px;
+}
+.section-container {
+  width: 95%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+

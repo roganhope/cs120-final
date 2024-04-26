@@ -1,6 +1,6 @@
 
 const { MongoClient } = require('mongodb');
-const {ObjectId} = require('mongodb');
+const { ObjectId } = require('mongodb');
 
 class InventoryModel {
     constructor(uri) {
@@ -38,7 +38,7 @@ class InventoryModel {
             // const objectId = new ObjectId(shipID);
             // const data = await this.inventory.find({ shipmentID: shipID }).toArray();
             const cursor = await this.inventory.find({ shipmentID: new ObjectId(shipID) });
-            const data = await cursor.toArray();        
+            const data = await cursor.toArray();
 
             if (data.length === 0) {
                 console.log('No inventory found for shipment:', shipID);
@@ -60,9 +60,9 @@ class InventoryModel {
         console.log("inventory model is retrieving inventory")
         await this.connect();
         try {
-            
-            const cursor =  this.inventory.find();
-            const data = await cursor.toArray();        
+
+            const cursor = this.inventory.find();
+            const data = await cursor.toArray();
 
             if (data.length === 0) {
                 console.log('No inventory found for shipment');
@@ -94,7 +94,26 @@ class InventoryModel {
         }
     }
 
-   
+    async getInventoryByMakeModel(make, model) {
+        console.log("Inventory model is retrieving inventory for " + make + model);
+        await this.connect();
+        try {
+            const cursor = this.inventory.find({ make: make, model: model });
+            const data = await cursor.toArray();
+            if (data.length === 0) {
+                console.log('No inventory found');
+                return null;
+            }
+            return data
+        } catch (error) {
+            console.error('Error retrieving inventory:', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
+
+
 
 
 

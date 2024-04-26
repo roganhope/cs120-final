@@ -1,19 +1,55 @@
 
-<h1><%= pageTitle %></h1>
-
-<ul>
-    
-        <li><strong>Make:</strong> <%= data.make %></li>
-   
-   
-        <li><strong>Model:</strong> <%= data.model %></li>
-  
-    <% if (data.mechanic_notes) { %>
-        <li><strong>Mechanic Notes:</strong> <%= data.mechanic_notes %></li>
-    <% } %>
+<h1><%= data.make %>  <%= data.model %> </h1>
 
     <% if (data.image) { %>
-        <img src="<%= data.image %>" alt="">
+        <img id="makemodelimg" src="<%= data.image %>" alt="">
+    <% } else { %>
+        <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
     <% } %>
-    <img src="./src/public/images/scooter_icon.png" alt="">
-</ul>
+
+    <div class="mechanic_notes_container">
+        <form action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>">
+            <label for="mechanic_notes">Mechanic Notes:</label>
+                <textarea id="mechanic_notes" name="mechanic_notes" readonly>
+                    <% if (data.mechanic_notes) { %>
+                        <%= data.mechanic_notes %>
+                    <% } %>
+                </textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+   
+
+
+<h1>Inventory</h1>
+<% if (inventory) { %>
+    <div class="full-width-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Vin</th>
+                    <th>Color</th>
+                </tr>
+            </thead>
+           
+            <% inventory.forEach(item => { %>
+                <tr>
+                    <td> <a href="/inventory/<%= item._id %>"><%= item.vin %> </a> </td>
+                    <td> <a href="/inventory/<%= item._id %>"><%= item.color %> </a> </td>
+                </tr>
+            
+            <% }); %>
+        </table>
+    </div>
+    
+<% } %>
+
+
+<!-- <ul>
+    <% if (inventory) { %>
+        <% inventory.forEach(function(vin) { %>
+            <li><strong>VIN:</strong> <%= vin %></li>
+        <% }); %>
+    <% } %>
+</ul> -->
