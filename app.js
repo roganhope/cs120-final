@@ -130,11 +130,11 @@ app.get("/inventory/:inventoryID", getSingleInventory);
 app.get("/mechanichub", getHub);
 app.get("/mechanichub/:make/:model", getModel);
 
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
+//   console.log(`Server running on port ${PORT}`);
 // });
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
