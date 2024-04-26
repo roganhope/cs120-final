@@ -10,11 +10,14 @@ async function getShipment(req, res, shipID, inventoryData){
         pageTitle: 'View Shipment',
         customCSS: '/css/shipments.css',
         shipID: data.shipID,
-        vendor: data.vendor,
+        vendor: data.shipmentVendor,
+        invoiceno: data.invoiceno,
         orderDate: data.orderDate,
         expectedDate: data.expectedDate,
         total: data.total,
-        inventory: inventoryData
+        inventory: inventoryData,
+        ship_status: data.ship_status
+
     });
 }
 
@@ -26,14 +29,18 @@ async function newShipment(req, res) {
 }
 
 async function uploadShipment(req, res) {
-    const { shipmentVendor, orderDate, expectedDate, total, invFile } = req.body;
+    const { shipmentVendor, orderDate, expectedDate, total, invFile, invoiceno } = req.body;
+    const ship_status = 'ORDERED'
     console.log("REQ POST DATA ibsude ship controller : " + JSON.stringify(req.body));
     // console.log(JSON.parse(req.body));
     const shipmentData = {
-        shipmentVendor,
+        
         orderDate,
         expectedDate,
-        total
+        total,
+        invoiceno,
+        shipmentVendor,
+        ship_status
     };
 
     console.log("creating shipment in controller with " + shipmentData);

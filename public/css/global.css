@@ -68,6 +68,12 @@
     background-color: #748d92;
 
 }
+.full-width-table a {
+    color: var(--font1)
+}
+.full-width-table a:hover {
+    color: coral
+}
 
 .full-width-table tr {
     height: 42px;

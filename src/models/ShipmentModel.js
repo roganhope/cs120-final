@@ -33,9 +33,7 @@ class ShipmentModel {
         try {
             const objectId = new ObjectId(shipID);
             const shipmentData = await this.shipments.findOne({ _id: objectId });
-            
-            
-            console.log('Retrieved shipment:', shipmentData);
+            // console.log('Retrieved shipment:', shipmentData);
             return shipmentData;
         } catch (error) {
             console.error('Error retrieving shipment:', error);

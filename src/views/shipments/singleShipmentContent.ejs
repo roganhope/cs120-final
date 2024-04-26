@@ -1,12 +1,13 @@
-<h1>(single) Shipment Details</h1>
+<h1> Single Shipment Details</h1>
 
     <div>
-        <!-- Render shipment details -->
-        <strong>Shipment ID:</strong> <%= shipID %><br>
+      
+        <strong>Invoice NO:</strong> <%= invoiceno %><br>
         <strong>Vendor:</strong> <%= vendor %><br>
         <strong>Order Date:</strong> <%= orderDate %><br>
         <strong>Expected Date:</strong> <%= expectedDate %><br>
         <strong>Total:</strong> <%= total %><br>
+        
     </div>
 
     
@@ -33,5 +34,16 @@
             </tbody>
         </table>
     </div>
+  
+    <!-- provide functionality to mark when an order has arrived -->
+    <!-- will cascade to all the inventory within the shipment  -->
+    <% if (ship_status === 'ORDERED') { %>
+        
+        <form action="/shipment/arrived/<%= shipID %>" method="POST">
+            <button type="submit">Mark As Arrived</button>
+        </form>
+        
+        
+    <% } %>
 
   

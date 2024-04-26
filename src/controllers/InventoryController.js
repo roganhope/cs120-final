@@ -27,11 +27,18 @@ async function uploadInventory(req, res) {
     // console.log(req.filePath)
     console.log(req.shipmentID)
     const shipmentID = req.shipmentID;
+    // build decision: not to include these fields
+    // const mechanic = null;
+    // const admin_notes = null;
+    // const build_time = null;
+    // const sale_id = null;
+    // const last_update = new Date();
+
     try {
         const jsonArray = await processInventoryFile(req.filePath);
         let jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID })); 
         jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
-        const status_id = 1;
+        const status_id = "ORDERED";
         const jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
    
         console.log('JSON data received:', jsonArrayWithStatus);
@@ -75,5 +82,10 @@ async function getInventory(req, res){
         
 }
 
+async function markEntireShipmentInventoryAsArrived(req, res,shipID){
+    // find the scooter, chagne the status 
+    const inventory = getInventoryFromShipment(req, res, shipID)
+    console.log("gellooooo")
+}
 
-module.exports = { getInventory, uploadInventory, getInventoryFromShipment};
+module.exports = { markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};

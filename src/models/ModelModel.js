@@ -18,25 +18,8 @@ class ModelModel {
         await this.client.close();
     }
 
-    // async watchInventoryChanges() {
-    //     try {
-    //         await this.connect();
-    //         const changeStream = this.inventory.watch();
-    //         changeStream.on('change', async (change) => {
     
-    //             if (change.operationType === 'insert') {
-    //                 const { make, model } = change.fullDocument;
-    //                 const existingModel = await this.models.findOne({ make, model });
-    //                 if (!existingModel) {
-    //                     await this.models.insertOne({ make, model });
-    //                     console.log(`New model added: ${make} ${model}`);
-    //                 }
-    //             }
-    //         });
-    //     } catch (error) {
-    //         console.error('Error setting up change stream:', error);
-    //     }
-    // }
+  
     async watchInventoryChanges() {
         try {
             await this.connect();
@@ -53,12 +36,13 @@ class ModelModel {
                     if (!processedModels.has(`${make}-${model}`)) {
                         // Add the combination to the set of processed models
                         processedModels.add(`${make}-${model}`);
+                        const image = './src/public/images/scooter_icon.png'
     
                         // Check if the model already exists in the database
                         const existingModel = await this.models.findOne({ make, model });
                         if (!existingModel) {
                             // Insert the new model
-                            await this.models.insertOne({ make, model });
+                            await this.models.insertOne({ make, model, image });
                             console.log(`New model added: ${make} ${model}`);
                         }
                     }

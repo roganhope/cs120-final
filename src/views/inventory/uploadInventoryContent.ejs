@@ -3,8 +3,12 @@
 <form action="/shipment/new" method="post"  enctype="multipart/form-data" >
     <input type="file" name="file" id="file">
     <div>
-        <label for="shipmentVendor">Shipment Vendor:</label>
+        <label for="shipmentVendor"> Vendor:</label>
         <input type="text" name="shipmentVendor" id="shipmentVendor">
+    </div>
+    <div>
+        <label for="invoiceno">Invoice Number:</label>
+        <input type="text" name="invoiceno" id="invoiceno">
     </div>
    
     <div>
@@ -17,6 +21,7 @@
     </div>
     <div>
         <label for="total">Total:</label>
+
         <input type="number" name="total" id="total">
     </div>
     <input type="submit" value="Submit">
