@@ -28,6 +28,24 @@
                 <div class="nav-button"><a class="nav-link" href="#">Account</a></div>
                 <div class="nav-button"><a class="nav-link" href="#">Log Out</a></div>
             </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var currentLocation = window.location.href;
+        
+                    var navLinks = document.querySelectorAll(".nav-link");
+        
+                    if (navLinks) {
+                        for (var i = 0; i < navLinks.length; i++) {
+                            if (navLinks[i].href === currentLocation) {
+                                navLinks[i].parentElement.classList.add("active");
+                                break; 
+                            }
+                        }
+                    } else {
+                        console.error("Navigation links not found.");
+                    }
+                });
+            </script>
         </div>
         <div class="page-content-container temp">
             <%- include(content) %>
