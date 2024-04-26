@@ -47,7 +47,7 @@ const {
   uploadInventory,
   getInventoryFromShipment,
 } = require("./src/controllers/InventoryController");
-const { getModel, getHub } = require("./src/controllers/MechanicController");
+const { getModel, getHub, updateMechanicNotes } = require("./src/controllers/MechanicController");
 const {
   getSale,
   newSale,
@@ -129,6 +129,7 @@ app.post("/shipment/arrived/:shipID", async (req, res) => {
 app.get("/inventory/:inventoryID", getSingleInventory);
 app.get("/mechanichub", getHub);
 app.get("/mechanichub/:make/:model", getModel);
+app.post("/updatemechanicnotes/:make/:model", updateMechanicNotes)
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

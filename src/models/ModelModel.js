@@ -24,8 +24,6 @@ class ModelModel {
         try {
             await this.connect();
             const changeStream = this.inventory.watch();
-    
-            // Keep track of processed make/model combinations to prevent duplicates
             const processedModels = new Set();
     
             changeStream.on('change', async (change) => {
@@ -88,6 +86,25 @@ class ModelModel {
             await this.client.close();
         }
     }
+
+    async updateMechanicNotes(make, model, mechanicNotes) {
+        await this.connect();
+        try {
+            const specificModel = await this.models.findOneAndUpdate(
+                { make: make, model: model }, 
+                { $set: { mechanic_notes: mechanicNotes } }, 
+                { new: true } 
+            );
+            console.log("updated notes " + specificModel.mechanic_notes)
+            return specificModel;
+        } catch (error) {
+            console.error('error updating notes ', error);
+            throw error; 
+        } finally {
+            await this.client.close();
+        }
+    }
+    
     
 }
 
