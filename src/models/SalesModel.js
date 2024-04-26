@@ -41,6 +41,13 @@ class SalesModel {
         await this.client.close();
     }
 
+    // louyou can you get this to work?
+    async getSale(saleID) {
+        await this.connect();
+        const sale = await this.sales.findOne({ sale_id: saleID });
+        await this.client.close();
+    }
+
 }
 
 module.exports = SalesModel;

@@ -88,4 +88,34 @@ async function markEntireShipmentInventoryAsArrived(req, res,shipID){
     console.log("gellooooo")
 }
 
-module.exports = { markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};
+
+// const SalesModel = require('../models/SalesModel');
+// const salesModel = new SalesModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
+// const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
+
+const getSingleInventory = async (req, res) => {
+
+    console.log("hello")
+    try {
+        const inventoryID = req.params.inventoryID;
+        console.log(inventoryID)
+        const inventoryData = await themodel.getSingleInventory(inventoryID);
+        const saleData = null;
+        // to do add in logic for sale data
+        res.render('inventory/singleInventory', {
+            pageTitle: 'View Inventory',
+            customCSS: '/css/inventory.css',
+            inventory: inventoryData,
+            sale: saleData
+        });
+        
+    }
+    catch (error){
+        console.error("Error locating inventory", error);
+    }
+   
+    // need to get the document based on the id 
+    // need to get the sale if there is a sale id 
+};
+
+module.exports = { getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};

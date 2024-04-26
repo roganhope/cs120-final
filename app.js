@@ -31,13 +31,13 @@ app.get('/login', (req, res) => {
 
 
 
-const { getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
+const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 app.get('/sales', getSale);
 app.get('/newSales', newSale);
 app.post('/sales/new', uploadSale);
 
 const {getShipments, uploadShipment, newShipment, getShipment } = require('./src/controllers/ShipmentController');
-const { markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
+const {getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment } = require('./src/controllers/InventoryController');
 
 app.get('/inventory', getInventory);
 app.get('/newshipment', newShipment);
@@ -89,6 +89,8 @@ app.post('/shipment/arrived/:shipID', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.get('/inventory/:inventoryID', getSingleInventory)
 
 
 

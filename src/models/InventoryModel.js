@@ -79,6 +79,21 @@ class InventoryModel {
 
     }
 
+    async getSingleInventory(id) {
+        console.log("inventory model is retrieving inventory");
+        await this.connect();
+        try {
+            // Assuming `inventoryCollection` is your MongoDB collection
+            const inventoryItem = await this.inventory.findOne({ _id: new ObjectId(id) });
+            return inventoryItem;
+        } catch (error) {
+            console.error('Error retrieving single inventory:', error);
+            throw error; // You might want to handle this error appropriately in your application
+        } finally {
+            await this.client.close();
+        }
+    }
+
 
 
 

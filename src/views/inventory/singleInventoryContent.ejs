@@ -1,0 +1,12 @@
+<h1><%= pageTitle %></h1>
+
+<link rel="stylesheet" href="<%= customCSS %>">
+
+<div class="inventory-details">
+    <h2>Inventory Details</h2>
+    <ul>
+        <% Object.keys(inventory).forEach(key => { %>
+            <li><strong><%= key %>:</strong> <%= inventory[key] %></li>
+        <% }); %>
+    </ul>
+</div>
