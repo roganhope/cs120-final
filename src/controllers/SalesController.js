@@ -30,10 +30,10 @@ async function uploadSale(req, res) {
     const { client_id, sale_price, down_payment_amount } = req.body;
     const saleData = {
         client_id,
-        sale_price,
-        down_payment_amount,
+        sale_price: parseFloat(sale_price),
+        down_payment_amount: parseFloat(down_payment_amount),
         date_initiated: new Date(),
-        date_completed: new Date()
+        date_completed: null
     };
 
     try {

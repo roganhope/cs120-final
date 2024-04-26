@@ -1,8 +1,9 @@
 <div class="total-box">
     <div>Total Sales: $<%= totalSales %></div>
     <div>Total Down Payments: $<%= totalDownPayments %></div>
+    <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
 </div>
-<table>
+<table class="full-width-table">
     <thead>
     <tr>
         <th>Client ID</th>
@@ -19,7 +20,7 @@
             <td>$<%= sale.sale_price %></td>
             <td>$<%= sale.down_payment_amount %></td>
             <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
-            <td><%= sale.date_completed.toISOString().substring(0, 10) %></td>
+            <td><%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed' %></td>
         </tr>
     <% }); %>
     </tbody>

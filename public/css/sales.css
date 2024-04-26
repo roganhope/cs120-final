@@ -13,18 +13,3 @@ body {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
 }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-}

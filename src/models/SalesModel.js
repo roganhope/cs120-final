@@ -24,7 +24,7 @@ class SalesModel {
         },
       ])
       .toArray();
-    return result[0] || { totalSales: 0, totalDownPayments: 0 };
+    return result[0] || { totalSales: 100, totalDownPayments: 100 };
   }
 
   async getAllSales() {
@@ -43,10 +43,15 @@ class SalesModel {
     await this.client.close();
   }
     // louyou can you get this to work?
+    // it should work
     async getSale(saleID) {
+      try {
         await this.connect();
         const sale = await this.sales.findOne({ sale_id: saleID });
+        return sale;
+      } finally {
         await this.client.close();
+      }
     }
 
 }
