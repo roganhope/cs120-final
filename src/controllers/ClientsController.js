@@ -4,6 +4,13 @@ const clientsModel = new ClientsModel(
   "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
 );
 
+//including sales model
+const SalesModel = require("../models/SalesModel");
+
+const salesModel = new SalesModel(
+  "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+);
+
 async function getClients(req, res) {
   try {
     const clientsData = await clientsModel.getAllClients();
@@ -54,49 +61,28 @@ async function uploadClient(req, res) {
   }
 }
 
-module.exports = { getClients, newClient, uploadClient };
-// async function getSale(req, res) {
-//     try {
-//         const total = await salesModel.getTotalSales();
-//         const salesData = await salesModel.getAllSales();
+async function getClientSales(req, res) {
+  const clientId = req.params.clientId; // Make sure clientId is passed correctly in the route
 
-//         res.render('sales/sales', {
-//             pageTitle: 'Sales Data',
-//             customCSS: '/css/sales.css',
-//             totalSales: total.totalSales,
-//             totalDownPayments: total.totalDownPayments,
-//             sales: salesData
-//         });
-//     } catch (error) {
-//         console.error("Error accessing sales data:", error);
-//         res.status(500).send("Unable to retrieve sales data.");
-//     }
-// }
+  try {
+    const client = await clientsModel.getClientById(clientId);
+    const salesData = await salesModel.getSalesByClientId(clientId);
 
-// async function newSale(req, res) {
-//     res.render('newSales/newSales', {
-//         pageTitle: 'New Sales',
-//         customCSS: '/css/newSales.css',
-//     });
-// }
+    if (!client) {
+      res.status(404).send("Client not found");
+      return; // Stop further execution if no client is found
+    }
+    res.render("clients/clientSales", {
+      pageTitle: "Client Sales",
+      customCSS: "/css/clientSales.css",
+      sales: salesData,
+      clientId: clientId,
+      clientName: `${client.first} ${client.last}`,
+    });
+  } catch (error) {
+    console.error("Error accessing sales data for client:", error);
+    res.status(500).send("Unable to retrieve sales data.");
+  }
+}
 
-// async function uploadSale(req, res) {
-//     const { client_id, sale_price, down_payment_amount } = req.body;
-//     const saleData = {
-//         client_id,
-//         sale_price,
-//         down_payment_amount,
-//         date_initiated: new Date(),
-//         date_completed: new Date()
-//     };
-
-//     try {
-//         await salesModel.createSale(saleData);
-//         res.redirect('/sales');
-//     } catch (error) {
-//         console.error("Error creating new sale:", error);
-//         res.status(500).send("Failed to create new sale.");
-//     }
-// }
-
-// module.exports = { getSale, newSale, uploadSale };
+module.exports = { getClients, newClient, uploadClient, getClientSales };

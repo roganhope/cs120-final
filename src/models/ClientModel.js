@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 class ClientsModel {
   constructor(uri) {
@@ -27,12 +27,11 @@ class ClientsModel {
 
   async getClientById(clientId) {
     await this.connect();
-    try {
-      const clientData = await this.clients.findOne({ _id: clientId });
-      return clientData;
-    } finally {
-      await this.client.close();
-    }
+    const clientIdToString = clientId.toString();
+    const clientData = await this.clients.findOne({
+      _id: new ObjectId(clientIdToString),
+    });
+    return clientData;
   }
 
   async close() {

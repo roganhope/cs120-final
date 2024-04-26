@@ -54,6 +54,19 @@ class SalesModel {
       }
     }
 
+  //Shuo added get sales by client ID function
+
+  async getSalesByClientId(clientId) {
+    await this.connect();
+    try {
+      const salesData = await this.sales
+        .find({ client_id: clientId })
+        .toArray();
+      return salesData;
+    } finally {
+      await this.close();
+    }
+  }
 }
 
 module.exports = SalesModel;
