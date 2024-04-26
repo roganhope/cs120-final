@@ -22,7 +22,14 @@ async function getClients(req, res) {
   }
 }
 
-module.exports = { getClients };
+async function newClient(req, res) {
+  res.render("newClient/newClient", {
+    pageTitle: "New Client",
+    customCSS: "/css/newClient.css",
+  });
+}
+
+module.exports = { getClients, newClient };
 // async function getSale(req, res) {
 //     try {
 //         const total = await salesModel.getTotalSales();
