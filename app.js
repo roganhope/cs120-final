@@ -54,20 +54,22 @@ const {
   uploadSale,
 } = require("./src/controllers/SalesController");
 const upload = require("./src/controllers/MulterFileController");
-
-const {
-  getClients,
-  newClient,
-  uploadClient,
-} = require("./src/controllers/ClientsController");
-
 app.get("/uploadinventory", (req, res) => {
   res.render("inventory/uploadInventory");
 });
 
+//clients
+const {
+  getClients,
+  newClient,
+  uploadClient,
+  getClientSales,
+} = require("./src/controllers/ClientsController");
+
 app.get("/clients", getClients);
 app.get("/newClient", newClient);
 app.post("/clients/new", uploadClient);
+app.get("/clients/:clientId", getClientSales);
 
 // sales
 app.get("/sales", getSale);

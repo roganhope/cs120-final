@@ -42,13 +42,26 @@ class SalesModel {
     console.log("Sale created with ID:", result.insertedId);
     await this.client.close();
   }
-    // louyou can you get this to work?
-    async getSale(saleID) {
-        await this.connect();
-        const sale = await this.sales.findOne({ sale_id: saleID });
-        await this.client.close();
-    }
+  // louyou can you get this to work?
+  async getSale(saleID) {
+    await this.connect();
+    const sale = await this.sales.findOne({ sale_id: saleID });
+    await this.client.close();
+  }
 
+  //Shuo added get sales by client ID function
+
+  async getSalesByClientId(clientId) {
+    await this.connect();
+    try {
+      const salesData = await this.sales
+        .find({ client_id: clientId })
+        .toArray();
+      return salesData;
+    } finally {
+      await this.close();
+    }
+  }
 }
 
 module.exports = SalesModel;
