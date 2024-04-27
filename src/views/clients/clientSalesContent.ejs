@@ -1,5 +1,12 @@
-<h1>Sales for Client: <%= clientName %>
-</h1>
+<div class="total-box">
+    <div>
+        Client: <%= clientName %>
+    </div>
+
+    <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
+
+</div>
+
 <% if (sales.length> 0) { %>
     <table class="full-width-table">
         <thead>
