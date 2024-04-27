@@ -1,27 +1,62 @@
-<form action="/clients/new" method="post">
-    <label for="client_fname">Frist Name:</label>
-    <input type="text" id="client_fname" name="client_fname" required>
-    <label for="client_lname">Last Name:</label>
-    <input type="text" id="client_lname" name="client_lname" required>
+<div class="form_container">
+
+    <div>
+        <h2>Create New Client</h2>
+    </div>
 
 
-    <label for="client_email">Email:</label>
-    <input type="text" id="client_email" name="client_email" required>
-
-    <label for="client_phone">Phone:</label>
-    <input type="text" id="client_phone" name="client_phone" required>
+    <form action="/clients/new" method="post">
 
 
-    <label for="client_address">Address:</label>
-    <label for="client_street">Street:</label>
-    <input type="text" id="client_street" name="client_street" required>
-    <label for="client_city">City:</label>
-    <input type="text" id="client_city" name="client_city" required>
-    <label for="client_state">State:</label>
-    <input type="text" id="client_state" name="client_state" required>
-    <label for="client_zipcode">zipcode:</label>
-    <input type="text" id="client_zipcode" name="client_zipcode" required>
-    <label for="client_notes">Note:</label>
-    <input type="text" id="client_notes" name="client_notes" required>
-    <input type="submit" value="Submit">
-</form>
+        <div class="form-row">
+            <label for="client_fname">First Name:</label>
+            <input type="text" id="client_fname" name="client_fname" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_lname">Last Name:</label>
+            <input type="text" id="client_lname" name="client_lname" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_email">Email:</label>
+            <input type="email" id="client_email" name="client_email" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_phone">Phone:</label>
+            <input type="tel" id="client_phone" name="client_phone" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_street">Street:</label>
+            <input type="text" id="client_street" name="client_street" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_city">City:</label>
+            <input type="text" id="client_city" name="client_city" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_state">State:</label>
+            <input type="text" id="client_state" name="client_state" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_zipcode">Zipcode:</label>
+            <input type="text" id="client_zipcode" name="client_zipcode" required>
+        </div>
+
+        <div class="form-row">
+            <label for="client_notes">Notes:</label>
+            <textarea id="client_notes" name="client_notes"></textarea>
+        </div>
+
+        <div class="form-row">
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
+
+</div>
