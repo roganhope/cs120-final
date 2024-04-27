@@ -104,6 +104,59 @@ class ModelModel {
             await this.client.close();
         }
     }
+
+    // async updateImage(make, model, newPath) {
+    //     console.log("UPDATING MODEL IMAGE from path received", newPath);
+    //     newPath = newPath.replace(/^public\//, '');
+    //     await this.connect();
+    //     try {
+            
+    //         const specificModel = await this.models.findOne({ make: make, model: model });
+    //         if (specificModel) {
+    //             console.log("ID OF MODEL BEING UPDATED: ", specificModel._id)
+    //             const currentPath = specificModel.image;
+    //             specificModel.image = newPath;
+             
+    //             console.log("UPDATED MONGO FILE PATH TO: " + specificModel.image)
+    //         }
+            
+        
+    //     } catch (error) {
+    //         console.error('error updating image', error);
+    //         throw error;
+    //     } finally {
+    //         await this.client.close();
+            
+    //     }
+    // }
+    async updateImage(make, model, newPath) {
+        console.log("UPDATING MODEL IMAGE from path received", newPath);
+        newPath = newPath.replace(/^public(?=\/)/, ''); // Remove 'public' from the beginning of the path
+    
+        await this.connect();
+        try {
+            const specificModel = await this.models.findOne({ make: make, model: model });
+            if (specificModel) {
+                console.log("ID OF MODEL BEING UPDATED: ", specificModel._id);
+                const currentPath = specificModel.image;
+                
+                // Update the image field with the new path
+                const result = await this.models.updateOne(
+                    { _id: specificModel._id }, // Filter for the specific model
+                    { $set: { image: newPath } } // Set the new value for the image field
+                );
+                console.log("UPDATED MONGO FILE PATH TO: " + newPath);
+                console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
+            }
+        } catch (error) {
+            console.error('error updating image', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
+    
+    
     
     
 }

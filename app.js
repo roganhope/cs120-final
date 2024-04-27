@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const multer = require('multer');
+
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
@@ -47,13 +49,13 @@ const {
   uploadInventory,
   getInventoryFromShipment,
 } = require("./src/controllers/InventoryController");
-const { getModel, getHub, updateMechanicNotes } = require("./src/controllers/MechanicController");
+const { getModel, getHub, updateMechanicNotes, updateImage } = require("./src/controllers/MechanicController");
 const {
   getSale,
   newSale,
   uploadSale,
 } = require("./src/controllers/SalesController");
-const upload = require("./src/controllers/MulterFileController");
+const {upload, modelImageUpload} = require("./src/controllers/MulterFileController");
 app.get("/uploadinventory", (req, res) => {
   res.render("inventory/uploadInventory");
 });
@@ -97,20 +99,14 @@ app.post("/shipment/new", upload.single("file"), async (req, res) => {
   console.log("Creating new shipment")
   try {
     const fileData = req.file;
-    // console.log('File data:', fileData);
     console.log("REQ POST DATA : " + JSON.stringify(req.body));
-    // make a shipment first so you have ship id for the inventory
     const shipmentResult = await uploadShipment(req);
     if (shipmentResult && shipmentResult.acknowledged === true) {
       shipmentResult.filePath = fileData.path;
-      console.log("RETURNED SHIP BODY " + JSON.stringify(shipmentResult))
-      // console.log("ready to upload inventory")
       const inventoryResult = await uploadInventory(shipmentResult);
-      // console.log(shipmentResult.shipmentID)
       res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
       return;
     }
-    console.log("reaching here")
   } catch (error) {
     console.error("Error processing shipment:", error);
     res.status(500).send("Error processing shipment");
@@ -132,6 +128,26 @@ app.get("/inventory/:inventoryID", getSingleInventory);
 app.get("/mechanichub", getHub);
 app.get("/mechanichub/:make/:model", getModel);
 app.post("/updatemechanicnotes/:make/:model", updateMechanicNotes)
+
+
+
+app.post('/update-model-image', modelImageUpload.single('image'), (req, res) => {
+  console.log("data passed" , req.body.data.make)
+  // console.log(req.body);
+  const make = req.body.make
+  console.log("make, " ,make)
+  const model = req.body.model
+  console.log("make, " ,model)
+  // console.log(req.body.make);
+
+  filePath = req.file.path
+  console.log('File path, ', filePath);
+  updateImage(make, model, filePath)
+  // console.log("after image is updoated", make,model)
+  // res.redirect(`/mechanichub/${make}/${model}`);
+  // res.redirect(`/mechanichub/${make}/${model}`);
+
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

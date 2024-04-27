@@ -21,7 +21,7 @@ async function getHub(req, res) {
     }
 }
 
-async function getModel(req, res){
+async function getModel(req, res) {
     const make = req.params.make;
     const model = req.params.model;
     const data = await modelModel.getSpeceficModel(make, model)
@@ -32,9 +32,11 @@ async function getModel(req, res){
         customCSS: '/css/mechanichub.css',
         data: data,
         inventory: inventory
-        
+
     });
 }
+
+
 
 async function updateMechanicNotes(req, res) {
     console.log("updating notes")
@@ -42,26 +44,43 @@ async function updateMechanicNotes(req, res) {
     const model = req.params.model;
     const mechanicNotes = req.body.mechanic_notes;
     console.log("mechanic notes" + mechanicNotes, make, model)
-    
+
     try {
         const updatedModel = await modelModel.updateMechanicNotes(make, model, mechanicNotes);
-        
+
         // await new Promise(resolve => setTimeout(resolve, 1000)); 
         const inventory = await inventoryModel.getInventoryByMakeModel(make, model);
-        
+
         res.render('mechanic/makeModel', {
             pageTitle: 'View Model',
             customCSS: '/css/mechanichub.css',
             data: updatedModel,
-            inventory: inventory 
+            inventory: inventory
         });
-        
+
     } catch (error) {
         console.error("Error updating mechanic notes:", error);
         // Handle the error appropriately
         res.status(500).send("Error updating mechanic notes");
     }
+
+   
+    
+}
+
+async function updateImage(make, model, newPath) {
+
+    try{
+    
+  await modelModel.updateImage(make, model, newPath)
+ 
+
+    }
+    catch (error) {
+        console.log("error updating image path", error)
+    }
+    
 }
 
 
-module.exports = {updateMechanicNotes, getModel, getHub};
+module.exports = { updateMechanicNotes, getModel, getHub, updateImage};

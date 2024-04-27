@@ -3,11 +3,27 @@
         <%= data.model %>
 </h1>
 
+
 <% if (data.image) { %>
     <img id="makemodelimg" src="<%= data.image %>" alt="">
     <% } else { %>
         <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
         <% } %>
+
+        <div class="button-container">
+            <button id="uploadButton">Upload Image</button>
+        </div>
+        
+        <div class="section-container" id="uploadSection" style="display: none;">
+            <form action="/update-model-image" class="upload-image" id="uploadForm" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" id="imageInput">
+                <input type="hidden" name="data" value="<%= data %>">
+                <input type="hidden" name="make" value="<%= data.make %>">
+                <input type="hidden" name="model" value="<%= data.model %>">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
 
             <div class="section-container">
                 <h2 class="section-title">Mechanic Notes</h2>
@@ -88,12 +104,16 @@
             </div>
          
             
-
-
-                    <!-- <ul>
-    <% if (inventory) { %>
-        <% inventory.forEach(function(vin) { %>
-            <li><strong>VIN:</strong> <%= vin %></li>
-        <% }); %>
-    <% } %>
-</ul> -->
+            <script>
+                // upload photo functionality 
+                document.addEventListener("DOMContentLoaded", function() {
+                    const uploadButton = document.getElementById('uploadButton');
+                    const uploadSection = document.getElementById('uploadSection');
+        
+                    uploadButton.addEventListener('click', function() {
+                        uploadButton.style.display = 'none';
+                        uploadSection.style.display = 'block'; 
+                    });
+                });
+            </script>
+            
