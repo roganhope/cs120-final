@@ -1,8 +1,12 @@
 const InventoryModel = require('../models/InventoryModel');
-const themodel = new InventoryModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
+const inventoryModel = new InventoryModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
 const fs = require('fs').promises;
 const csv = require('csv-parser');
-const csvtojson = require('csvtojson');     
+const csvtojson = require('csvtojson');  
+const SalesModel = require('../models/SalesModel');
+const salesModel = new SalesModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");   
+const ClientModel = require('../models/ClientModel');
+const clientModel = new ClientModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");   
 
 
 async function processInventoryFile(file) {
@@ -42,7 +46,7 @@ async function uploadInventory(req, res) {
         const jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
    
         console.log('JSON data received:', jsonArrayWithStatus);
-        await themodel.uploadBulkInventory(jsonArrayWithStatus)
+        await inventoryModel.uploadBulkInventory(jsonArrayWithStatus)
         // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL
     } catch (error) {
         console.error('Error uploading inventory:', error);
@@ -53,7 +57,7 @@ async function uploadInventory(req, res) {
 async function getInventoryFromShipment(req, res, shipmentID){
     console.log("shipment id in inventory controller is " + shipmentID)
     try {
-        const inventory = await themodel.getInventoryFromShipment(shipmentID);
+        const inventory = await inventoryModel.getInventoryFromShipment(shipmentID);
         // console.log("Inventory returned from controller:", inventory);
         
         return inventory
@@ -67,7 +71,7 @@ async function getInventory(req, res){
     console.log("controller is sending request to get inventory to mdoel")
     
     try {
-        const data = await themodel.getInventory();
+        const data = await inventoryModel.getInventory();
         res.render('inventory/allInventory', {
             pageTitle: 'View Inventory',
             customCSS: '/css/inventory.css',
@@ -99,14 +103,27 @@ const getSingleInventory = async (req, res) => {
     try {
         const inventoryID = req.params.inventoryID;
         console.log(inventoryID)
-        const inventoryData = await themodel.getSingleInventory(inventoryID);
-        const saleData = null;
+        const inventoryData = await inventoryModel.getSingleInventory(inventoryID);
+        var saleData = null;
+        var clientData = null
+        if (inventoryData.sale_id) {
+            
+            console.log("Sale ID exists:", inventoryData.sale_id);
+            saleData = await salesModel.getSale(inventoryData.sale_id);
+            clientData = await clientModel.getClientById(saleData.client_id)
+            console.log(clientData)
+            // console.log("sale data returned " + saleData)
+        } else {
+            // The inventoryData does not have a sale_id
+            console.log("Sale ID does not exist");
+        }
         // to do add in logic for sale data
         res.render('inventory/singleInventory', {
             pageTitle: 'View Inventory',
             customCSS: '/css/inventory.css',
             inventory: inventoryData,
-            sale: saleData
+            sale: saleData,
+            clientData: clientData
         });
         
     }
@@ -114,8 +131,7 @@ const getSingleInventory = async (req, res) => {
         console.error("Error locating inventory", error);
     }
    
-    // need to get the document based on the id 
-    // need to get the sale if there is a sale id 
+  
 };
 
 module.exports = { getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};

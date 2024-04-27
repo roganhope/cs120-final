@@ -1,4 +1,5 @@
 <h1 class="page-title">
+  
     <%= inventory.year %>
         <%= inventory.color %>
             <%= inventory.make %>
@@ -10,10 +11,13 @@
 
 <div class="section-container inventory-details">
 
-    <h2 class="section-title">Inventory Details</h2>
-    <%= inventory.status_id %>
-        <%= inventory.ccs %>
-            <%= inventory.purchase_price %>
+    <h2 class="section-title">Details</h2>
+    <strong>VIN: </strong><%= inventory.vin  %><br>
+    <strong>Status: </strong><%= inventory.status  %><br>
+    <strong>CCs: </strong><%= inventory.ccs  %><br>
+    <strong>Price: </strong><%= inventory.retail_price  %><br>
+
+   
 
 
 </div>
@@ -23,7 +27,28 @@
         View Shipment Details</a></button>    
 </div>
 
+<div class="section-container sale-section">
+    <h2 class="section-title">Sale</h2>
+    <% if (sale != null) { %>
+        <strong>Sale Price: </strong>$<%= sale.sale_price  %><br>
+        <strong>Down Payment Amount: </strong>$<%= sale.down_payment_amount %><br>
+        <strong>Date Initiated:</strong> <%= sale.date_initiated %><br>
+        <% if (sale.date_completed) { %>
+            <strong>Date Completed:</strong> <%= sale.date_completed %><br>
+        <% } else { %>
+            <p>Sale still in progress.</p>
+        <% } %>
+    <% } %>
+</div>
+
 
 <div class="section-container client-section">
-    <p>client info here</p>
+    <h2 class="section-title">Client</h2>
+    <% if (clientData != null) { %>
+        <strong>Name:</strong> <a href="/clients/<%= clientData._id %>">
+            <p> <%= clientData.first %> <%= clientData.last %></p>
+           
+        </a><br>
+        
+    <% } %>
 </div>

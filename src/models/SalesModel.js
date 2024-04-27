@@ -1,4 +1,6 @@
 const { MongoClient } = require("mongodb");
+const { ObjectId } = require('mongodb');
+
 
 class SalesModel {
   constructor(uri) {
@@ -42,12 +44,12 @@ class SalesModel {
     console.log("Sale created with ID:", result.insertedId);
     await this.client.close();
   }
-    // louyou can you get this to work?
-    // it should work
+
+    // updated sale_id filter to _id
     async getSale(saleID) {
       try {
         await this.connect();
-        const sale = await this.sales.findOne({ sale_id: saleID });
+        const sale = await this.sales.findOne({ _id: new ObjectId(saleID) });
         return sale;
       } finally {
         await this.client.close();
