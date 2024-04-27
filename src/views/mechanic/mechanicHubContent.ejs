@@ -11,8 +11,12 @@
             <% models.forEach(model => { %>
                 <a href="/mechanichub/<%= model.make %>/<%= model.model %>">
                     <div class="card">
+                        <div class="image-holder">
+                           
+                            <img id="model-card-img" src="<%= model.image %> " alt="">
+                        </div>
            
-                        <img id="model-card-img" src="<%= model.image %> " alt="">
+                       
                         <strong><h2><%= model.make %> <%= model.model %></h2></strong>
                         <p></p>
                     </div>

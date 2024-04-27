@@ -331,3 +331,31 @@ db.inventory.insertMany([
 ]);
 
 
+// Group inventory documents by unique make and model combinations
+db.inventory.aggregate([
+    {
+      $group: {
+        _id: { make: "$make", model: "$model" }
+      }
+    }
+  ]).forEach(function(group) {
+    // Generate mechanic_notes based on make and model
+    var mechanic_notes = "Assembly notes for " + group._id.make + " " + group._id.model + ": ";
+    if (group._id.make.toLowerCase() === "bintelli") {
+      mechanic_notes += "Back tire needs to be forced on until click is heard. Assemble gas casket first.";
+    } else if (group._id.make.toLowerCase() === "genuine") {
+      mechanic_notes += "Secure all screws tightly. Check for any loose parts.";
+    } else if (group._id.make.toLowerCase() === "icebear") {
+      mechanic_notes += "Handlebar assembly requires careful alignment. Double-check brake system.";
+    } else {
+      mechanic_notes += "General assembly instructions.";
+    }
+  
+    // Insert a new document into the models collection
+    db.models.insertOne({
+      make: group._id.make,
+      model: group._id.model,
+      mechanic_notes: mechanic_notes
+    });
+  });
+  

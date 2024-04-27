@@ -70,9 +70,20 @@ textarea#mechanic_notes {
 
 }
 
+.image-holder {
+    width: 100%;
+    min-height: 330px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+
+
 #model-card-img {
     width: 100%;
+    object-fit: contain;
     height: auto;
 
 }
+
 
