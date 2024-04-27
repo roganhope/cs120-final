@@ -72,7 +72,7 @@ async function updateImage(make, model, newPath) {
 
     try{
     
-  await modelModel.updateImage(make, model, newPath)
+        await modelModel.updateImage(make, model, newPath)
  
 
     }

@@ -23,3 +23,20 @@ textarea#mechanic_notes {
 #makemodelimg {
     width: 100px;
 }
+
+
+.model-img-container {
+    width: 220px;
+    /* margin: 0 auto; */
+    margin-left: 15px;;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+
+}
+
+#makemodelimg {
+    height: 200px;
+    width: 200px;
+}

@@ -3,12 +3,16 @@
         <%= data.model %>
 </h1>
 
+<div class="model-img-container">
 
-<% if (data.image) { %>
-    <img id="makemodelimg" src="<%= data.image %>" alt="">
-    <% } else { %>
-        <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
-        <% } %>
+    <% if (data.image) { %>
+        <img id="makemodelimg" src="<%= data.image %>" alt="">
+        <% } else { %>
+            <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
+            <% } %>
+</div>
+
+
 
         <div class="button-container">
             <button id="uploadButton">Upload Image</button>
