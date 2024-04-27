@@ -22,7 +22,7 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
   position: fixed;
 }
@@ -38,6 +38,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 120px;
   /* margin-top: 60px; */
   width: 100%;
 }
@@ -47,14 +48,17 @@ a {
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  padding-left: 20px;
-  width: 90%;
+  padding-left: 30px;
+  width: 85%;
+
   height: 40px;
   /* border-style: solid; */
+  transition: background-color 0.3s;
 }
 
 .nav-button:hover {
   background-color: var(--navbar-hover-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-img {
@@ -65,7 +69,7 @@ a {
 }
 
 .nav-link {
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .nav-bottom {
@@ -74,12 +78,14 @@ a {
 
 .active {
   background-color: var(--navbar-active-color) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-  width: 50px;
+  width: 40px;
   height: auto;
   margin-top: 30px;
+  filter:drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) ;
 }
 
 .logout {
@@ -90,4 +96,28 @@ a {
   border-style: solid;
   border-color: rgb(207, 78, 78);
   /* background-color: rgba(255, 228, 196, 0.298); */
+}
+.header-container {
+  position: absolute; /* Footer at the bottom */
+  top: 15px;
+  display: flex; /* Enables flexbox */
+  align-items: center; /* Centers items vertically */
+  justify-content: center; /* Centers items horizontally if there is space */
+  padding: 10px; /* Add padding for some space around the content */
+  /* Adjust the color to match your design */
+}
+
+.title {
+  margin-top: 30px;
+  margin-left: 10px; /* Add space between the logo and the title */
+  color: white; /* Adjust text color to match your design */
+  font-size: 20px; /* Adjust font size as necessary */
+
+  text-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.footer-container {
+  position: absolute; /* Footer at the bottom */
+  bottom: 15px; /* Space from the bottom */
+  width: 100%; /* Full width taking padding into account */
 }
