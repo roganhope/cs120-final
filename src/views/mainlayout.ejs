@@ -15,8 +15,13 @@
 <body>
     <div class="page-container">
         <div class="nav-container">
-            <div>
-                <a href="/dashboard"><img class="logo" src="/images/scooter_icon.png" alt=""></a>
+
+
+            <div class="header-container">
+                <a href="/dashboard"><img src="/images/scooter_icon.png" alt="MopedMark Logo" class="logo"></a>
+                <a href="/dashboard">
+                    <h1 class="title">mopedmark</h1>
+                </a>
             </div>
             <div class="nav-buttons">
                 <div class="nav-button "><a class="nav-link" href="/dashboard">Dashboard</a></div>
@@ -25,20 +30,24 @@
                 <div class="nav-button"><a class="nav-link" href="/mechanichub">Mechanic Hub</a></div>
                 <div class="nav-button"><a class="nav-link" href="/clients">Clients</a></div>
                 <div class="nav-button"><a class="nav-link" href="/sales">Sales</a></div>
+
+            </div>
+            <div class="footer-container">
+
                 <div class="nav-button"><a class="nav-link" href="#">Account</a></div>
-                <div class="nav-button"><a class="nav-link" href="#">Log Out</a></div>
+                <div class="nav-button"><a class="nav-link" href="/login">Log Out</a></div>
             </div>
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     var currentLocation = window.location.href;
-        
+
                     var navLinks = document.querySelectorAll(".nav-link");
-        
+
                     if (navLinks) {
                         for (var i = 0; i < navLinks.length; i++) {
                             if (navLinks[i].href === currentLocation) {
                                 navLinks[i].parentElement.classList.add("active");
-                                break; 
+                                break;
                             }
                         }
                     } else {
