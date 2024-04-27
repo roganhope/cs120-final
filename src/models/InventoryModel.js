@@ -113,6 +113,34 @@ class InventoryModel {
         }
     }
 
+    async updateImage(id, newPath) {
+        console.log("UPDATING MODEL IMAGE from path received", newPath);
+        newPath = newPath.replace(/^public(?=\/)/, ''); 
+    
+        await this.connect();
+        try {
+            const inventoryItem = await this.inventory.findOne({ _id: new ObjectId(id) });
+            if (inventoryItem && inventoryItem.image !== undefined) {
+                console.log("ID OF ITEM BEING UPDATED: ", inventoryItem._id);
+                const currentPath = inventoryItem.image;
+                const result = await this.inventory.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: { image: newPath } } 
+                );
+                console.log("UPDATED MONGO FILE PATH TO: " + newPath);
+                console.log(`${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
+            } else {
+                console.log("Inventory item not found or doesn't have an image field.");
+            }
+        } catch (error) {
+            console.error('error updating image', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
+    
+
 
 
 

@@ -105,30 +105,6 @@ class ModelModel {
         }
     }
 
-    // async updateImage(make, model, newPath) {
-    //     console.log("UPDATING MODEL IMAGE from path received", newPath);
-    //     newPath = newPath.replace(/^public\//, '');
-    //     await this.connect();
-    //     try {
-            
-    //         const specificModel = await this.models.findOne({ make: make, model: model });
-    //         if (specificModel) {
-    //             console.log("ID OF MODEL BEING UPDATED: ", specificModel._id)
-    //             const currentPath = specificModel.image;
-    //             specificModel.image = newPath;
-             
-    //             console.log("UPDATED MONGO FILE PATH TO: " + specificModel.image)
-    //         }
-            
-        
-    //     } catch (error) {
-    //         console.error('error updating image', error);
-    //         throw error;
-    //     } finally {
-    //         await this.client.close();
-            
-    //     }
-    // }
     async updateImage(make, model, newPath) {
         console.log("UPDATING MODEL IMAGE from path received", newPath);
         newPath = newPath.replace(/^public(?=\/)/, ''); // Remove 'public' from the beginning of the path

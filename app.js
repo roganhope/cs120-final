@@ -48,6 +48,7 @@ const {
   getInventory,
   uploadInventory,
   getInventoryFromShipment,
+  updateInventoryImage
 } = require("./src/controllers/InventoryController");
 const { getModel, getHub, updateMechanicNotes, updateImage } = require("./src/controllers/MechanicController");
 const {
@@ -55,7 +56,7 @@ const {
   newSale,
   uploadSale,
 } = require("./src/controllers/SalesController");
-const {upload, modelImageUpload} = require("./src/controllers/MulterFileController");
+const {upload, modelImageUpload, inventoryImageUpload} = require("./src/controllers/MulterFileController");
 app.get("/uploadinventory", (req, res) => {
   res.render("inventory/uploadInventory");
 });
@@ -139,15 +140,16 @@ app.post('/update-model-image', modelImageUpload.single('image'), (req, res) => 
   const model = req.body.model
   console.log("make, " ,model)
   // console.log(req.body.make);
-
   filePath = req.file.path
   console.log('File path, ', filePath);
   updateImage(make, model, filePath)
-  // console.log("after image is updoated", make,model)
-  // res.redirect(`/mechanichub/${make}/${model}`);
-  // res.redirect(`/mechanichub/${make}/${model}`);
-
 });
+
+
+// leave this if we want ot implement images on inventory
+// app.post('/update-inventory-image', inventoryImageUpload.single('image'), (req, res) => {
+//   updateInventoryImage(req.id, req.file.path)
+// });
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

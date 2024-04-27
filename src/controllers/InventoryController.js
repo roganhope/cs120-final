@@ -132,6 +132,21 @@ const getSingleInventory = async (req, res) => {
     }
    
   
-};
+}
+const updateInventoryImage = async (req, res) => {
+    try{
+    
+        await inventoryModel.updateImage(id, newPath)
+ 
 
-module.exports = { getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};
+    }
+    catch (error) {
+        console.log("error updating image path", error)
+    }
+}
+
+
+
+;
+
+module.exports = { updateInventoryImage, getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};

@@ -5,8 +5,7 @@
         <tr>
             <th>VIN</th>
             <th>Scooter</th>
-            <th>Client</th>
-            <th>Status</th>
+        
         </tr>
     </thead>
     <tbody>
@@ -14,8 +13,7 @@
             <tr>
                 <td><a href="/inventory/<%= item._id %>"> <%= item.vin %></a></td>
                 <td><%= item.color %> <%= item.make %> <%= item.model %></td>
-                <td></td> <!-- Placeholder for client -->
-                <td><%= item.status_id %> </td> 
+   
             </tr>
         <% }); %>
     </tbody>

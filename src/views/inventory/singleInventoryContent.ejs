@@ -17,14 +17,20 @@
     <strong>CCs: </strong><%= inventory.ccs  %><br>
     <strong>Price: </strong><%= inventory.retail_price  %><br>
 
-   
-
-
 </div>
+
+<!-- <div class="section-container" id="uploadSection" style="display: none;">
+    <form action="/update-inventory-image" class="upload-image" id="uploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput">
+        <input type="hidden" name="id" value="<%= inventory._id %>">
+        <button type="submit">Submit</button>
+    </form>
+</div> -->
 
 <div class="button-container">
     <button><a href="/shipment/<%= inventory.shipmentID %>">
         View Shipment Details</a></button>    
+        <!-- <button id="uploadButton">Upload Image</button> -->
 </div>
 
 <div class="section-container sale-section">
@@ -52,3 +58,16 @@
         
     <% } %>
 </div>
+
+<script>
+    // upload photo functionality 
+    document.addEventListener("DOMContentLoaded", function() {
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadSection = document.getElementById('uploadSection');
+
+        uploadButton.addEventListener('click', function() {
+            uploadButton.style.display = 'none';
+            uploadSection.style.display = 'block'; 
+        });
+    });
+</script>

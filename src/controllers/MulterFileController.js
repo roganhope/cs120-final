@@ -16,13 +16,25 @@ const modelImageStorage = multer.diskStorage({
     cb(null, 'public/images/model-images/'); 
   },
   filename: function (req, file, cb) {
-    console.log("sinde function: ", req.body.make)
+    console.log("inside function: ", req.body.make)
     // TO DO: dyanmic file renaming to make and model that is passed
     cb(null, file.originalname); 
   }
 });
 
+const inventoryImageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/inventory-images/'); 
+  },
+  filename: function (req, file, cb) {
+    console.log("inside function: ", req.body.make)
+    // TO DO: dyanmic file renaming to make and model that is passed
+    cb(null, file.originalname); 
+  }
+});
+
+const inventoryImageUpload = multer({ storage: inventoryImageStorage });
 const modelImageUpload = multer({ storage: modelImageStorage });
 const upload = multer({ storage: csvStorage });
 
-module.exports = {upload , modelImageUpload};
+module.exports = {upload , modelImageUpload, inventoryImageUpload};
