@@ -1,0 +1,7 @@
+.page-content-container {
+    padding: 10px;
+    width: calc(100vw - 200px);
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
