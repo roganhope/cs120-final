@@ -24,28 +24,16 @@ async function processInventoryFile(file) {
 }
 
 async function uploadInventory(req, res) {
-    console.log("helloooo")
-    // console.log(req.body.shipmentID) //
-    // console.log(req.body)
-    // console.log(typeof req.invFile);
-    // console.log(req.filePath)
     console.log(req.shipmentID)
     const shipmentID = req.shipmentID;
-    // build decision: not to include these fields
-    // const mechanic = null;
-    // const admin_notes = null;
-    // const build_time = null;
-    // const sale_id = null;
-    // const last_update = new Date();
 
     try {
         const jsonArray = await processInventoryFile(req.filePath);
         let jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID })); 
         jsonArrayWithShipmentID = jsonArray.map(obj => ({ ...obj, shipmentID }));
         const status_id = "ORDERED";
-        const jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
-   
-        console.log('JSON data received:', jsonArrayWithStatus);
+        var jsonArrayWithStatus = jsonArrayWithShipmentID.map(obj => ({ ...obj, status_id }));
+        jsonArrayWithStatus = jsonArrayWithStatus.map(obj => ({ ...obj, sale_id: null }));
         await inventoryModel.uploadBulkInventory(jsonArrayWithStatus)
         // TO DO: MODEL LOGIC UPOLOAD NNEW MAKE AND MODEL
     } catch (error) {
