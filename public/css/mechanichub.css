@@ -40,3 +40,39 @@ textarea#mechanic_notes {
     height: 200px;
     width: 200px;
 }
+
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 95%;
+    margin: 0 auto;
+    /* background-color: #ffffff; */
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: rgb(246, 246, 246);
+    height: auto;
+    width: 325px;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px; 
+    overflow: hidden; 
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    margin: 20px;
+    min-height: 400px;
+
+
+}
+
+#model-card-img {
+    width: 100%;
+    height: auto;
+
+}
+

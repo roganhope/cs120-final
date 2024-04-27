@@ -2,6 +2,7 @@
   --page-title: #474b54; /* Orange */
   --font1: #212a32;
   --font2: #2065a2;
+  --background:  #d3d9d5;
 
   /* tables */
   --table-header-color: #748d92;
@@ -27,16 +28,18 @@
 .page-container {
   display: flex;
   min-height: 100vh;
-  background-color: #d3d9d5;
+  background-color: var(--background);
 }
 
 /* PAGE CONTENT */
 .page-content-container {
+  box-sizing: border-box;
   padding: 10px;
   width: calc(100vw - 200px);
-  height: auto;
+  /* height: auto; */
+  min-height: 100vh;
+  background-color:  var(--background);
 }
-
 /* PAGE TITLE  */
 .page-title {
   margin-left: 20px;
