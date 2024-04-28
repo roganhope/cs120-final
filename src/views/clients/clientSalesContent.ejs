@@ -1,11 +1,33 @@
-<div class="total-box">
-    <div>
-        Client: <%= clientName %>
-    </div>
+<h1 class="page-title">Client details
+</h1>
 
-    <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
+
+
+
+<div class="section-container">
+
+    <strong>Client: <%= clientName %></strong><br>
+    <strong>Email:</strong>
+    <%= clientData.email %><br>
+        <strong>Phone:</strong>
+        <%= clientData.phone_number %><br>
+            <strong>Address:</strong>
+            <%= clientData.address.street %>, <%= clientData.address.city %>, <%= clientData.address.state %>, <%=
+                            clientData.address.zipcode %><br>
+                            <strong>Total order:</strong>
+                            <%= sales.length %><br>
 
 </div>
+
+
+
+
+<button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
+
+
+
+
+<br>
 
 <% if (sales.length> 0) { %>
     <table class="full-width-table">
