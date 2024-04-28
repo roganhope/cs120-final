@@ -139,14 +139,36 @@ class InventoryModel {
             await this.client.close();
         }
     }
-    
 
-
-
-
-
-
-
+    async updateSaleIdByVin(vin, saleId) {
+        await this.connect();
+        try {
+            const inventoryItem = await this.inventory.findOne({ vin: vin });
+            if (inventoryItem) {
+                // If sale_id already exists, update it; otherwise, add sale_id
+                if (inventoryItem.sale_id) {
+                    const result = await this.inventory.updateOne(
+                        { vin: vin },
+                        { $set: { sale_id: saleId } }
+                    );
+                    console.log(`Updated sale_id for VIN ${vin}`);
+                } else {
+                    const result = await this.inventory.updateOne(
+                        { vin: vin },
+                        { $set: { sale_id: saleId } }
+                    );
+                    console.log(`Added sale_id for VIN ${vin}`);
+                }
+            } else {
+                console.log(`Inventory item not found for VIN ${vin}`);
+            }
+        } catch (error) {
+            console.error('Error updating sale_id by VIN:', error);
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
 
 
 }

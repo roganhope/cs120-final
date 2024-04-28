@@ -6,7 +6,7 @@
 <table class="full-width-table">
     <thead>
     <tr>
-        <th>Client ID</th>
+        <th>Client Name</th>
         <th>Sale Price</th>
         <th>Down Payment Amount</th>
         <th>Date Initiated</th>
@@ -16,7 +16,7 @@
     <tbody>
     <% sales.forEach(function(sale) { %>
         <tr>
-            <td><%= sale.client_id %></td>
+            <td><%= sale.client_name %></td>
             <td>$<%= sale.sale_price %></td>
             <td>$<%= sale.down_payment_amount %></td>
             <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
