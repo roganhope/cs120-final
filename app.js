@@ -1,10 +1,60 @@
 const express = require("express");
 const app = express();
 const multer = require('multer');
-
+const passport = require("passport");
+const session = require("express-session");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
+
+app.use(
+    session({
+      secret: "secret_key", // 替换成一个安全的密钥
+      resave: false,
+      saveUninitialized: false,
+    })
+);
+
+// oauth2
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+    new GoogleStrategy(
+        {
+          clientID: "232301126322-5db2irp4hgmjov1cg251ep06gpchj2vt.apps.googleusercontent.com",
+          clientSecret: "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",
+          callbackURL: "/auth/google/callback", // 设置正确的回调 URL
+        },
+        (accessToken, refreshToken, profile, done) => {
+          return done(null, profile);
+        }
+    )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+app.get(
+    "/auth/google",
+    passport.authenticate("google", {
+      scope: ["profile", "email"],
+    })
+);
+
+app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/" }),
+    (req, res) => {
+      res.redirect("/dashboard");
+    }
+);
 
 // model trigger
 const ModelModel = require("./src/models/ModelModel.js");
