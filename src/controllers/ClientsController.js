@@ -65,10 +65,10 @@ async function getClientSales(req, res) {
   const clientId = req.params.clientId; // Make sure clientId is passed correctly in the route
 
   try {
-    const client = await clientsModel.getClientById(clientId);
+    const clientData = await clientsModel.getClientById(clientId);
     const salesData = await salesModel.getSalesByClientId(clientId);
-
-    if (!client) {
+    console.log(clientData);
+    if (!clientData) {
       res.status(404).send("Client not found");
       return; // Stop further execution if no client is found
     }
@@ -77,7 +77,8 @@ async function getClientSales(req, res) {
       customCSS: "/css/clientSales.css",
       sales: salesData,
       clientId: clientId,
-      clientName: `${client.first} ${client.last}`,
+      clientData: clientData,
+      clientName: `${clientData.first} ${clientData.last}`,
     });
   } catch (error) {
     console.error("Error accessing sales data for client:", error);
