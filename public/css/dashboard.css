@@ -13,3 +13,26 @@
 .user-info p:first-child {
     font-weight: bold;
 }
+
+.dashboard-square {
+    width: 100px;
+    height: 100px;
+    background-color: #124e66;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.dashboard-number {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.dashboard-label {
+    font-size: 14px;
+    color: white;
+}
