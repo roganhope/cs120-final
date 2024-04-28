@@ -1,20 +1,24 @@
-<div class="user-info">
-    <p>Welcome, <%= userData.displayName %></p>
-    <p>Email: <%= userData.email %></p>
+<div class="section-container">
+    <div class="user-info">
+        <p>Welcome, <%= userData.displayName %></p>
+        <p>Email: <%= userData.email %></p>
+    </div>
 </div>
 
-<div class="highlights temp">
-    <div class="highlight-card temp">
-        <p class="highlight-number"><%= totalClients %></p>
-        <p>Total Clients</p>
-    </div>
-    <div class="highlight-card temp">
-        <p class="highlight-number"><%= totalSales %></p>
-        <p>Total Sales</p>
-    </div>
-    <div class="highlight-card temp">
-        <p class="highlight-number"><%= totalInventory %></p>
-        <p>Total Inventory</p>
+<div class="section-container">
+    <div class="highlights temp">
+        <div class="highlight-card temp">
+            <p class="highlight-number"><%= totalClients %></p>
+            <p>Total Clients</p>
+        </div>
+        <div class="highlight-card temp">
+            <p class="highlight-number"><%= totalSales %></p>
+            <p>Total Sales</p>
+        </div>
+        <div class="highlight-card temp">
+            <p class="highlight-number"><%= totalInventory %></p>
+            <p>Total Inventory</p>
+        </div>
     </div>
 </div>
 
