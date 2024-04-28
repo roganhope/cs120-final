@@ -10,7 +10,7 @@ app.set("view engine", "ejs");
 
 app.use(
     session({
-      secret: "secret_key", // 替换成一个安全的密钥
+      secret: "secret_key",
       resave: false,
       saveUninitialized: false,
     })
@@ -25,7 +25,7 @@ passport.use(
         {
           clientID: "232301126322-5db2irp4hgmjov1cg251ep06gpchj2vt.apps.googleusercontent.com",
           clientSecret: "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",
-          callbackURL: "/auth/google/callback", // 设置正确的回调 URL
+          callbackURL: "https://cs120-ef3a736436d9.herokuapp.com/auth/google/callback",
         },
         (accessToken, refreshToken, profile, done) => {
           return done(null, profile);
