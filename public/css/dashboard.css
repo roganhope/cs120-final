@@ -31,12 +31,13 @@
 }
 
 .square-number {
-    font-size: 24px;
+    font-size: 60px;
+    font-weight: bold;
     color: white;
     margin-bottom: 10px;
 }
 
 .square-text {
-    font-size: 16px;
+    font-size: 30px;
     color: white;
 }
