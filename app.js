@@ -5,6 +5,14 @@ const passport = require("passport");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/");
+}
+
+
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
@@ -16,6 +24,9 @@ app.use(
     })
 );
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 // oauth2
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,10 +52,11 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+
 app.get(
     "/auth/google",
     passport.authenticate("google", {
-      scope: ["profile", "email"],
+        scope: ["profile", "email"],
     })
 );
 
@@ -52,36 +64,35 @@ app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     (req, res) => {
-      res.redirect("/dashboard");
+        req.session.user = req.user;
+        console.log(req.user);
+        res.redirect("/dashboard");
     }
 );
-
-// model trigger
-const ModelModel = require("./src/models/ModelModel.js");
-const modelTrigger = new ModelModel(
-  "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
-);
-modelTrigger
-  .watchInventoryChanges()
-  .then(() => {
-    console.log("Watching for inventory changes...");
-  })
-  .catch((error) => {
-    console.error("Error setting up inventory change watcher:", error);
-  });
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
-
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard/dashboard");
-});
+const {
+    getDashboardData,
+} = require("./src/controllers/DashboardController");
+app.get("/dashboard", ensureAuthenticated, getDashboardData)
 
 app.get("/", (req, res) => {
   res.render("login");
 });
 
+
+
+
+const ModelModel = require("./src/models/ModelModel.js");
+const modelTrigger = new ModelModel(
+    "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+);
+modelTrigger
+    .watchInventoryChanges()
+    .then(() => {
+        console.log("Watching for inventory changes...");
+    })
+    .catch((error) => {
+        console.error("Error setting up inventory change watcher:", error);
+    });
 // app.get("/inventory", (req, res) => {
 //   res.render("inventory/allInventory");
 // });

@@ -170,7 +170,11 @@ class InventoryModel {
         }
     }
 
-
+    async getTotalInventory() {
+        await this.connect();
+        const totalInventory = await this.inventory.countDocuments();
+        return totalInventory;
+    }
 }
 
 module.exports = InventoryModel;

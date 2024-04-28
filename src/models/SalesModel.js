@@ -70,6 +70,11 @@ class SalesModel {
       await this.close();
     }
   }
+  async getTotalSales() {
+    await this.connect();
+    const totalSales = await this.sales.countDocuments();
+    return totalSales;
+  }
 }
 
 module.exports = SalesModel;

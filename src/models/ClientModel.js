@@ -44,6 +44,14 @@ class ClientsModel {
     console.log("Client create with ID: ", result.insertedId);
     await this.client.close();
   }
+
+  async getTotalClients() {
+    await this.connect();
+    const totalClients = await this.clients.countDocuments();
+    return totalClients;
+  }
 }
+
+
 
 module.exports = ClientsModel;
