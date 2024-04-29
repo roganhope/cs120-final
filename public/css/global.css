@@ -44,7 +44,7 @@
 /* PAGE TITLE  */
 .page-title {
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 25px;
   text-transform: uppercase;
   color: var(--page-title);
   margin-bottom: 20px;
@@ -52,11 +52,9 @@
 
 /* FULL WIDTH TABLE SECTION */
 .full-width-table {
-  width: 90%;
-  margin-left: 20px;
+  width: 100%;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
 }
 
 .full-width-table table {
@@ -72,7 +70,7 @@
   color: var(--font1);
 }
 .full-width-table a:hover {
-  color: coral;
+  color: #659bb1;
 }
 
 .full-width-table tr {
@@ -89,8 +87,25 @@
 .full-width-table td,
 .full-width-table th {
   vertical-align: middle;
-  padding-left: 10px;
+  padding-left: 5px;
+  border-radius: 5px;
   /* color:rgb(60, 60, 60); */
+}
+
+#salesCompleteBtn {
+  background: none;
+  border: #124e66 1px solid;
+  color: #212a32;
+}
+
+#salesCompleteBtn:hover {
+  background-color: #124e66;
+  border: #124e66 1px solid;
+  color: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s;
+
+  font-weight: bold;
 }
 
 table tbody tr:nth-child(even) {
@@ -237,6 +252,7 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 3px;
   width: 160px;
+  visibility: visible;
 }
 
 button a {
@@ -248,19 +264,24 @@ button a {
 /* use h2 */
 .section-title {
   /* font-size: 15px; */
-  margin-left: 13px;
+
   text-transform: uppercase;
   color: var(--page-title);
   margin-bottom: 10px;
 }
 .section-container {
   width: 90%;
-  margin-left: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   line-height: 150%;
+}
+
+.section-container p {
+  margin-bottom: 10px;
 }
 
 .button-container {
@@ -280,7 +301,7 @@ button a {
 
   border-radius: 8px;
 }
-form {
+.form_container form {
   min-width: 600px;
   margin: 20px auto;
   padding: 20px;
@@ -303,6 +324,8 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
+input[type="number"],
+input[type="date"],
 textarea {
   width: calc(100% - 20px);
   padding: 10px;
@@ -355,5 +378,15 @@ input[type="submit"]:hover {
 }
 
 #uploadButton {
-  margin-left: 25px;
+  margin-left: 10px;
+}
+
+/*
+single inventory content 
+*/
+
+#statusFormBtn {
+  width: 100px;
+  height: 22px;
+  margin-left: 5px;
 }

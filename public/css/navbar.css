@@ -85,7 +85,7 @@ a {
   width: 40px;
   height: auto;
   margin-top: 30px;
-  filter:drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) ;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 }
 
 .logout {
@@ -118,6 +118,6 @@ a {
 
 .footer-container {
   position: absolute; /* Footer at the bottom */
-  bottom: 15px; /* Space from the bottom */
+  bottom: 40px; /* Space from the bottom */
   width: 100%; /* Full width taking padding into account */
 }

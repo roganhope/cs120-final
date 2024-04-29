@@ -15,18 +15,29 @@ class SalesModel {
   async getSalesNum() {
     await this.connect();
     const result = await this.sales
-      .aggregate([
-        {
-          $group: {
-            _id: null,
-            totalSales: { $sum: "$sale_price" },
-            totalDownPayments: { $sum: "$down_payment_amount" },
+        .aggregate([
+          {
+            $group: {
+              _id: null,
+              totalSales: { $sum: "$sale_price" },
+              totalDownPayments: { $sum: "$down_payment_amount" },
+              outstandingBalance: {
+                $sum: {
+                  $cond: [
+                    { $eq: ["$date_completed", null] },
+                    { $subtract: ["$sale_price", "$down_payment_amount"] },
+                    0
+                  ]
+                }
+              }
+            },
           },
-        },
-      ])
-      .toArray();
-    return result[0] || { totalSales: 100, totalDownPayments: 100 };
+        ])
+        .toArray();
+    await this.close();
+    return result[0] || { totalSales: -1, totalDownPayments: -1, outstandingBalance: -1 };
   }
+
 
   async getAllSales() {
     await this.connect();
@@ -85,6 +96,28 @@ class SalesModel {
     // console.log("Sales data retrieved:", salesData);
     return salesData;
   }
+
+  async completeSale(saleId) {
+    await this.connect();
+    try {
+      const sale = await this.sales.findOne({ _id: new ObjectId(saleId) });
+      const salePrice = sale.sale_price;
+      const result = await this.sales.updateOne(
+          { _id: new ObjectId(saleId) },
+          {
+            $set: {
+              date_completed: new Date(),
+              down_payment_amount: salePrice
+            }
+          }
+      );
+      console.log("Completed Sale Update Result:", result);
+      return result;
+    } finally {
+      await this.close();
+    }
+  }
+
 
 }
 

@@ -30,6 +30,7 @@ async function getSale(req, res) {
             customCSS: '/css/sales.css',
             totalSales: total.totalSales,
             totalDownPayments: total.totalDownPayments,
+            outstandingBalance: total.outstandingBalance,
             sales: salesWithClientNames
         });
     } catch (error) {
@@ -69,4 +70,16 @@ async function uploadSale(req, res) {
     }
 }
 
-module.exports = { getSale, newSale, uploadSale};
+async function completeSale(req, res) {
+    const saleId = req.params.saleId;
+
+    try {
+        await salesModel.completeSale(saleId);
+        res.redirect('/sales');
+    } catch (error) {
+        console.error('Failed to complete the sale:', error);
+        res.status(500).send('Failed to complete the sale.');
+    }
+}
+
+module.exports = { getSale, newSale, uploadSale, completeSale};

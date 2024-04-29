@@ -2,33 +2,39 @@
     <%= pageTitle %>
 </h1>
 
-<h2 class="section-title">View Models</h2> 
-<div class="card-container ">
-   
-   
-    <% if (models.length > 0) { %>
+<div class="section-container" style="background:none;">
+    <div class="card-container ">
 
-            <% models.forEach(model => { %>
+
+        <% if (models.length> 0) { %>
+
+            <% models.forEach(model=> { %>
                 <a href="/mechanichub/<%= model.make %>/<%= model.model %>">
                     <div class="card">
                         <div class="image-holder">
-                           
+
                             <img id="model-card-img" src="<%= model.image %> " alt="">
                         </div>
-           
-                       
-                        <strong><h2><%= model.make %> <%= model.model %></h2></strong>
+
+
+                        <strong>
+                            <h2>
+                                <%= model.make %>
+                                    <%= model.model %>
+                            </h2>
+                        </strong>
                         <p></p>
                     </div>
                 </a>
-                
-                
-           
+
+
+
                 <% }); %>
-       
-    <% } else { %>
-        <p>No models found.</p>
-    <% } %>
+
+                    <% } else { %>
+                        <p>No models found.</p>
+                        <% } %>
 
 
+    </div>
 </div>

@@ -1,20 +1,37 @@
+<h1 class="page-title">Inventory overview</h1>
 
-<h1 class="page-title">View Inventory</h1>
-<table class="full-width-table">
-    <thead>
-        <tr>
-            <th>VIN</th>
-            <th>Scooter</th>
-        
-        </tr>
-    </thead>
-    <tbody>
-        <% inventory.forEach(item => { %>
+<div class="section-container">
+
+    <p>
+        <strong>Total Inventories: <%= totalInventories %></strong>
+    </p>
+
+    <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
+</div>
+
+<div class="section-container">
+    <table class="full-width-table">
+        <thead>
             <tr>
-                <td><a href="/inventory/<%= item._id %>"> <%= item.vin %></a></td>
-                <td><%= item.color %> <%= item.make %> <%= item.model %></td>
-   
+                <th>VIN</th>
+                <th>Scooter</th>
+
             </tr>
-        <% }); %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% inventory.forEach(item=> { %>
+                <tr>
+                    <td><a href="/inventory/<%= item._id %>">
+                            <%= item.vin %>
+                        </a></td>
+                    <td>
+                        <%= item.color %>
+                            <%= item.make %>
+                                <%= item.model %>
+                    </td>
+
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>

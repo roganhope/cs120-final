@@ -73,15 +73,18 @@ const { getDashboardData } = require("./src/controllers/DashboardController");
 // app.get("/dashboard", ensureAuthenticated, getDashboardData);
 app.get("/dashboard", getDashboardData);
 
+app.get("/dashboard", getDashboardData);
 app.get("/", (req, res) => {
   res.render("login");
 });
 
 // translate API
-const {translateTextToEnglish, translateTextToSpanish} = require('./src/api/translate')
-app.post('/translate/to/english', translateTextToEnglish)
-app.post('/translate/to/spanish', translateTextToSpanish)
-
+const {
+  translateTextToEnglish,
+  translateTextToSpanish,
+} = require("./src/api/translate");
+app.post("/translate/to/english", translateTextToEnglish);
+app.post("/translate/to/spanish", translateTextToSpanish);
 
 // this should have been a db based thing not app based
 const ModelModel = require("./src/models/ModelModel.js");
@@ -125,6 +128,7 @@ const {
   getSale,
   newSale,
   uploadSale,
+    completeSale,
 } = require("./src/controllers/SalesController");
 const {
   upload,
@@ -144,25 +148,26 @@ const {
   updateClientNotes,
 } = require("./src/controllers/ClientsController");
 
-app.get("/clients", ensureAuthenticated, getClients);
-app.get("/newClient", ensureAuthenticated, newClient);
-app.post("/clients/new", ensureAuthenticated, uploadClient);
-app.get("/clients/:clientId", ensureAuthenticated, getClientSales);
+app.get("/clients", getClients);
+app.get("/newClient", newClient);
+app.post("/clients/new", uploadClient);
+app.get("/clients/:clientId", getClientSales);
 app.post("/clients/:clientId/update-notes", updateClientNotes);
 
 // sales
-app.get("/sales", ensureAuthenticated, getSale);
-app.get("/newSales", ensureAuthenticated, newSale);
-app.post("/sales/new", ensureAuthenticated, uploadSale);
+app.get("/sales", getSale);
+app.get("/newSales", newSale);
+app.post("/sales/new", uploadSale);
+app.post('/sales/complete/:saleId', completeSale);
 
 // inventory + shipments (related)
-app.get("/inventory", ensureAuthenticated, getInventory);
+app.get("/inventory", getInventory);
 // app.get("/shipments", ensureAuthenticated, getShipments);
-app.get("/shipments",  getShipments);
-app.get("/shipment/new", ensureAuthenticated, newShipment);
+app.get("/shipments", getShipments);
+app.get("/shipment/new", newShipment);
 app.post("/update/shipment/arrived", async (req, res) => {
   await markShipmentArrived(req, res);
-  // await markEntireShipmentInventoryAsArrived(req, res); 
+  // await markEntireShipmentInventoryAsArrived(req, res);
   res.redirect(`/shipment/${req.body.shipID}`);
 });
 
@@ -177,9 +182,10 @@ app.get("/shipment/:shipmentID", async (req, res) => {
 });
 
 // update inventory status
-const { updateInventoryStatus } = require('./src/controllers/InventoryController');
+const {
+  updateInventoryStatus,
+} = require("./src/controllers/InventoryController");
 app.post("/inventory/:inventoryID/update-status", updateInventoryStatus);
-
 
 app.post("/shipment/new", upload.single("file"), async (req, res) => {
   console.log("Creating new shipment");
