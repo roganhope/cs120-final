@@ -189,6 +189,29 @@ class InventoryModel {
     // console.log("Inventory data retrieved:", inventoryItems);
     return inventoryItems;
   }
+
+  async updateStatusById(id, newStatus) {
+    await this.connect();
+    try {
+      const inventoryItem = await this.inventory.findOne({
+        _id: new ObjectId(id),
+      });
+      if (inventoryItem) {
+        const result = await this.inventory.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: { status_id: newStatus } }
+        );
+        console.log(`Updated status for item with ID ${id} to ${newStatus}`);
+      } else {
+        console.log(`Inventory item not found for ID ${id}`);
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      throw error;
+    } finally {
+      await this.client.close();
+    }
+  }
 }
 
 module.exports = InventoryModel;

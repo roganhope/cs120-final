@@ -86,24 +86,22 @@ async function markEntireShipmentInventoryAsArrived(req, res,shipID){
 // const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 
 const getSingleInventory = async (req, res) => {
-
-    console.log("hello")
     try {
         const inventoryID = req.params.inventoryID;
-        console.log(inventoryID)
+        //console.log(inventoryID)
         const inventoryData = await inventoryModel.getSingleInventory(inventoryID);
         var saleData = null;
         var clientData = null
         if (inventoryData.sale_id) {
             
-            console.log("Sale ID exists:", inventoryData.sale_id);
+            //console.log("Sale ID exists:", inventoryData.sale_id);
             saleData = await salesModel.getSale(inventoryData.sale_id);
             clientData = await clientModel.getClientById(saleData.client_id)
-            console.log(clientData)
+            //console.log(clientData)
             // console.log("sale data returned " + saleData)
         } else {
             // The inventoryData does not have a sale_id
-            console.log("Sale ID does not exist");
+            //console.log("Sale ID does not exist");
         }
         // to do add in logic for sale data
         res.render('inventory/singleInventory', {
@@ -133,8 +131,18 @@ const updateInventoryImage = async (req, res) => {
     }
 }
 
+async function updateInventoryStatus(req, res) {
+    const inventoryID = req.params.inventoryID;
+    const { newStatus } = req.body;
 
-
+    try {
+        await inventoryModel.updateStatusById(inventoryID, newStatus);
+        res.redirect(`/inventory/${inventoryID}`);
+    } catch (error) {
+        console.error('Error updating inventory status:', error);
+        res.status(500).send({ error: 'Internal server error.' });
+    }
+}
 ;
 
-module.exports = { updateInventoryImage, getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment};
+module.exports = { updateInventoryImage, getSingleInventory, markEntireShipmentInventoryAsArrived, getInventory, uploadInventory, getInventoryFromShipment, updateInventoryStatus};

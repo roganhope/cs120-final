@@ -85,6 +85,7 @@ class SalesModel {
     // console.log("Sales data retrieved:", salesData);
     return salesData;
   }
+
 }
 
 module.exports = SalesModel;
