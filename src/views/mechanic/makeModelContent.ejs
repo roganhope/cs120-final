@@ -3,20 +3,21 @@
         <%= data.model %>
 </h1>
 
-<div class="model-img-container">
+<div class="section-container" style="background: none;">
+    <div class="model-img-container">
 
-    <% if (data.image) { %>
-        <img id="makemodelimg" src="<%= data.image %>" alt="">
-        <% } else { %>
-            <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
-            <% } %>
-</div>
+        <% if (data.image) { %>
+            <img id="makemodelimg" src="<%= data.image %>" alt="">
+            <% } else { %>
+                <img id="makemodelimg" src="/images/unknown-scooter.png" alt="">
+                <% } %>
+    </div>
 
-
-
-<div class="button-container">
     <button id="uploadButton">Upload Image</button>
+
+
 </div>
+
 
 <div class="section-container" id="uploadSection" style="display: none;">
     <form action="/update-model-image" class="upload-image" id="uploadForm" method="post" enctype="multipart/form-data">
@@ -41,7 +42,7 @@
 
     <button type="button" id="editMechanicButton" onclick="editMechanicNotes()">Edit</button>
     <button id="translateEnglishButton" onclick="translateToEnglish()">Translate to English</button>
-    <button id="translateSpanishButton" onclick="translateToSpanish()"">Translate to Spanish</button>
+    <button id="translateSpanishButton" onclick="translateToSpanish()">Translate to Spanish</button>
 
     <form id=" mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
         method="post" style="display: none;">
@@ -49,7 +50,7 @@
         <br><br>
         <button type="submit">Submit</button>
         <button type="button" id="cancelMechanicButton" onclick="cancelEditMechanic()">Cancel</button>
-        </form>
+    </form>
 </div>
 
 <script>

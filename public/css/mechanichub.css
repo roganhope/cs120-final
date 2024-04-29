@@ -1,89 +1,83 @@
-
-
 .mechanic_notes_container form {
-    color: red;
+  color: red;
 }
 
 #mechanic_notes {
-    width: 100%; 
-    min-height: 100px; 
-    box-sizing: border-box;
-    border-style: solid;
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
+  border-style: solid;
 }
 
 textarea#mechanic_notes {
-    width: 100%; /* Set the width to fill its container */
-    height: 150px; /* Set the initial height */
-    resize: vertical; /* Allow vertical resizing */
-    overflow-y: auto; /* Add vertical scrollbar if needed */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    /* Add any other styling you want */
+  width: 100%; /* Set the width to fill its container */
+  height: 150px; /* Set the initial height */
+  resize: vertical; /* Allow vertical resizing */
+  overflow-y: auto; /* Add vertical scrollbar if needed */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  /* Add any other styling you want */
 }
 
 #makemodelimg {
-    width: 100px;
+  width: 100px;
 }
-
 
 .model-img-container {
-    width: 220px;
-    /* margin: 0 auto; */
-    margin-left: 15px;;
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
+  width: 220px;
+  /* margin: 0 auto; */
 
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
 }
 
 #makemodelimg {
-    height: 200px;
-    width: 200px;
+  height: 200px;
+  width: 200px;
 }
 
-
 .card-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 95%;
-    margin: 0 auto;
-    /* background-color: #ffffff; */
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 95%;
+  margin: 0 auto;
+  /* background-color: #ffffff; */
+  border-radius: 10px;
 }
 
 .card {
-    background-color: rgb(246, 246, 246);
-    height: auto;
-    width: 325px;
-    align-items: center;
-    flex-direction: column;
-    padding: 0px; 
-    overflow: hidden; 
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
-    margin: 20px;
-    min-height: 400px;
+  background-color: rgb(246, 246, 246);
+  height: auto;
+  width: 325px;
+  align-items: center;
+  flex-direction: column;
 
-
+  padding: 0px;
+  overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  min-height: 400px;
+  border-radius: 10px;
 }
 
 .image-holder {
-    width: 100%;
-    min-height: 330px;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  min-height: 330px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
 }
-
 
 #model-card-img {
-    width: 100%;
-    object-fit: contain;
-    height: auto;
-
+  width: 100%;
+  object-fit: contain;
+  height: auto;
 }
 
-
+.card-container h2 {
+  padding-left: 10px;
+  padding-top: 10px;
+}

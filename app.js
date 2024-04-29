@@ -159,13 +159,13 @@ app.get("/newSales", newSale);
 app.post("/sales/new", uploadSale);
 
 // inventory + shipments (related)
-app.get("/inventory", ensureAuthenticated, getInventory);
+app.get("/inventory", getInventory);
 // app.get("/shipments", ensureAuthenticated, getShipments);
-app.get("/shipments",  getShipments);
-app.get("/shipment/new", ensureAuthenticated, newShipment);
+app.get("/shipments", getShipments);
+app.get("/shipment/new", newShipment);
 app.post("/update/shipment/arrived", async (req, res) => {
   await markShipmentArrived(req, res);
-  // await markEntireShipmentInventoryAsArrived(req, res); 
+  // await markEntireShipmentInventoryAsArrived(req, res);
   res.redirect(`/shipment/${req.body.shipID}`);
 });
 
@@ -180,9 +180,10 @@ app.get("/shipment/:shipmentID", async (req, res) => {
 });
 
 // update inventory status
-const { updateInventoryStatus } = require('./src/controllers/InventoryController');
+const {
+  updateInventoryStatus,
+} = require("./src/controllers/InventoryController");
 app.post("/inventory/:inventoryID/update-status", updateInventoryStatus);
-
 
 app.post("/shipment/new", upload.single("file"), async (req, res) => {
   console.log("Creating new shipment");
