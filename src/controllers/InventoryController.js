@@ -60,9 +60,11 @@ async function getInventory(req, res){
     
     try {
         const data = await inventoryModel.getInventory();
+        const totalInventories = await inventoryModel.getTotalInventory();
         res.render('inventory/allInventory', {
             pageTitle: 'View Inventory',
             customCSS: '/css/inventory.css',
+            totalInventories: totalInventories,
             inventory: data
         });
         
@@ -70,8 +72,6 @@ async function getInventory(req, res){
     catch (error){
         console.error("Error locating inventory", error);
     }
-   
-        
 }
 
 async function markEntireShipmentInventoryAsArrived(req, res){
