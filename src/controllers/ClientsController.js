@@ -85,5 +85,23 @@ async function getClientSales(req, res) {
     res.status(500).send("Unable to retrieve sales data.");
   }
 }
+async function updateClientNotes(req, res) {
+  const clientId = req.params.clientId;
+  const updatedNotes = req.body.client_notes;
+  console.log(updatedNotes);
+  try {
+    await clientsModel.updateClientNotes(clientId, updatedNotes);
+    res.redirect("/clients/" + clientId); // Redirect back to the client details page
+  } catch (error) {
+    console.error("Error updating client notes:", error);
+    res.status(500).send("Failed to update client notes.");
+  }
+}
 
-module.exports = { getClients, newClient, uploadClient, getClientSales };
+module.exports = {
+  getClients,
+  newClient,
+  uploadClient,
+  getClientSales,
+  updateClientNotes,
+};

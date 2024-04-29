@@ -50,8 +50,16 @@ class ClientsModel {
     const totalClients = await this.clients.countDocuments();
     return totalClients;
   }
+
+  async updateClientNotes(clientId, updatedNotes) {
+    await this.connect();
+    const result = await this.clients.updateOne(
+      { _id: new ObjectId(clientId) },
+      { $set: { notes: updatedNotes } }
+    );
+    await this.close();
+    return result;
+  }
 }
-
-
 
 module.exports = ClientsModel;

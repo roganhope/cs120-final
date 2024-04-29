@@ -26,30 +26,25 @@
 }
 
 .page-container {
-
   display: flex !important;
   /* min-height: 100vh; */
   /* background-color: var(--background); */
   /* background-color: red; */
   display: inline-block;
-  
 }
 
 /* PAGE CONTENT */
 .page-content-container {
   padding: 10px;
   width: calc(100vw - 200px);
-  height: 2000px !important; 
+  height: 2000px !important;
 
-
-  background-color:  var(--background);
-  
-
+  background-color: var(--background);
 }
 /* PAGE TITLE  */
 .page-title {
   margin-top: 50px;
-  margin-left: 10px;
+  margin-left: 20px;
   text-transform: uppercase;
   color: var(--page-title);
   margin-bottom: 20px;
@@ -57,15 +52,15 @@
 
 /* FULL WIDTH TABLE SECTION */
 .full-width-table {
-  width: 95%;
-  margin: 0 auto;
+  width: 90%;
+  margin-left: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
 }
 
 .full-width-table table {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -259,8 +254,8 @@ button a {
   margin-bottom: 10px;
 }
 .section-container {
-  width: 95%;
-  margin: 0 auto;
+  width: 90%;
+  margin-left: 20px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
@@ -330,4 +325,20 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: #124e66;
+}
+
+/*notes section*/
+#notesDisplay p {
+  margin: 20px 10px 20px 10px;
+  padding: 20px;
+  background-color: #d8e2ecaf;
+  border-radius: 10px;
+}
+
+#editButton {
+  margin-left: 10px;
+}
+
+#newOrderBtn {
+  margin-left: 25px;
 }
