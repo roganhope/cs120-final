@@ -78,14 +78,18 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
+// translate API
+const {translateTextToEnglish, translateTextToSpanish} = require('./src/api/translate')
+app.post('/translate/to/english', translateTextToEnglish)
+app.post('/translate/to/spanish', translateTextToSpanish)
 
-
-
+// to do: make this a trigger in atlas not here ************
 const ModelModel = require("./src/models/ModelModel.js");
 const modelTrigger = new ModelModel(
     "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
 );
-modelTrigger
+
+modelTrigger 
     .watchInventoryChanges()
     .then(() => {
         console.log("Watching for inventory changes...");
@@ -93,9 +97,9 @@ modelTrigger
     .catch((error) => {
         console.error("Error setting up inventory change watcher:", error);
     });
-// app.get("/inventory", (req, res) => {
-//   res.render("inventory/allInventory");
-// });
+// to do: make this a trigger in atlas not here ************
+
+
 // all imports
 const {
   getShipments,

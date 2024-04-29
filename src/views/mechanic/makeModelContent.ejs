@@ -43,6 +43,8 @@
         <br><br>
 
         <button type="button" id="editButton">Edit</button>
+        <button type="button" id="translateButton">Translate To English </button>
+        <button type="button" id="translateToSpanish">Translate To Spanish </button>
         <button type="submit" id="submitButton" style="display: none;">Submit</button>
         <button type="button" id="cancelButton" style="display: none;">Cancel</button>
     </form>
@@ -52,71 +54,124 @@
 
 
 <script>
-    var editButton = document.getElementById('editButton');
-    var submitButton = document.getElementById('submitButton');
-    var cancelButton = document.getElementById('cancelButton');
-    var form = document.getElementById('mechanic_notes_form');
-    var textarea = document.getElementById('mechanic_notes');
+    document.addEventListener('DOMContentLoaded', function() {
+        var editButton = document.getElementById('editButton');
+        var submitButton = document.getElementById('submitButton');
+        var cancelButton = document.getElementById('cancelButton');
+        var form = document.getElementById('mechanic_notes_form');
+        var textarea = document.getElementById('mechanic_notes');
+        const translateButton = document.getElementById('translateButton');
+        const translateToSpanishButton = document.getElementById('translateToSpanish');
 
+         // Translate button functionality
+         translateToSpanishButton.addEventListener('click', function () {
+            console.log("Translate to spansih button pressed")
+            const mechanicNotes = textarea.value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/translate/to/spanish', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-    editButton.addEventListener('click', function () {
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
+                        console.log(response)
+                        if (response.translatedText) {
+                            const translatedText = response.translatedText.trans; 
+                            console.log('Translated text:', translatedText);
+                            addTranslatedDiv(translatedText)
+                        }
+                    } else {
+                        console.error('Request failed');
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({ text: mechanicNotes }));
+        });
 
-        editButton.style.display = 'none';
-        submitButton.style.display = 'inline-block';
-        cancelButton.style.display = 'inline-block';
-        textarea.removeAttribute('readonly');
-    });
+        translateButton.addEventListener('click', function () {
+            console.log("Translate to enlgish button pressed")
+            const mechanicNotes = textarea.value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/translate/to/english', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-    cancelButton.addEventListener('click', function () {
-        location.reload(); // Refresh the page
-    });
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log(xhr.responseText);
+                        const response = JSON.parse(xhr.responseText);
+                        console.log(response)
+                        if (response.translatedText) {
+                            const translatedText = response.translatedText.trans; 
+                            console.log('Translated text:', translatedText);
+                            addTranslatedDiv(translatedText)
+                        }
+                    } else {
+                        console.error('Request failed');
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({ text: mechanicNotes }));
+        });
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        form.submit();
-    });
+        editButton.addEventListener('click', function () {
+            editButton.style.display = 'none';
+            submitButton.style.display = 'inline-block';
+            cancelButton.style.display = 'inline-block';
+            textarea.removeAttribute('readonly');
+        });
 
-</script>
+        // Cancel button functionality
+        cancelButton.addEventListener('click', function () {
+            location.reload(); // Refresh the page
+        });
 
-<div class="section-container">
-    <h2 class="section-title">Inventory</h2>
-    <% if (inventory) { %>
-        <div class="full-width-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Vin</th>
-                        <th>Color</th>
-                    </tr>
-                </thead>
+        // Form submission handling
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            form.submit();
+        });
 
-                <% inventory.forEach(item=> { %>
-                    <tr>
-                        <td> <a href="/inventory/<%= item._id %>">
-                                <%= item.vin %>
-                            </a> </td>
-                        <td> <a href="/inventory/<%= item._id %>">
-                                <%= item.color %>
-                            </a> </td>
-                    </tr>
-
-                    <% }); %>
-            </table>
-        </div>
-
-        <% } %>
-</div>
-
-
-<script>
-    // upload photo functionality 
-    document.addEventListener("DOMContentLoaded", function () {
+        // Upload photo functionality
         const uploadButton = document.getElementById('uploadButton');
         const uploadSection = document.getElementById('uploadSection');
-
         uploadButton.addEventListener('click', function () {
             uploadButton.style.display = 'none';
             uploadSection.style.display = 'block';
         });
+
+       
     });
+
+    function addTranslatedDiv(translatedText) {
+    const pageContentContainer = document.getElementById('pageContentContainer');
+
+    if (pageContentContainer) { // Ensure the container exists
+        // Create a new div element to contain the translated text
+        const translatedDiv = document.createElement('div');
+        translatedDiv.classList.add('section-container'); // Add necessary classes
+
+        // Create a heading for the translated text
+        const translatedHeading = document.createElement('h2');
+        translatedHeading.classList.add('section-title');
+        translatedHeading.textContent = 'Translated Notes';
+
+        // Create a paragraph for the translated text content
+        const translatedParagraph = document.createElement('p');
+        translatedParagraph.textContent = translatedText;
+
+        // Append heading and paragraph to the translated div
+        translatedDiv.appendChild(translatedHeading);
+        translatedDiv.appendChild(translatedParagraph);
+
+        // Append the translated div to the page content container
+        pageContentContainer.appendChild(translatedDiv);
+    } else {
+        console.error('Page content container not found.');
+    }
+}
+
 </script>
+
