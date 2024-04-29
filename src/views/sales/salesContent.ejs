@@ -1,34 +1,46 @@
+<h1 class="page-title">Sales overview </h1>
+
+
 <div class="section-container">
-    <div>Total Sales: $<%= totalSales %></div>
-    <div>Total Down Payments: $<%= totalDownPayments %></div>
+
+    <p><strong>Total Sales: $<%= totalSales %></strong>
+        <br>
+        <strong> Total Down Payments: $<%= totalDownPayments %></strong>
+    </p>
+
     <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
 </div>
-<table class="full-width-table">
-    <thead>
-    <tr>
-        <th>Client Name</th>
-        <th>Sale Price</th>
-        <th>Down Payment Amount</th>
-        <th>Date Initiated</th>
-        <th>Date Completed</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% sales.forEach(function(sale) { %>
-        <tr>
-            <td><%= sale.client_name %></td>
-            <td>$<%= sale.sale_price %></td>
-            <td>$<%= sale.down_payment_amount %></td>
-            <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
-            <td><%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed' %></td>
-        </tr>
-    <% }); %>
-    </tbody>
-</table>
+<div class="section-container">
+    <table class="full-width-table">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Sale Price</th>
+                <th>Down Payment Amount</th>
+                <th>Date Initiated</th>
+                <th>Date Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% sales.forEach(function(sale) { %>
+                <tr>
+                    <td>
+                        <%= sale.client_name %>
+                    </td>
+                    <td>$<%= sale.sale_price %>
+                    </td>
+                    <td>$<%= sale.down_payment_amount %>
+                    </td>
+                    <td>
+                        <%= sale.date_initiated.toISOString().substring(0, 10) %>
+                    </td>
+                    <td>
+                        <%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed'
+                            %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
 
-
-
-
-
-
-
+</div>

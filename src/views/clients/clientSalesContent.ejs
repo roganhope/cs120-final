@@ -48,58 +48,60 @@
 </div>
 
 
+<div class="section-container">
+    <% if (sales.length> 0) { %>
 
-<% if (sales.length> 0) { %>
-    <table class="full-width-table">
-        <thead>
-            <tr>
-                <th>Sale ID</th>
-                <th>Date Initiated</th>
-                <th>Sale Price</th>
-                <th>Down Payment</th>
-                <th>Completed</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% sales.forEach(sale=> { %>
+
+        <table class="full-width-table">
+            <thead>
                 <tr>
-                    <td>
-                        <%= sale._id %>
-                    </td>
-                    <td>
-                        <%= new Date(sale.date_initiated).toLocaleDateString("en-US") %>
-                    </td>
-                    <td>$
-                        <%= sale.sale_price.toFixed(2) %>
-                    </td>
-                    <td>$
-
-                        <%= sale.down_payment_amount.toFixed(2) %>
-                    </td>
-                    <td>
-                        <%= sale.date_completed ? new Date(sale.date_completed).toLocaleDateString("en-US") : "Pending"
-                            %>
-                    </td>
+                    <th>Sale ID</th>
+                    <th>Date Initiated</th>
+                    <th>Sale Price</th>
+                    <th>Down Payment</th>
+                    <th>Completed</th>
                 </tr>
-                <% }) %>
-        </tbody>
-    </table>
-    <% } else { %>
-        <p>No sales data available for this client.</p>
-        <% } %>
+            </thead>
+            <tbody>
+                <% sales.forEach(sale=> { %>
+                    <tr>
+                        <td>
+                            <%= sale._id %>
+                        </td>
+                        <td>
+                            <%= new Date(sale.date_initiated).toLocaleDateString("en-US") %>
+                        </td>
+                        <td>$
+                            <%= sale.sale_price.toFixed(2) %>
+                        </td>
+                        <td>$
 
+                            <%= sale.down_payment_amount.toFixed(2) %>
+                        </td>
+                        <td>
+                            <%= sale.date_completed ? new Date(sale.date_completed).toLocaleDateString("en-US")
+                                : "Pending" %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <p>No sales data available for this client.</p>
+            <% } %>
 
+</div>
 
-            <script>
-                function editNotes() {
-                    document.getElementById('notesDisplay').style.display = 'none';
-                    document.getElementById('editButton').style.display = 'none';
-                    document.getElementById('notesForm').style.display = 'block';
-                }
+<script>
+    function editNotes() {
+        document.getElementById('notesDisplay').style.display = 'none';
+        document.getElementById('editButton').style.display = 'none';
+        document.getElementById('notesForm').style.display = 'block';
+    }
 
-                function cancelEdit() {
-                    document.getElementById('notesDisplay').style.display = 'block';
-                    document.getElementById('editButton').style.display = 'inline';
-                    document.getElementById('notesForm').style.display = 'none';
-                }
-            </script>
+    function cancelEdit() {
+        document.getElementById('notesDisplay').style.display = 'block';
+        document.getElementById('editButton').style.display = 'inline';
+        document.getElementById('notesForm').style.display = 'none';
+    }
+</script>

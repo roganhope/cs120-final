@@ -70,17 +70,21 @@ app.get(
   }
 );
 const { getDashboardData } = require("./src/controllers/DashboardController");
-app.get("/dashboard", ensureAuthenticated, getDashboardData);
 
+// app.get("/dashboard", ensureAuthenticated, getDashboardData);
+
+app.get("/dashboard", getDashboardData);
 app.get("/", (req, res) => {
   res.render("login");
 });
 
 // translate API
-const {translateTextToEnglish, translateTextToSpanish} = require('./src/api/translate')
-app.post('/translate/to/english', translateTextToEnglish)
-app.post('/translate/to/spanish', translateTextToSpanish)
-
+const {
+  translateTextToEnglish,
+  translateTextToSpanish,
+} = require("./src/api/translate");
+app.post("/translate/to/english", translateTextToEnglish);
+app.post("/translate/to/spanish", translateTextToSpanish);
 
 // this should have been a db based thing not app based
 const ModelModel = require("./src/models/ModelModel.js");
@@ -143,16 +147,16 @@ const {
   updateClientNotes,
 } = require("./src/controllers/ClientsController");
 
-app.get("/clients", ensureAuthenticated, getClients);
-app.get("/newClient", ensureAuthenticated, newClient);
-app.post("/clients/new", ensureAuthenticated, uploadClient);
-app.get("/clients/:clientId", ensureAuthenticated, getClientSales);
+app.get("/clients", getClients);
+app.get("/newClient", newClient);
+app.post("/clients/new", uploadClient);
+app.get("/clients/:clientId", getClientSales);
 app.post("/clients/:clientId/update-notes", updateClientNotes);
 
 // sales
-app.get("/sales", ensureAuthenticated, getSale);
-app.get("/newSales", ensureAuthenticated, newSale);
-app.post("/sales/new", ensureAuthenticated, uploadSale);
+app.get("/sales", getSale);
+app.get("/newSales", newSale);
+app.post("/sales/new", uploadSale);
 
 // inventory + shipments (related)
 app.get("/inventory", ensureAuthenticated, getInventory);
