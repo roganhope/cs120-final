@@ -135,21 +135,21 @@ const {
   updateClientNotes,
 } = require("./src/controllers/ClientsController");
 
-app.get("/clients", getClients);
-app.get("/newClient", newClient);
-app.post("/clients/new", uploadClient);
-app.get("/clients/:clientId", getClientSales);
-app.post("/clients/:clientId/update-notes", updateClientNotes);
+app.get("/clients", ensureAuthenticated, getClients);
+app.get("/newClient", ensureAuthenticated, newClient);
+app.post("/clients/new", ensureAuthenticated, uploadClient);
+app.get("/clients/:clientId", ensureAuthenticated, getClientSales);
+app.post("/clients/:clientId/update-notes", ensureAuthenticated, updateClientNotes);
 
 // sales
-app.get("/sales", getSale);
-app.get("/newSales", newSale);
-app.post("/sales/new", uploadSale);
+app.get("/sales", ensureAuthenticated, getSale);
+app.get("/newSales", ensureAuthenticated, newSale);
+app.post("/sales/new", ensureAuthenticated, uploadSale);
 
 // inventory + shipments (related)
-app.get("/inventory", getInventory);
-app.get("/shipments", getShipments);
-app.get("/shipment/new", newShipment);
+app.get("/inventory", ensureAuthenticated, getInventory);
+app.get("/shipments", ensureAuthenticated, getShipments);
+app.get("/shipment/new", ensureAuthenticated, newShipment);
 
 app.get("/shipment/:shipmentID", async (req, res) => {
   // console.log("woohoo")

@@ -12,7 +12,7 @@ class SalesModel {
     await this.client.connect();
   }
 
-  async getTotalSales() {
+  async getSalesNum() {
     await this.connect();
     const result = await this.sales
       .aggregate([

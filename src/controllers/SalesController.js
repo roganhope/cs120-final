@@ -15,7 +15,7 @@ const { ObjectId } = require('mongodb');
 
 async function getSale(req, res) {
     try {
-        const total = await salesModel.getTotalSales();
+        const total = await salesModel.getSalesNum();
         const salesData = await salesModel.getAllSales();
         const clientData = await clientsModel.getAllClients();
 
