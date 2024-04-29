@@ -16,47 +16,36 @@
                             clientData.address.zipcode %><br>
                             <strong>Total order:</strong>
                             <%= sales.length %><br>
-
+                                <strong>Client ID:</strong>
+                                <%= clientData._id %><br>
 </div>
 
 
 
 
-<button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
+<button onclick="window.location.href='/newSales'" class="btn btn-primary" id="newOrderBtn">New Order</button>
+
+<br><br>
 
 
-
-
-<br>
-
-<!--show notes in a section div. has edit button. when it clicked, it shoud pop a txtarea and peple can type it in there. 
-at the same time, the edit button become submit button and also shows a cancel button on the side.
-after click submit, the note will append on the note section, and edit txtarea will dispare and the edit button comeback.--> 
 <div class="section-container">
     <h2 class="section-title">Client Notes</h2>
 
-        <p>clientData.notes</p>
+    <div id="notesDisplay">
+        <p id="notesText">
+            <%= clientData.notes || "No notes available." %>
+        </p>
+    </div>
 
-        <button type="button" id="editButton">Edit</button>
+    <button type="button" id="editButton" onclick="editNotes()">Edit</button>
 
-    <form action="/appendNewClientNote%>" method="post" style="display: none;">
-        <!-- <input type="hidden" name="make" value="<%= data.make %>">
-        <input type="hidden" name="model" value="<%= data.model %>"> -->
-        
-        <textarea id="client_notes" name="client_notes" readonly>
-                    <% if (clientData.notes) { %>
-                        <%= clientData.notes %>
-                    <% } %>
-                </textarea>
+    <form id="notesForm" action="/clients/<%= clientData._id %>/update-notes" method="post" style="display: none;">
+        <textarea id="client_notes" name="client_notes"><%= clientData.notes %></textarea>
         <br><br>
-
-      
+        <button type="submit">Submit</button>
+        <button type="button" id="cancelButton" onclick="cancelEdit()">Cancel</button>
     </form>
-   
-    <button type="submit" id="submitButton" style="display: none;">Submit</button>
-    <button type="button" id="cancelButton" style="display: none;">Cancel</button>
 </div>
-
 
 
 
@@ -98,3 +87,19 @@ after click submit, the note will append on the note section, and edit txtarea w
     <% } else { %>
         <p>No sales data available for this client.</p>
         <% } %>
+
+
+
+            <script>
+                function editNotes() {
+                    document.getElementById('notesDisplay').style.display = 'none';
+                    document.getElementById('editButton').style.display = 'none';
+                    document.getElementById('notesForm').style.display = 'block';
+                }
+
+                function cancelEdit() {
+                    document.getElementById('notesDisplay').style.display = 'block';
+                    document.getElementById('editButton').style.display = 'inline';
+                    document.getElementById('notesForm').style.display = 'none';
+                }
+            </script>
