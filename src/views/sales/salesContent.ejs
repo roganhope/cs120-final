@@ -35,7 +35,7 @@
                 <td><%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed' %></td>
                 <td>
                     <form action="/sales/complete/<%= sale._id %>" method="post" class="complete-form">
-                        <button type="submit" class="btn btn-primary">Complete</button>
+                        <button type="submit" class="btn btn-primary" id="salesCompleteBtn">Complete</button>
                     </form>
                 </td>
             </tr>
