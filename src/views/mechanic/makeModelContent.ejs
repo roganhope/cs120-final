@@ -30,7 +30,7 @@
 
 
 
-<div class="section-container">
+<div class="section-container" id="mechanicNotes">
     <h2 class="section-title">Mechanic Notes</h2>
 
     <div id="mechanicNotesDisplay">
@@ -40,14 +40,16 @@
     </div>
 
     <button type="button" id="editMechanicButton" onclick="editMechanicNotes()">Edit</button>
+    <button id="translateEnglishButton" onclick="translateToEnglish()">Translate to English</button>
+    <button id="translateSpanishButton" onclick="translateToSpanish()"">Translate to Spanish</button>
 
-    <form id="mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
+    <form id=" mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
         method="post" style="display: none;">
         <textarea id="mechanic_notes" name="mechanic_notes"><%= data.mechanic_notes %></textarea>
         <br><br>
         <button type="submit">Submit</button>
         <button type="button" id="cancelMechanicButton" onclick="cancelEditMechanic()">Cancel</button>
-    </form>
+        </form>
 </div>
 
 <script>
@@ -61,6 +63,89 @@
         // Hide the form and show the display paragraph
         document.getElementById('mechanicNotesForm').style.display = 'none';
         document.getElementById('mechanicNotesDisplay').style.display = 'block';
+    }
+
+    function translateToEnglish() {
+        console.log("Translating to English button pressed");
+        var text = document.getElementById("mechanicNotesText").textContent;
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/translate/to/english', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.translatedText) {
+                        const translatedText = response.translatedText.trans;
+                        console.log('Translated text:', translatedText);
+                        addTranslatedDiv(translatedText);
+                    }
+                } else {
+                    console.error('Request failed');
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ text: text }));
+    }
+
+
+    function translateToSpanish() {
+        console.log("Translating to spnaish button pressed");
+        var text = document.getElementById("mechanicNotesText").textContent;
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/translate/to/spanish', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.translatedText) {
+                        const translatedText = response.translatedText.trans;
+                        console.log('Translated text:', translatedText);
+                        addTranslatedDiv(translatedText);
+                    }
+                } else {
+                    console.error('Request failed');
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ text: text }));
+    }
+    function addTranslatedDiv(translatedText) {
+        const pageContentContainer = document.getElementById('pageContentContainer');
+        const mechanicNotesDiv = document.getElementById('mechanicNotes');
+        if (pageContentContainer) { // Ensure the container exists
+            // Create a new div element to contain the translated text
+            const translatedDiv = document.createElement('div');
+            translatedDiv.classList.add('section-container'); // Add necessary classes
+
+            // Create a heading for the translated text
+            const translatedHeading = document.createElement('h2');
+            translatedHeading.classList.add('section-title');
+            translatedHeading.textContent = 'Translated Notes';
+
+            // Create a paragraph for the translated text content
+            const translatedParagraph = document.createElement('p');
+            translatedParagraph.textContent = translatedText;
+
+            // Append heading and paragraph to the translated div
+            translatedDiv.appendChild(translatedHeading);
+            translatedDiv.appendChild(translatedParagraph);
+
+            // Append the translated div to the page content container
+            // pageContentContainer.appendChild(translatedDiv);
+            pageContentContainer.insertBefore(translatedDiv, mechanicNotesDiv.nextSibling);
+        } else {
+            console.error('Page content container not found.');
+        }
     }
 </script>
 

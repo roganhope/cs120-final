@@ -76,6 +76,13 @@ app.get("/", (req, res) => {
   res.render("login");
 });
 
+// translate API
+const {translateTextToEnglish, translateTextToSpanish} = require('./src/api/translate')
+app.post('/translate/to/english', translateTextToEnglish)
+app.post('/translate/to/spanish', translateTextToSpanish)
+
+
+// this should have been a db based thing not app based
 const ModelModel = require("./src/models/ModelModel.js");
 const modelTrigger = new ModelModel(
   "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
