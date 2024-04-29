@@ -128,6 +128,7 @@ const {
   getSale,
   newSale,
   uploadSale,
+    completeSale,
 } = require("./src/controllers/SalesController");
 const {
   upload,
@@ -157,6 +158,7 @@ app.post("/clients/:clientId/update-notes", updateClientNotes);
 app.get("/sales", getSale);
 app.get("/newSales", newSale);
 app.post("/sales/new", uploadSale);
+app.post('/sales/complete/:saleId', completeSale);
 
 // inventory + shipments (related)
 app.get("/inventory", ensureAuthenticated, getInventory);

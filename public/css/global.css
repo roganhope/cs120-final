@@ -236,6 +236,7 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 3px;
   width: 160px;
+  visibility: visible;
 }
 
 button a {

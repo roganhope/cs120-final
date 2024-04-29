@@ -3,9 +3,12 @@
 
 <div class="section-container">
 
-    <p><strong>Total Sales: $<%= totalSales %></strong>
+    <p>
+        <strong>Total Gross Sales: $<%= totalSales %></strong>
         <br>
-        <strong> Total Down Payments: $<%= totalDownPayments %></strong>
+        <strong>Total Received Payments: $<%= totalDownPayments %></strong>
+        <br>
+        <strong>Total Outstanding Receivables: $<%= outstandingBalance %></strong>
     </p>
 
     <button onclick="window.location.href='/newSales'" class="btn btn-primary">New Order</button>
@@ -19,27 +22,24 @@
                 <th>Down Payment Amount</th>
                 <th>Date Initiated</th>
                 <th>Date Completed</th>
+                <th>Complete</th>
             </tr>
         </thead>
         <tbody>
-            <% sales.forEach(function(sale) { %>
-                <tr>
-                    <td>
-                        <%= sale.client_name %>
-                    </td>
-                    <td>$<%= sale.sale_price %>
-                    </td>
-                    <td>$<%= sale.down_payment_amount %>
-                    </td>
-                    <td>
-                        <%= sale.date_initiated.toISOString().substring(0, 10) %>
-                    </td>
-                    <td>
-                        <%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed'
-                            %>
-                    </td>
-                </tr>
-                <% }); %>
+        <% sales.forEach(function(sale) { %>
+            <tr>
+                <td><%= sale.client_name %></td>
+                <td>$<%= sale.sale_price %></td>
+                <td>$<%= sale.down_payment_amount %></td>
+                <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
+                <td><%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed' %></td>
+                <td>
+                    <form action="/sales/complete/<%= sale._id %>" method="post" class="complete-form">
+                        <button type="submit" class="btn btn-primary">Complete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
         </tbody>
     </table>
 
