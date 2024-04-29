@@ -71,14 +71,12 @@ app.get(
 );
 const { getDashboardData } = require("./src/controllers/DashboardController");
 app.get("/dashboard", ensureAuthenticated, getDashboardData);
-// app.get("/dashboard", getDashboardData);
 
-app.get("/dashboard", getDashboardData);
 app.get("/", (req, res) => {
   res.render("login");
 });
 
-// translate API
+// TRANSLATION API
 const {
   translateTextToEnglish,
   translateTextToSpanish,
@@ -86,7 +84,7 @@ const {
 app.post("/translate/to/english", translateTextToEnglish);
 app.post("/translate/to/spanish", translateTextToSpanish);
 
-// this should have been a db based thing not app based
+// MODEL TRIGGER  --> next time we will make this a DB based action not application level
 const ModelModel = require("./src/models/ModelModel.js");
 const modelTrigger = new ModelModel(
   "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
@@ -99,10 +97,8 @@ modelTrigger
   .catch((error) => {
     console.error("Error setting up inventory change watcher:", error);
   });
-// app.get("/inventory", (req, res) => {
-//   res.render("inventory/allInventory");
-// });
-// all imports
+
+// ALL IMPORTS
 const {
   markShipmentArrived,
   getShipments,
