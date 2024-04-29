@@ -1,35 +1,52 @@
+<h1 class="page-title">
+    Shipment Overview
+</h1>
+<div class="section-container">
 
+    <p><strong>Total Shipments: <%= totalShipments%></strong> <br></p>
 
-<h1 class="page-title"><%= pageTitle %></h1>
-   
+    <button onclick="window.location.href='/shipment/new'" class="btn btn-primary">New Shipment</button>
 
-<div class="button-container">
+</div>
+
+<!-- <div class="button-container">
     <button type="submit"> <a href="/shipment/new"> New Shipment</a>
 
     </button>
+</div> -->
+<div class="section-container">
+    <table class="full-width-table">
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Vendor</th>
+                <th>Order Date</th>
+                <th>Expected Date</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% shipmentData.forEach(shipment=> { %>
+                <a href="/shipment/<%= shipment._id %>">
+                    <tr>
+                        <td><a href="/shipment/<%= shipment._id %>">
+                                <%= shipment.invoiceno %>
+                            </a></td>
+                        <td>
+                            <%= shipment.shipmentVendor %>
+                        </td>
+                        <td>
+                            <%= shipment.orderDate %>
+                        </td>
+                        <td>
+                            <%= shipment.expectedDate %>
+                        </td>
+                        <td>
+                            <%= shipment.total %>
+                        </td>
+                    </tr>
+                </a>
+                <% }); %>
+        </tbody>
+    </table>
 </div>
-
-<table class="full-width-table">
-    <thead>
-        <tr>
-            <th>Invoice Number</th>
-            <th>Vendor</th>
-            <th>Order Date</th>
-            <th>Expected Date</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% shipmentData.forEach(shipment => { %>
-            <a href="/shipment/<%= shipment._id %>">
-                <tr>
-                    <td><a href="/shipment/<%= shipment._id %>"><%= shipment.invoiceno %></a></td>
-                    <td><%= shipment.shipmentVendor %></td>
-                    <td><%= shipment.orderDate %></td>
-                    <td><%= shipment.expectedDate %></td>
-                    <td><%= shipment.total %></td>
-                </tr>
-            </a>
-        <% }); %>
-    </tbody>
-</table>

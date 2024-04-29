@@ -44,7 +44,7 @@
 /* PAGE TITLE  */
 .page-title {
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 25px;
   text-transform: uppercase;
   color: var(--page-title);
   margin-bottom: 20px;
@@ -52,11 +52,9 @@
 
 /* FULL WIDTH TABLE SECTION */
 .full-width-table {
-  width: 90%;
-  margin-left: 20px;
+  width: 100%;
   background-color: #ffffff;
   border-radius: 10px;
-  padding: 15px;
 }
 
 .full-width-table table {
@@ -72,7 +70,7 @@
   color: var(--font1);
 }
 .full-width-table a:hover {
-  color: coral;
+  color: #659bb1;
 }
 
 .full-width-table tr {
@@ -89,7 +87,8 @@
 .full-width-table td,
 .full-width-table th {
   vertical-align: middle;
-  padding-left: 10px;
+  padding-left: 5px;
+  border-radius: 5px;
   /* color:rgb(60, 60, 60); */
 }
 
@@ -254,13 +253,17 @@ button a {
   margin-bottom: 10px;
 }
 .section-container {
-  width: 90%;
-  margin-left: 20px;
+  width: 95%;
+  margin-left: 25px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   line-height: 150%;
+}
+
+.section-container p {
+  margin-bottom: 10px;
 }
 
 .button-container {

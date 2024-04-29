@@ -1,80 +1,84 @@
-const ShipmentModel = require('../models/ShipmentModel');
-const themodel = new ShipmentModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
+const ShipmentModel = require("../models/ShipmentModel");
+const themodel = new ShipmentModel(
+  "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+);
 
-
-async function getShipment(req, res, shipID, inventoryData){
-    console.log("getting shipment")
-    console.log(shipID)
-    const data = await themodel.getShipment(shipID);
-    res.render('shipments/singleShipment', {
-        pageTitle: 'View Shipment',
-        customCSS: '/css/shipments.css',
-        shipID: data.shipID,
-        vendor: data.shipmentVendor,
-        invoiceno: data.invoiceno,
-        orderDate: data.orderDate,
-        expectedDate: data.expectedDate,
-        total: data.total,
-        inventory: inventoryData,
-        ship_status: data.ship_status
-
-    });
+async function getShipment(req, res, shipID, inventoryData) {
+  console.log("getting shipment");
+  console.log(shipID);
+  const data = await themodel.getShipment(shipID);
+  res.render("shipments/singleShipment", {
+    pageTitle: "View Shipment",
+    customCSS: "/css/shipments.css",
+    shipID: data.shipID,
+    vendor: data.shipmentVendor,
+    invoiceno: data.invoiceno,
+    orderDate: data.orderDate,
+    expectedDate: data.expectedDate,
+    total: data.total,
+    inventory: inventoryData,
+    ship_status: data.ship_status,
+  });
 }
 
 async function newShipment(req, res) {
-    res.render('inventory/uploadInventory', {
-        pageTitle: 'uploadInventory',
-        customCSS: '/css/inventory.css',
-    });
+  res.render("inventory/uploadInventory", {
+    pageTitle: "uploadInventory",
+    customCSS: "/css/inventory.css",
+  });
 }
 
 async function uploadShipment(req, res) {
-    const { shipmentVendor, orderDate, expectedDate, total, invFile, invoiceno } = req.body;
-    const ship_status = 'ORDERED'
-    console.log("REQ POST DATA ibsude ship controller : " + JSON.stringify(req.body));
-    // console.log(JSON.parse(req.body));
-    const shipmentData = {
-        
-        orderDate,
-        expectedDate,
-        total,
-        invoiceno,
-        shipmentVendor,
-        ship_status
-    };
+  const { shipmentVendor, orderDate, expectedDate, total, invFile, invoiceno } =
+    req.body;
+  const ship_status = "ORDERED";
+  console.log(
+    "REQ POST DATA ibsude ship controller : " + JSON.stringify(req.body)
+  );
+  // console.log(JSON.parse(req.body));
+  const shipmentData = {
+    orderDate,
+    expectedDate,
+    total,
+    invoiceno,
+    shipmentVendor,
+    ship_status,
+  };
 
-    console.log("creating shipment in controller with " + shipmentData);
+  console.log("creating shipment in controller with " + shipmentData);
 
-    try {
-        const shipmentResult = await themodel.createShipment(shipmentData);
+  try {
+    const shipmentResult = await themodel.createShipment(shipmentData);
 
-        // create new json object with the original req
-        if (shipmentResult.acknowledged === true) {
-            shipmentID = shipmentResult.insertedId;
-            acknowledged = shipmentResult.acknowledged;
-            const returnData = {
-                shipmentID,
-                invFile,
-                acknowledged
-            }
-            return (returnData)
-        }
-        
-        return(shipmentResult);
-
-    } catch (error) {
-        console.error("Error creating new shipment:", error);
-        res.status(500).send("Failed to create new shipment.");
+    // create new json object with the original req
+    if (shipmentResult.acknowledged === true) {
+      shipmentID = shipmentResult.insertedId;
+      acknowledged = shipmentResult.acknowledged;
+      const returnData = {
+        shipmentID,
+        invFile,
+        acknowledged,
+      };
+      return returnData;
     }
+
+    return shipmentResult;
+  } catch (error) {
+    console.error("Error creating new shipment:", error);
+    res.status(500).send("Failed to create new shipment.");
+  }
 }
 
 async function getShipments(req, res) {
-    const shipments = await themodel.getShipments();
-    res.render('shipments/allShipments', {
-        pageTitle: 'View Shipments',
-        customCSS: '/css/shipments.css',
-        shipmentData: shipments
-    });
+  const shipments = await themodel.getShipments();
+  const totalShipments = await themodel.getTotalShipments();
+  //   console.log("shipments:", totalShipments);
+  res.render("shipments/allShipments", {
+    pageTitle: "View Shipments",
+    customCSS: "/css/shipments.css",
+    shipmentData: shipments,
+    totalShipments: totalShipments,
+  });
 }
 
-module.exports = { uploadShipment, newShipment, getShipment, getShipments};
+module.exports = { uploadShipment, newShipment, getShipment, getShipments };
