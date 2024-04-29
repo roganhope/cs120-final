@@ -189,6 +189,34 @@ class InventoryModel {
     // console.log("Inventory data retrieved:", inventoryItems);
     return inventoryItems;
   }
+
+  async markEntireShipmentInventoryAsArrived(shipID) {
+    try {
+        // Connect to the database
+        await this.connect();
+
+        // Convert shipID to ObjectId
+        const objectId = new ObjectId(shipID);
+        
+        // Update all inventory items where shipment_id matches shipID
+        await this.inventory.updateMany(
+            { shipment_id: objectId },
+            { $set: { status_id: "ARRIVED" } }
+        );
+
+        console.log("All inventory items for shipment ID:", shipID, "marked as ARRIVED");
+    } catch (error) {
+        console.error("Error marking inventory items as ARRIVED:", error);
+        throw error;
+    } finally {
+        // Close the database connection
+        await this.close();
+    }
+}
+
+
+
+
 }
 
 module.exports = InventoryModel;

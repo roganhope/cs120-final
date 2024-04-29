@@ -74,16 +74,11 @@ async function getInventory(req, res){
         
 }
 
-async function markEntireShipmentInventoryAsArrived(req, res,shipID){
-    // find the scooter, chagne the status 
-    const inventory = getInventoryFromShipment(req, res, shipID)
-    console.log("gellooooo")
+async function markEntireShipmentInventoryAsArrived(req, res){
+    console.log("updating inventory in shipment")
+    inventoryModel.markEntireShipmentInventoryAsArrived(req.body.shipID);
 }
 
-
-// const SalesModel = require('../models/SalesModel');
-// const salesModel = new SalesModel("mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/");
-// const {  getSale, newSale, uploadSale } = require('./src/controllers/SalesController');
 
 const getSingleInventory = async (req, res) => {
 

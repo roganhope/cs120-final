@@ -161,6 +161,7 @@ app.get("/shipments",  getShipments);
 app.get("/shipment/new", ensureAuthenticated, newShipment);
 app.post("/update/shipment/arrived", async (req, res) => {
   await markShipmentArrived(req, res);
+  // await markEntireShipmentInventoryAsArrived(req, res); 
   res.redirect(`/shipment/${req.body.shipID}`);
 });
 
