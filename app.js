@@ -70,8 +70,8 @@ app.get(
   }
 );
 const { getDashboardData } = require("./src/controllers/DashboardController");
-// app.get("/dashboard", ensureAuthenticated, getDashboardData);
-app.get("/dashboard", getDashboardData);
+app.get("/dashboard", ensureAuthenticated, getDashboardData);
+// app.get("/dashboard", getDashboardData);
 
 app.get("/dashboard", getDashboardData);
 app.get("/", (req, res) => {
