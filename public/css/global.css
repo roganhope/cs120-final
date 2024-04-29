@@ -26,17 +26,25 @@
 }
 
 .page-container {
-  display: flex;
-  min-height: 100vh;
-  background-color: var(--background);
+
+  display: flex !important;
+  /* min-height: 100vh; */
+  /* background-color: var(--background); */
+  /* background-color: red; */
+  display: inline-block;
+  
 }
 
 /* PAGE CONTENT */
 .page-content-container {
   padding: 10px;
   width: calc(100vw - 200px);
-  min-height: 100vh;
+  height: 2000px !important; 
+
+
   background-color:  var(--background);
+  
+
 }
 /* PAGE TITLE  */
 .page-title {
