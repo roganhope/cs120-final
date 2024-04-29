@@ -27,6 +27,7 @@
                 <tr>
                     <th>VIN</th>
                     <th>Scooter</th>
+                    <th> Status </tr>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +35,7 @@
                     <tr>
                         <td><a href="/inventory/<%= item._id %>"><%= item.vin %></a></td>
                         <td><%= `${item.color} ${item.make} ${item.model}` %></td>
-                        
+                        <td><%= item.status_id %></td>
                     </tr>
                 <% }); %>
             </tbody>

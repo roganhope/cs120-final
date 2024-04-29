@@ -70,7 +70,8 @@ app.get(
   }
 );
 const { getDashboardData } = require("./src/controllers/DashboardController");
-app.get("/dashboard", ensureAuthenticated, getDashboardData);
+// app.get("/dashboard", ensureAuthenticated, getDashboardData);
+app.get("/dashboard", getDashboardData);
 
 app.get("/", (req, res) => {
   res.render("login");
@@ -236,11 +237,11 @@ app.post(
 //   updateInventoryImage(req.id, req.file.path)
 // });
 
-// const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
