@@ -2,11 +2,19 @@
 <h1 class="page-title">Shipment Details </h1>
     <div class="section-container">
       
-        <strong>Invoice NO:</strong> <%= invoiceno %><br>
-        <strong>Vendor:</strong> <%= vendor %><br>
-        <strong>Order Date:</strong> <%= orderDate %><br>
-        <strong>Expected Date:</strong> <%= expectedDate %><br>
-        <strong>Total:</strong> <%= total %><br>
+        <strong>Invoice NO:</strong> <%= data.invoiceno %><br>
+        <strong>Vendor:</strong> <%= data.shipmentVendor %><br>
+        <strong>Order Date:</strong> <%= data.orderDate %><br>
+        <strong>Expected Date:</strong> <%= data.expectedDate %><br>
+        <strong>Total:</strong> <%= data.total %><br>
+        <% if (data.ship_status === 'ORDERED') { %>
+            <form action="/update/shipment/arrived" method="POST">
+                <input type="hidden" name="shipID" value="<%= data._id %>">
+                <button type="submit">Mark As Arrived</button>
+            </form>
+            <% } %>
+   
+
         
     </div>
 
@@ -18,7 +26,6 @@
                 <tr>
                     <th>VIN</th>
                     <th>Scooter</th>
-                   
                 </tr>
             </thead>
             <tbody>
@@ -33,15 +40,6 @@
         </table>
     </div>
   
-    <!-- provide functionality to mark when an order has arrived -->
-    <!-- will cascade to all the inventory within the shipment  -->
-    <% if (ship_status === 'ORDERED') { %>
-        
-        <form action="/shipment/arrived/<%= shipID %>" method="POST">
-            <button type="submit">Mark As Arrived</button>
-        </form>
-        
-        
-    <% } %>
-
+ 
+    
   

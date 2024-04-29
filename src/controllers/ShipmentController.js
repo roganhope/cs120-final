@@ -9,14 +9,9 @@ async function getShipment(req, res, shipID, inventoryData){
     res.render('shipments/singleShipment', {
         pageTitle: 'View Shipment',
         customCSS: '/css/shipments.css',
-        shipID: data.shipID,
-        vendor: data.shipmentVendor,
-        invoiceno: data.invoiceno,
-        orderDate: data.orderDate,
-        expectedDate: data.expectedDate,
-        total: data.total,
-        inventory: inventoryData,
-        ship_status: data.ship_status
+        data: data,
+        inventory: inventoryData
+ 
 
     });
 }
@@ -77,4 +72,10 @@ async function getShipments(req, res) {
     });
 }
 
-module.exports = { uploadShipment, newShipment, getShipment, getShipments};
+async function markShipmentArrived(req, res) {
+    console.log("SHIP ID IN CONTROLLER: ",req.body.shipID)
+    const shipments = await themodel.markShipmentArrived(req.body.shipID);
+   
+}
+
+module.exports = {markShipmentArrived, uploadShipment, newShipment, getShipment, getShipments};

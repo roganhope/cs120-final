@@ -100,6 +100,7 @@ modelTrigger
 // });
 // all imports
 const {
+  markShipmentArrived,
   getShipments,
   uploadShipment,
   newShipment,
@@ -155,8 +156,13 @@ app.post("/sales/new", ensureAuthenticated, uploadSale);
 
 // inventory + shipments (related)
 app.get("/inventory", ensureAuthenticated, getInventory);
-app.get("/shipments", ensureAuthenticated, getShipments);
+// app.get("/shipments", ensureAuthenticated, getShipments);
+app.get("/shipments",  getShipments);
 app.get("/shipment/new", ensureAuthenticated, newShipment);
+app.post("/update/shipment/arrived", async (req, res) => {
+  await markShipmentArrived(req, res);
+  res.redirect(`/shipment/${req.body.shipID}`);
+});
 
 app.get("/shipment/:shipmentID", async (req, res) => {
   // console.log("woohoo")

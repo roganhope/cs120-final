@@ -65,6 +65,27 @@ class ShipmentModel {
         }
     }
 
+    async markShipmentArrived(shipID) {
+        console.log("Attempting to update shipment status");
+        await this.connect();
+    
+        try {
+            console.log("ship it in model: ", shipID);
+            const objectId = new ObjectId(shipID);
+    
+          
+            await this.shipments.updateOne(
+                { _id: objectId },
+                { $set: { ship_status: "ARRIVED" } }
+            );
+    
+            console.log("Shipment status updated to ARRIVED");
+        } catch (error) {
+            console.error("Error updating shipment status:", error);
+        }
+    }
+    
+    
 }
 
 module.exports = ShipmentModel;
