@@ -1,37 +1,98 @@
 const express = require("express");
 const app = express();
 const multer = require('multer');
+const passport = require("passport");
+const session = require("express-session");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/");
+}
 
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
-// model trigger
-const ModelModel = require("./src/models/ModelModel.js");
-const modelTrigger = new ModelModel(
-  "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+app.use(
+    session({
+      secret: "secret_key",
+      resave: false,
+      saveUninitialized: false,
+    })
 );
-modelTrigger
-  .watchInventoryChanges()
-  .then(() => {
-    console.log("Watching for inventory changes...");
-  })
-  .catch((error) => {
-    console.error("Error setting up inventory change watcher:", error);
-  });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+// oauth2
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard/dashboard");
+passport.use(
+    new GoogleStrategy(
+        {
+          clientID: "232301126322-5db2irp4hgmjov1cg251ep06gpchj2vt.apps.googleusercontent.com",
+          clientSecret: "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",
+          callbackURL: "https://cs120-ef3a736436d9.herokuapp.com/auth/google/callback",
+        },
+        (accessToken, refreshToken, profile, done) => {
+          return done(null, profile);
+        }
+    )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-app.get("/login", (req, res) => {
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+
+app.get(
+    "/auth/google",
+    passport.authenticate("google", {
+        scope: ["profile", "email"],
+    })
+);
+
+app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/" }),
+    (req, res) => {
+        req.session.user = req.user;
+        console.log(req.user);
+        res.redirect("/dashboard");
+    }
+);
+const {
+    getDashboardData,
+} = require("./src/controllers/DashboardController");
+app.get("/dashboard", ensureAuthenticated, getDashboardData)
+
+app.get("/", (req, res) => {
   res.render("login");
 });
 
+
+
+
+const ModelModel = require("./src/models/ModelModel.js");
+const modelTrigger = new ModelModel(
+    "mongodb+srv://cs120:hleIcqccff99VSJc@cluster0.bmluvqb.mongodb.net/"
+);
+modelTrigger
+    .watchInventoryChanges()
+    .then(() => {
+        console.log("Watching for inventory changes...");
+    })
+    .catch((error) => {
+        console.error("Error setting up inventory change watcher:", error);
+    });
 // app.get("/inventory", (req, res) => {
 //   res.render("inventory/allInventory");
 // });

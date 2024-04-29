@@ -14,110 +14,109 @@
 
 
 
-        <div class="button-container">
-            <button id="uploadButton">Upload Image</button>
-        </div>
-        
-        <div class="section-container" id="uploadSection" style="display: none;">
-            <form action="/update-model-image" class="upload-image" id="uploadForm" method="post" enctype="multipart/form-data">
-                <input type="file" name="image" id="imageInput">
-                <input type="hidden" name="data" value="<%= data %>">
-                <input type="hidden" name="make" value="<%= data.make %>">
-                <input type="hidden" name="model" value="<%= data.model %>">
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        
+<div class="button-container">
+    <button id="uploadButton">Upload Image</button>
+</div>
 
-            <div class="section-container">
-                <h2 class="section-title">Mechanic Notes</h2>
-                <form action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>" method="post">
-                    <input type="hidden" name="make" value="<%= data.make %>">
-                    <input type="hidden" name="model" value="<%= data.model %>">
-                
-                    <textarea id="mechanic_notes" name="mechanic_notes" readonly>
+<div class="section-container" id="uploadSection" style="display: none;">
+    <form action="/update-model-image" class="upload-image" id="uploadForm" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageInput">
+        <input type="hidden" name="data" value="<%= data %>">
+        <input type="hidden" name="make" value="<%= data.make %>">
+        <input type="hidden" name="model" value="<%= data.model %>">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+
+<div class="section-container">
+    <h2 class="section-title">Mechanic Notes</h2>
+    <form action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>" method="post">
+        <input type="hidden" name="make" value="<%= data.make %>">
+        <input type="hidden" name="model" value="<%= data.model %>">
+
+        <textarea id="mechanic_notes" name="mechanic_notes" readonly>
                     <% if (data.mechanic_notes) { %>
                         <%= data.mechanic_notes %>
                     <% } %>
                 </textarea>
-                    <br><br>
+        <br><br>
 
-                    <button type="button" id="editButton">Edit</button>
-                    <button type="submit" id="submitButton" style="display: none;">Submit</button>
-                    <button type="button" id="cancelButton" style="display: none;">Cancel</button>
-                </form>
-            </div>
-
-
+        <button type="button" id="editButton">Edit</button>
+        <button type="submit" id="submitButton" style="display: none;">Submit</button>
+        <button type="button" id="cancelButton" style="display: none;">Cancel</button>
+    </form>
+</div>
 
 
-            <script>
-                var editButton = document.getElementById('editButton');
-                var submitButton = document.getElementById('submitButton');
-                var cancelButton = document.getElementById('cancelButton');
-                var form = document.getElementById('mechanic_notes_form');
-                var textarea = document.getElementById('mechanic_notes');
 
 
-                editButton.addEventListener('click', function () {
+<script>
+    var editButton = document.getElementById('editButton');
+    var submitButton = document.getElementById('submitButton');
+    var cancelButton = document.getElementById('cancelButton');
+    var form = document.getElementById('mechanic_notes_form');
+    var textarea = document.getElementById('mechanic_notes');
 
-                    editButton.style.display = 'none';
-                    submitButton.style.display = 'inline-block';
-                    cancelButton.style.display = 'inline-block';
-                    textarea.removeAttribute('readonly');
-                });
 
-                cancelButton.addEventListener('click', function () {
-                    location.reload(); // Refresh the page
-                });
+    editButton.addEventListener('click', function () {
 
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault();
-                    form.submit();
-                });
+        editButton.style.display = 'none';
+        submitButton.style.display = 'inline-block';
+        cancelButton.style.display = 'inline-block';
+        textarea.removeAttribute('readonly');
+    });
 
-            </script>
+    cancelButton.addEventListener('click', function () {
+        location.reload(); // Refresh the page
+    });
 
-            <div class="section-container">
-                <h2 class="section-title">Inventory</h2>
-                <% if (inventory) { %>
-                    <div class="full-width-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Vin</th>
-                                    <th>Color</th>
-                                </tr>
-                            </thead>
-    
-                            <% inventory.forEach(item=> { %>
-                                <tr>
-                                    <td> <a href="/inventory/<%= item._id %>">
-                                            <%= item.vin %>
-                                        </a> </td>
-                                    <td> <a href="/inventory/<%= item._id %>">
-                                            <%= item.color %>
-                                        </a> </td>
-                                </tr>
-    
-                                <% }); %>
-                        </table>
-                    </div>
-    
-                    <% } %>
-            </div>
-         
-            
-            <script>
-                // upload photo functionality 
-                document.addEventListener("DOMContentLoaded", function() {
-                    const uploadButton = document.getElementById('uploadButton');
-                    const uploadSection = document.getElementById('uploadSection');
-        
-                    uploadButton.addEventListener('click', function() {
-                        uploadButton.style.display = 'none';
-                        uploadSection.style.display = 'block'; 
-                    });
-                });
-            </script>
-            
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        form.submit();
+    });
+
+</script>
+
+<div class="section-container">
+    <h2 class="section-title">Inventory</h2>
+    <% if (inventory) { %>
+        <div class="full-width-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Vin</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+
+                <% inventory.forEach(item=> { %>
+                    <tr>
+                        <td> <a href="/inventory/<%= item._id %>">
+                                <%= item.vin %>
+                            </a> </td>
+                        <td> <a href="/inventory/<%= item._id %>">
+                                <%= item.color %>
+                            </a> </td>
+                    </tr>
+
+                    <% }); %>
+            </table>
+        </div>
+
+        <% } %>
+</div>
+
+
+<script>
+    // upload photo functionality 
+    document.addEventListener("DOMContentLoaded", function () {
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadSection = document.getElementById('uploadSection');
+
+        uploadButton.addEventListener('click', function () {
+            uploadButton.style.display = 'none';
+            uploadSection.style.display = 'block';
+        });
+    });
+</script>

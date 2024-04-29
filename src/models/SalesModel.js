@@ -43,6 +43,7 @@ class SalesModel {
     const result = await this.sales.insertOne(saleData);
     console.log("Sale created with ID:", result.insertedId);
     await this.client.close();
+    return { _id: result.insertedId }
   }
 
     // updated sale_id filter to _id
@@ -68,6 +69,11 @@ class SalesModel {
     } finally {
       await this.close();
     }
+  }
+  async getTotalSales() {
+    await this.connect();
+    const totalSales = await this.sales.countDocuments();
+    return totalSales;
   }
 }
 
