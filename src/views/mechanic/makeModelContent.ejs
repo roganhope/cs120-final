@@ -29,54 +29,41 @@
 </div>
 
 
+
 <div class="section-container">
     <h2 class="section-title">Mechanic Notes</h2>
-    <form action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>" method="post">
-        <input type="hidden" name="make" value="<%= data.make %>">
-        <input type="hidden" name="model" value="<%= data.model %>">
 
-        <textarea id="mechanic_notes" name="mechanic_notes" readonly>
-                    <% if (data.mechanic_notes) { %>
-                        <%= data.mechanic_notes %>
-                    <% } %>
-                </textarea>
+    <div id="mechanicNotesDisplay">
+        <p id="mechanicNotesText">
+            <%= data.mechanic_notes || "No notes available." %>
+        </p>
+    </div>
+
+    <button type="button" id="editMechanicButton" onclick="editMechanicNotes()">Edit</button>
+
+    <form id="mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
+        method="post" style="display: none;">
+        <textarea id="mechanic_notes" name="mechanic_notes"><%= data.mechanic_notes %></textarea>
         <br><br>
-
-        <button type="button" id="editButton">Edit</button>
-        <button type="submit" id="submitButton" style="display: none;">Submit</button>
-        <button type="button" id="cancelButton" style="display: none;">Cancel</button>
+        <button type="submit">Submit</button>
+        <button type="button" id="cancelMechanicButton" onclick="cancelEditMechanic()">Cancel</button>
     </form>
 </div>
 
-
-
-
 <script>
-    var editButton = document.getElementById('editButton');
-    var submitButton = document.getElementById('submitButton');
-    var cancelButton = document.getElementById('cancelButton');
-    var form = document.getElementById('mechanic_notes_form');
-    var textarea = document.getElementById('mechanic_notes');
+    function editMechanicNotes() {
+        // Show the form and hide the display paragraph
+        document.getElementById('mechanicNotesDisplay').style.display = 'none';
+        document.getElementById('mechanicNotesForm').style.display = 'block';
+    }
 
-
-    editButton.addEventListener('click', function () {
-
-        editButton.style.display = 'none';
-        submitButton.style.display = 'inline-block';
-        cancelButton.style.display = 'inline-block';
-        textarea.removeAttribute('readonly');
-    });
-
-    cancelButton.addEventListener('click', function () {
-        location.reload(); // Refresh the page
-    });
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        form.submit();
-    });
-
+    function cancelEditMechanic() {
+        // Hide the form and show the display paragraph
+        document.getElementById('mechanicNotesForm').style.display = 'none';
+        document.getElementById('mechanicNotesDisplay').style.display = 'block';
+    }
 </script>
+
 
 <div class="section-container">
     <h2 class="section-title">Inventory</h2>

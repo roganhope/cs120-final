@@ -193,7 +193,7 @@ app.post("/shipment/arrived/:shipID", async (req, res) => {
 app.get("/inventory/:inventoryID", getSingleInventory);
 app.get("/mechanichub", getHub);
 app.get("/mechanichub/:make/:model", getModel);
-app.post("/updatemechanicnotes/:make/:model", updateMechanicNotes);
+app.post("/updatemechanicnotes/:make/:model/updateNotes", updateMechanicNotes);
 
 app.post(
   "/update-model-image",
