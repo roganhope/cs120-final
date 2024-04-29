@@ -147,7 +147,7 @@ app.get("/clients", ensureAuthenticated, getClients);
 app.get("/newClient", ensureAuthenticated, newClient);
 app.post("/clients/new", ensureAuthenticated, uploadClient);
 app.get("/clients/:clientId", ensureAuthenticated, getClientSales);
-app.post("/clients/:clientId/update-notes", ensureAuthenticated, updateClientNotes);
+app.post("/clients/:clientId/update-notes", updateClientNotes);
 
 // sales
 app.get("/sales", ensureAuthenticated, getSale);
@@ -174,6 +174,11 @@ app.get("/shipment/:shipmentID", async (req, res) => {
   console.log(JSON.stringify(inventoryData));
   await getShipment(req, res, shipmentID, inventoryData);
 });
+
+// update inventory status
+const { updateInventoryStatus } = require('./src/controllers/InventoryController');
+app.post("/inventory/:inventoryID/update-status", updateInventoryStatus);
+
 
 app.post("/shipment/new", upload.single("file"), async (req, res) => {
   console.log("Creating new shipment");
@@ -231,11 +236,11 @@ app.post(
 //   updateInventoryImage(req.id, req.file.path)
 // });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-// const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 8080;
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);
 // });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

@@ -26,6 +26,22 @@
         <button type="submit">Submit</button>
     </form>
 </div> -->
+<form id="statusForm" action="/inventory/<%= inventory._id %>/update-status" method="POST">
+    <div class="section-container change-status">
+        <h2 class="section-title">Select Status:</h2>
+        <select id="statusSelect" name="newStatus">
+            <option value="ORDERED">Ordered</option>
+            <option value="ARRIVED">Arrived</option>
+            <option value="ASSEMBLED">Assembled</option>
+            <option value="READY TO SELL">Ready to Sell</option>
+            <option value="SOLD">Sold</option>
+            <option value="RETRIEVED">Retrieved</option>
+        </select>
+        <div class="button-container">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+</form>
 
 <div class="button-container">
     <button><a href="/shipment/<%= inventory.shipmentID %>">
