@@ -47,16 +47,13 @@
                                     client.address.zipcode %>
                 </td>
                 <td>
-                    <!-- Assuming there is a 'scooter' property on your client document -->
-                    <%= client.scooter ? client.scooter : 'N/A' %>
+                    <%= client.scooter %>
                 </td>
                 <td>
-                    <!-- Assuming there is an 'order_status' property on your client document -->
-                    <%= client.order_status ? client.order_status : 'N/A' %>
+                    <%= client.order_status %>
                 </td>
                 <td>
-                    <!-- Assuming there is a 'client_status' property on your client document -->
-                    <%= client.client_status ? client.client_status : 'N/A' %>
+                    <%= client.client_status %>
                 </td>
 
             </tr>
