@@ -92,6 +92,22 @@
   /* color:rgb(60, 60, 60); */
 }
 
+#salesCompleteBtn {
+  background: none;
+  border: #124e66 1px solid;
+  color: #212a32;
+}
+
+#salesCompleteBtn:hover {
+  background-color: #124e66;
+  border: #124e66 1px solid;
+  color: white;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s;
+
+  font-weight: bold;
+}
+
 table tbody tr:nth-child(even) {
   background-color: #d3d9d5;
 }
@@ -254,8 +270,9 @@ button a {
   margin-bottom: 10px;
 }
 .section-container {
-  width: 95%;
+  width: 90%;
   margin-left: 25px;
+  margin-right: 25px;
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
