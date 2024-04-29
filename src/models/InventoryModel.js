@@ -180,25 +180,22 @@ class InventoryModel {
   }
 
   async getScooterDetailsBySaleIds(saleIds) {
-    // console.log(saleIds);
+
     await this.connect();
 
     const inventoryItems = await this.inventory
       .find({ sale_id: { $in: saleIds } })
       .toArray();
-    // console.log("Inventory data retrieved:", inventoryItems);
     return inventoryItems;
   }
 
   async markEntireShipmentInventoryAsArrived(shipID) {
     try {
-        // Connect to the database
+  
         await this.connect();
-
-        // Convert shipID to ObjectId
         const objectId = new ObjectId(shipID);
         
-        // Update all inventory items where shipment_id matches shipID
+  
         await this.inventory.updateMany(
             { shipment_id: objectId },
             { $set: { status_id: "ARRIVED" } }
@@ -209,7 +206,7 @@ class InventoryModel {
         console.error("Error marking inventory items as ARRIVED:", error);
         throw error;
     } finally {
-        // Close the database connection
+     
         await this.close();
     }
 }

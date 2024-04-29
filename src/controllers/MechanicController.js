@@ -37,33 +37,9 @@ async function getModel(req, res) {
   });
 }
 
-// async function updateMechanicNotes(req, res) {
-//     console.log("updating notes")
-//     const make = req.params.make;
-//     const model = req.params.model;
-//     const mechanicNotes = req.body.mechanic_notes;
-//     console.log("mechanic notes" + mechanicNotes, make, model)
 
-//     try {
-//         const updatedModel = await modelModel.updateMechanicNotes(make, model, mechanicNotes);
-
-//         // await new Promise(resolve => setTimeout(resolve, 1000));
-//         const inventory = await inventoryModel.getInventoryByMakeModel(make, model);
-
-//         res.render('mechanic/makeModel', {
-//             pageTitle: 'View Model',
-//             customCSS: '/css/mechanichub.css',
-//             data: updatedModel,
-//             inventory: inventory
-//         });
-
-//     } catch (error) {
-//         console.error("Error updating mechanic notes:", error);
-//         // Handle the error appropriately
-//         res.status(500).send("Error updating mechanic notes");
-//     }
 async function updateMechanicNotes(req, res) {
-  //   console.log("updating notes");
+
   const make = req.params.make;
   const model = req.params.model;
   const mechanicNotes = req.body.mechanic_notes;
@@ -71,7 +47,7 @@ async function updateMechanicNotes(req, res) {
 
   try {
     await modelModel.updateMechanicNotes(make, model, mechanicNotes);
-    res.redirect("/mechanichub/" + make + "/" + model); // Redirect back to the mechanic details page
+    res.redirect("/mechanichub/" + make + "/" + model); 
   } catch (error) {
     console.error("Error updating mechanic notes:", error);
     res.status(500).send("Failed to update mechanic notes.");

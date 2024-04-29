@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-// const { ObjectId } = require('mongodb');
+
 
 class ModelModel {
   constructor(uri) {
@@ -27,16 +27,16 @@ class ModelModel {
         if (change.operationType === "insert") {
           const { make, model } = change.fullDocument;
 
-          // Check if the make/model combination has already been processed
+          
           if (!processedModels.has(`${make}-${model}`)) {
-            // Add the combination to the set of processed models
+      
             processedModels.add(`${make}-${model}`);
             const image = "/images/unknown-scooter.png";
 
-            // Check if the model already exists in the database
+       
             const existingModel = await this.models.findOne({ make, model });
             if (!existingModel) {
-              // Insert the new model
+        
               await this.models.insertOne({ make, model, image });
               console.log(`New model added: ${make} ${model}`);
             }
@@ -118,8 +118,8 @@ class ModelModel {
 
         // Update the image field with the new path
         const result = await this.models.updateOne(
-          { _id: specificModel._id }, // Filter for the specific model
-          { $set: { image: newPath } } // Set the new value for the image field
+          { _id: specificModel._id }, 
+          { $set: { image: newPath } } 
         );
         console.log("UPDATED MONGO FILE PATH TO: " + newPath);
         console.log(
