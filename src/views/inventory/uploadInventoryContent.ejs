@@ -1,7 +1,7 @@
+<!-- 
+    <h1 class="page-title">Create Shipment and Upload Inventory</h1> -->
 
-    <h1 class="page-title">Create Shipment and Upload Inventory</h1>
-
-
+<!-- 
 <div class="section-container">
     <form action="/shipment/new" method="post" enctype="multipart/form-data">
         <input type="file" name="file" id="file" required>
@@ -28,5 +28,47 @@
         <input type="submit" value="Submit">
     </form>
     
-</div>
+</div> -->
 
+<div class="form_container">
+
+    <div>
+        <h2>Create Shipment and Upload Inventory</h2>
+    </div>
+
+
+    <form action="/shipment/new" method="post" enctype="multipart/form-data">
+
+
+        <div class="form-row">
+            <label for="shipmentVendor"> Vendor:</label>
+            <input type="text" name="shipmentVendor" id="shipmentVendor" required>
+        </div>
+
+        <div class="form-row">
+            <label for="invoiceno">Invoice Number:</label>
+            <input type="text" name="invoiceno" id="invoiceno" required>
+        </div>
+
+        <div class="form-row">
+            <label for="orderDate">Order Date:</label>
+            <input type="date" name="orderDate" id="orderDate" required>
+        </div>
+
+        <div class="form-row">
+            <label for="expectedDate">Expected Date:</label>
+            <input type="date" name="expectedDate" id="expectedDate" required>
+        </div>
+
+        <div class="form-row">
+            <label for="total">Total:</label>
+            <input type="number" name="total" id="total" required>
+        </div>
+
+        <div class="form-row">
+            <input type="submit" value="Submit">
+        </div>
+
+    </form>
+
+</div>
