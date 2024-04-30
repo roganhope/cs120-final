@@ -124,7 +124,7 @@ const {
   getSale,
   newSale,
   uploadSale,
-    completeSale,
+  completeSale,
 } = require("./src/controllers/SalesController");
 const {
   upload,
@@ -144,17 +144,21 @@ const {
   updateClientNotes,
 } = require("./src/controllers/ClientsController");
 
-app.get("/clients", getClients);
-app.get("/newClient", newClient);
-app.post("/clients/new", uploadClient);
-app.get("/clients/:clientId", getClientSales);
-app.post("/clients/:clientId/update-notes", updateClientNotes);
+app.get("/clients", ensureAuthenticated, getClients);
+app.get("/newClient", ensureAuthenticated, newClient);
+app.post("/clients/new", ensureAuthenticated, uploadClient);
+app.get("/clients/:clientId", ensureAuthenticated, getClientSales);
+app.post(
+  "/clients/:clientId/update-notes",
+  ensureAuthenticated,
+  updateClientNotes
+);
 
 // sales
-app.get("/sales", getSale);
-app.get("/newSales", newSale);
-app.post("/sales/new", uploadSale);
-app.post('/sales/complete/:saleId', completeSale);
+app.get("/sales", ensureAuthenticated, getSale);
+app.get("/newSales", ensureAuthenticated, newSale);
+app.post("/sales/new", ensureAuthenticated, uploadSale);
+app.post("/sales/complete/:saleId", ensureAuthenticated, completeSale);
 
 // inventory + shipments (related)
 app.get("/inventory", ensureAuthenticated, getInventory);
@@ -182,25 +186,34 @@ app.get("/shipment/:shipmentID", ensureAuthenticated, async (req, res) => {
 const {
   updateInventoryStatus,
 } = require("./src/controllers/InventoryController");
-app.post("/inventory/:inventoryID/update-status", ensureAuthenticated, updateInventoryStatus);
+app.post(
+  "/inventory/:inventoryID/update-status",
+  ensureAuthenticated,
+  updateInventoryStatus
+);
 
-app.post("/shipment/new", ensureAuthenticated, upload.single("file"), async (req, res) => {
-  console.log("Creating new shipment");
-  try {
-    const fileData = req.file;
-    console.log("REQ POST DATA : " + JSON.stringify(req.body));
-    const shipmentResult = await uploadShipment(req);
-    if (shipmentResult && shipmentResult.acknowledged === true) {
-      shipmentResult.filePath = fileData.path;
-      const inventoryResult = await uploadInventory(shipmentResult);
-      res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
-      return;
+app.post(
+  "/shipment/new",
+  ensureAuthenticated,
+  upload.single("file"),
+  async (req, res) => {
+    console.log("Creating new shipment");
+    try {
+      const fileData = req.file;
+      console.log("REQ POST DATA : " + JSON.stringify(req.body));
+      const shipmentResult = await uploadShipment(req);
+      if (shipmentResult && shipmentResult.acknowledged === true) {
+        shipmentResult.filePath = fileData.path;
+        const inventoryResult = await uploadInventory(shipmentResult);
+        res.redirect(`/shipment/${shipmentResult.shipmentID.toString()}`);
+        return;
+      }
+    } catch (error) {
+      console.error("Error processing shipment:", error);
+      res.status(500).send("Error processing shipment");
     }
-  } catch (error) {
-    console.error("Error processing shipment:", error);
-    res.status(500).send("Error processing shipment");
   }
-});
+);
 
 app.post("/shipment/arrived/:shipID", ensureAuthenticated, async (req, res) => {
   try {
@@ -216,10 +229,15 @@ app.post("/shipment/arrived/:shipID", ensureAuthenticated, async (req, res) => {
 app.get("/inventory/:inventoryID", ensureAuthenticated, getSingleInventory);
 app.get("/mechanichub", ensureAuthenticated, getHub);
 app.get("/mechanichub/:make/:model", ensureAuthenticated, getModel);
-app.post("/updatemechanicnotes/:make/:model/updateNotes", ensureAuthenticated, updateMechanicNotes);
+app.post(
+  "/updatemechanicnotes/:make/:model/updateNotes",
+  ensureAuthenticated,
+  updateMechanicNotes
+);
 
 app.post(
   "/update-model-image",
+  ensureAuthenticated,
   modelImageUpload.single("image"),
   (req, res) => {
     console.log("data passed", req.body.data.make);
