@@ -44,7 +44,7 @@
     <button id="translateEnglishButton" onclick="translateToEnglish()">Translate to English</button>
     <button id="translateSpanishButton" onclick="translateToSpanish()">Translate to Spanish</button>
 
-    <form id=" mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
+    <form id="mechanicNotesForm" action="/updatemechanicnotes/<%= data.make %>/<%= data.model %>/updateNotes"
         method="post" style="display: none;">
         <textarea id="mechanic_notes" name="mechanic_notes"><%= data.mechanic_notes %></textarea>
         <br><br>
