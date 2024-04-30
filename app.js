@@ -70,9 +70,9 @@ app.get(
   }
 );
 const { getDashboardData } = require("./src/controllers/DashboardController");
-app.get("/dashboard", getDashboardData);
+app.get("/dashboard", ensureAuthenticated, getDashboardData);
 
-app.get("/", (req, res) => {
+app.get("/", ensureAuthenticated, (req, res) => {
   res.render("login");
 });
 
@@ -131,7 +131,7 @@ const {
   modelImageUpload,
   inventoryImageUpload,
 } = require("./src/controllers/MulterFileController");
-app.get("/uploadinventory", (req, res) => {
+app.get("/uploadinventory", ensureAuthenticated, (req, res) => {
   res.render("inventory/uploadInventory");
 });
 
@@ -157,18 +157,18 @@ app.post("/sales/new", uploadSale);
 app.post('/sales/complete/:saleId', completeSale);
 
 // inventory + shipments (related)
-app.get("/inventory", getInventory);
+app.get("/inventory", ensureAuthenticated, getInventory);
 
 // app.get("/shipments", ensureAuthenticated, getShipments);
-app.get("/shipments", getShipments);
-app.get("/shipment/new", newShipment);
-app.post("/update/shipment/arrived", async (req, res) => {
+app.get("/shipments", ensureAuthenticated, getShipments);
+app.get("/shipment/new", ensureAuthenticated, newShipment);
+app.post("/update/shipment/arrived", ensureAuthenticated, async (req, res) => {
   await markShipmentArrived(req, res);
   // await markEntireShipmentInventoryAsArrived(req, res);
   res.redirect(`/shipment/${req.body.shipID}`);
 });
 
-app.get("/shipment/:shipmentID", async (req, res) => {
+app.get("/shipment/:shipmentID", ensureAuthenticated, async (req, res) => {
   // console.log("woohoo")
   const shipmentID = req.params.shipmentID;
   // console.log("shipment id here " + shipmentID.toString())
@@ -182,9 +182,9 @@ app.get("/shipment/:shipmentID", async (req, res) => {
 const {
   updateInventoryStatus,
 } = require("./src/controllers/InventoryController");
-app.post("/inventory/:inventoryID/update-status", updateInventoryStatus);
+app.post("/inventory/:inventoryID/update-status", ensureAuthenticated, updateInventoryStatus);
 
-app.post("/shipment/new", upload.single("file"), async (req, res) => {
+app.post("/shipment/new", ensureAuthenticated, upload.single("file"), async (req, res) => {
   console.log("Creating new shipment");
   try {
     const fileData = req.file;
@@ -202,7 +202,7 @@ app.post("/shipment/new", upload.single("file"), async (req, res) => {
   }
 });
 
-app.post("/shipment/arrived/:shipID", async (req, res) => {
+app.post("/shipment/arrived/:shipID", ensureAuthenticated, async (req, res) => {
   try {
     const shipID = req.params.shipID;
     markEntireShipmentInventoryAsArrived(shipID);
@@ -213,10 +213,10 @@ app.post("/shipment/arrived/:shipID", async (req, res) => {
   }
 });
 
-app.get("/inventory/:inventoryID", getSingleInventory);
-app.get("/mechanichub", getHub);
-app.get("/mechanichub/:make/:model", getModel);
-app.post("/updatemechanicnotes/:make/:model/updateNotes", updateMechanicNotes);
+app.get("/inventory/:inventoryID", ensureAuthenticated, getSingleInventory);
+app.get("/mechanichub", ensureAuthenticated, getHub);
+app.get("/mechanichub/:make/:model", ensureAuthenticated, getModel);
+app.post("/updatemechanicnotes/:make/:model/updateNotes", ensureAuthenticated, updateMechanicNotes);
 
 app.post(
   "/update-model-image",
