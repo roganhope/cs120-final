@@ -26,20 +26,29 @@
             </tr>
         </thead>
         <tbody>
-        <% sales.forEach(function(sale) { %>
-            <tr>
-                <td><%= sale.client_name %></td>
-                <td>$<%= sale.sale_price %></td>
-                <td>$<%= sale.down_payment_amount %></td>
-                <td><%= sale.date_initiated.toISOString().substring(0, 10) %></td>
-                <td><%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed' %></td>
-                <td>
-                    <form action="/sales/complete/<%= sale._id %>" method="post" class="complete-form">
-                        <button type="submit" class="btn btn-primary" id="salesCompleteBtn">Complete</button>
-                    </form>
-                </td>
-            </tr>
-        <% }); %>
+            <% sales.forEach(function(sale) { %>
+                <tr>
+                    <td>
+                        <%= sale.client_name %>
+                    </td>
+                    <td>$<%= sale.sale_price %>
+                    </td>
+                    <td>$<%= sale.down_payment_amount %>
+                    </td>
+                    <td>
+                        <%= sale.date_initiated.toISOString().substring(0, 10) %>
+                    </td>
+                    <td>
+                        <%= sale.date_completed ? sale.date_completed.toISOString().substring(0, 10) : 'not completed'
+                            %>
+                    </td>
+                    <td>
+                        <form action="/sales/complete/<%= sale._id %>" method="post" class="complete-form">
+                            <button type="submit" class="btn btn-primary" id="salesCompleteBtn">Complete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
         </tbody>
     </table>
 
