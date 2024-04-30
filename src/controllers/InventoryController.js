@@ -89,14 +89,20 @@ const getSingleInventory = async (req, res) => {
         var clientData = null
         if (inventoryData.sale_id) {
             
-            //console.log("Sale ID exists:", inventoryData.sale_id);
-            saleData = await salesModel.getSale(inventoryData.sale_id);
-            clientData = await clientModel.getClientById(saleData.client_id)
-            //console.log(clientData)
+            console.log("Sale ID exists:", inventoryData.sale_id);
+            console.log(inventoryData.sale_id.toString())
+            saleData = await salesModel.getSale(inventoryData.sale_id.toString());
+            console.log("Sale data: ", saleData)
+            if (saleData != null) {
+                clientData = await clientModel.getClientById(saleData.client_id)
+                console.log(clientData)
+
+            }
+            
             // console.log("sale data returned " + saleData)
         } else {
             // The inventoryData does not have a sale_id
-            //console.log("Sale ID does not exist");
+            console.log("Sale ID does not exist");
         }
         // to do add in logic for sale data
         res.render('inventory/singleInventory', {

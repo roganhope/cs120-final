@@ -158,6 +158,7 @@ app.post('/sales/complete/:saleId', completeSale);
 
 // inventory + shipments (related)
 app.get("/inventory", getInventory);
+
 // app.get("/shipments", ensureAuthenticated, getShipments);
 app.get("/shipments", getShipments);
 app.get("/shipment/new", newShipment);
