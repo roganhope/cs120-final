@@ -93,6 +93,7 @@
 }
 
 #salesCompleteBtn {
+  width: 100%;
   background: none;
   border: #124e66 1px solid;
   color: #212a32;
