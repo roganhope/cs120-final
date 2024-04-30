@@ -233,6 +233,46 @@ class InventoryModel {
       await this.client.close();
     }
   }
+
+  async getAllInventoriesWithDetails() {
+    await this.connect();
+    return await this.inventory.aggregate([
+      {
+        $lookup: {
+          from: "sales",
+          localField: "sale_id",
+          foreignField: "_id",
+          as: "sale_info"
+        }
+      },
+      {
+        $unwind: "$sale_info"
+      },
+      {
+        $lookup: {
+          from: "clients",
+          let: { client_id_obj: { $toObjectId: "$sale_info.client_id" } },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$_id", "$$client_id_obj"] } } }
+          ],
+          as: "client_info"
+        }
+      },
+      {
+        $unwind: "$client_info"
+      },
+      {
+        $project: {
+          _id: 0,
+          vin: 1,
+          "status_id": 1,
+          "client_info.first": 1,
+          "client_info.last": 1,
+          "sale_info.date_initiated": 1
+        }
+      }
+    ]).toArray();
+  }
 }
 
 module.exports = InventoryModel;

@@ -16,6 +16,8 @@ async function getDashboardData(req, res) {
         const totalSales = await salesModel.getTotalSales();
         const totalInventory = await inventoryModel.getTotalInventory();
 
+        const inventoryDetails = await inventoryModel.getAllInventoriesWithDetails();
+
         const userData = req.user;
 
         res.render("dashboard/dashboard", {
@@ -23,6 +25,7 @@ async function getDashboardData(req, res) {
             totalClients,
             totalSales,
             totalInventory,
+            inventoryDetails,
             userData,
         });
     } catch (error) {

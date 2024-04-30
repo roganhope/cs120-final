@@ -20,6 +20,7 @@ async function getSale(req, res) {
         const clientData = await clientsModel.getAllClients();
 
         const salesWithClientNames = salesData.map(sale => {
+            console.log(sale.client_id)
             const client = clientData.find(client => client._id.equals(new ObjectId(sale.client_id)));
             const clientName = client ? `${client.first} ${client.last}` : 'Unknown';
             return { ...sale, client_name: clientName };

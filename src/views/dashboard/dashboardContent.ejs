@@ -1,6 +1,7 @@
 <div class="section-container">
     <div class="user-info">
-        <p>Welcome, <%= userData.displayName %></p>
+
+
     </div>
 </div>
 
@@ -19,4 +20,27 @@
             <p class="square-text">Total Inventory</p>
         </div>
     </div>
+</div>
+
+<div class="section-container">
+    <table class="full-width-table">
+        <thead>
+        <tr>
+            <th>VIN</th>
+            <th>Sale Status</th>
+            <th>Client Name</th>
+            <th>Date Initiated</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% inventoryDetails.forEach(function(item) { %>
+            <tr>
+                <td><%= item.vin %></td>
+                <td><%= item.status_id %></td>
+                <td><%= item.client_info.first + ' ' + item.client_info.last %></td>
+                <td><%= new Date(item.sale_info.date_initiated).toDateString() %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
 </div>
